@@ -1,5 +1,9 @@
 @import './components/navbar.css';
 
+body {
+    margin: 0;
+}
+
 .welcome {
     padding: 2.5em 5em 0 5em;
     text-align: center;
@@ -9,3 +13,10 @@
     font-weight: 100;
 }
 
+.title {
+    text-transform: uppercase;
+}
+
+.wrap {
+    padding: 1em 3em;
+}

@@ -58,5 +58,6 @@
     margin-left: 4em;
 }
 
-
-
+.is-right {
+    float: right;
+}
