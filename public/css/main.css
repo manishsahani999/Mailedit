@@ -1,0 +1,11 @@
+@import './components/navbar.css';
+
+.welcome {
+    padding: 2.5em 5em 0 5em;
+    text-align: center;
+    font-size: 5em;
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+}
+

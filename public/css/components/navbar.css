@@ -1,0 +1,8 @@
+.navbar-logo {
+    font-size: 2em;
+}
+
+.navbar-logo span i {
+    margin-top: 5px;
+    margin-left: -12px;
+}
