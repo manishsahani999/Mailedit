@@ -20,13 +20,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th>1</th>
-                <td><a href="">Lorem</a></td>
-                <td>23</td>
-                <td><a href="" class="button">Edit</a></td>
-                <td><a href="" class="button">Delete</a></td>
-            </tr>
+            @foreach($brands as $brand)
+                <tr>
+                    <th>{{ $brand->id }}</th>
+                    <td><a href="{{ route('brand.show', $brand->slug) }}">{{ $brand->brand_name }}</a></td>
+                    <td>23</td>
+                    <td><a href="" class="button">Edit</a></td>
+                    <td><a href="" class="button">Delete</a></td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

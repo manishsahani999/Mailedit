@@ -21,6 +21,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    @yield('links')
 </head>
 <body>
     <div id="app">
@@ -31,5 +32,6 @@
     </div>
     {{--scripts--}}
     <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

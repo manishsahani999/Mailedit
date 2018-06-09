@@ -50,3 +50,7 @@ body {
 .brand-body {
 
 }
+
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-blurred.ck-editor__editable_inline {
+    min-height: 25em;
+}

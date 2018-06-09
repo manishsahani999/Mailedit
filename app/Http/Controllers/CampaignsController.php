@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBrand;
 use Illuminate\Http\Request;
-use App\Models\BinaryBrand;
+use App\Models\{BinaryBrand, BinaryCampaigns};
 
-class BrandController extends Controller
+class CampaignsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -23,9 +22,10 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($slug)
     {
-        return view('pages.brand.create');
+        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+        return view('pages.campaigns.create', ['brand' => $brand]);
     }
 
     /**
@@ -34,26 +34,25 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBrand $request)
+    public function store(Request $request, $slug)
     {
-        // Collection  of Request data
         $data = [
-            'brand_name'    => $request->brand_name,
-            'slug'          => str_slug($request->brand_name, '-'),
+            'subject'       => $request->subject,
             'from_name'     => $request->from_name,
             'from_email'    => $request->from_email,
             'reply_to'      => $request->reply_to,
+            'name'          => $request->name,
+            'description'   => $request->description,
+            'html'          => $request->html,
+            'text'          => $request->text,
             'allowed_files' => $request->allowed_files,
             'query_string'  => null,
             'brand_logo'    => $request->brand_logo,
             'settingd'      => $request->settings,
         ];
 
-        // Creating new Brand
-        $new = auth()->user()->binaryBrand()->create($data);
-
-        // redirecting to show page
-        return redirect()->route('brand.show', $new->slug);
+        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+        $campaign = $brand->binaryCampaign()->create($request->all());
     }
 
     /**
@@ -62,11 +61,9 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
-        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
-        $campaigns = $brand->binaryCampaign()->get();
-        return view('pages.brand.show', ['brand' => $brand, 'campaigns' => $campaigns]);
+        //
     }
 
     /**

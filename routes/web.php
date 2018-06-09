@@ -27,4 +27,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('new-brand', 'BrandController@create')->name('brand.create');
     Route::post('new-brand', 'BrandController@store')->name('brand.store');
     Route::get('{slug}', 'BrandController@show')->name('brand.show');
+    Route::get('{slug}/new-campaign', 'CampaignsController@create')->name('campaign.create');
+    Route::post('{slug}/new-campaign', 'CampaignsController@store')->name('campaign.store');
 });
