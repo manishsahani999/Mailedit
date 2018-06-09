@@ -6,7 +6,8 @@
             <div class="title">New brand</div>
         </div>
         <div class="brand-body m-t-1">
-            <form action="">
+            <form action="{{ route('brand.store') }}">
+                @csrf
                 <div class="columns">
                     <div class="column is-4 m-l-1">
                         <div class="title is-5 ">Brand info</div>
