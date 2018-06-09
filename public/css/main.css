@@ -20,3 +20,24 @@ body {
 .wrap {
     padding: 1em 3em;
 }
+
+.login-heading {
+    margin-top: 3.5em;
+}
+
+.login-body {
+    max-width: 20em;
+    margin: 1.8em auto;
+}
+
+.login-btn {
+    width: 100%;
+    background-color: rgb(64, 81, 204);
+    color: #ffffff;
+    transition: .3s;
+    border: rgb(58, 74, 174) 1px solid;
+}
+
+.login-btn:hover {
+    background-color: #fff;
+}

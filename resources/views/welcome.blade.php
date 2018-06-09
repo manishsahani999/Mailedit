@@ -21,11 +21,11 @@
             <nav class="navbar" role="navigation" aria-label="main navigation">
                 <div class="navbar-end">
                     @guest
-                        <a class="navbar-item" href="">
-                            Home
+                        <a class="navbar-item" href="{{ route('register') }}">
+                            Register
                         </a>
-                        <a class="navbar-item" href="" >
-                            Home
+                        <a class="navbar-item" href="{{ route('login') }}" >
+                            Login
                         </a>
                     @else
                         <div class="navbar-item has-dropdown is-hoverable">

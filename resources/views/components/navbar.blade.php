@@ -16,25 +16,33 @@
     <div class="navbar-menu">
 
         <div class="navbar-end m-r-1">
-            <a class="navbar-item" href="">
-                Home
-            </a>
             @guest
-                <a class="navbar-item" href="https://bulma.io/">
-                    Home
+                <a class="navbar-item" href="{{ route('register') }}">
+                    Register
                 </a>
-                <a class="navbar-item" href="https://bulma.io/">
-                    Home
+                <a class="navbar-item" href="{{ route('login') }}">
+                    Login
                 </a>
             @else
+                <a class="navbar-item" href="">
+                    Home
+                </a>
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link" href="#">
                         {{ Auth::user()->name }}
                     </a>
                     <div class="navbar-dropdown is-boxed is-right">
-                        <a class="navbar-item dropdown-item" href="#">
+                        <a class="navbar-item dropdown-item" href="{{ url('/home') }}">
                             Dashboard
                         </a>
+                        <a class="navbar-item dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                           document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     </div>
                 </div>
             @endguest
