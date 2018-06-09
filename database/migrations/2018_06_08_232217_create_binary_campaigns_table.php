@@ -24,7 +24,12 @@ class CreateBinaryCampaignsTable extends Migration
             $table->string('description')->default('Default Description');
             $table->longText('html')->nullable();
             $table->longText('text')->nullable();
-            $table->enum('status', ['draft', 'scheduled', 'sending', 'sent', 'cancel']);
+            $table->timestamp('starts_at')->nullable();
+            $table->timestamp('ends_at')->nullable();
+            $table->bigInteger('recipients_count')->default(0);
+            $table->bigInteger('sent_count')->default(0);
+            $table->bigInteger('sending_count')->default(0);
+            $table->enum('status', ['draft', 'sent', 'scheduled', 'cancelled', 'sending']);
             $table->softDeletes();
         });
     }

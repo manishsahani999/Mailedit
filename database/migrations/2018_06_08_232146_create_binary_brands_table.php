@@ -17,10 +17,12 @@ class CreateBinaryBrandsTable extends Migration
             $table->increments('id');
             $table->string('brand_name')->unique();
             $table->string('from_name')->nullable();
-            $table->string('from_email')->nullable();            $table->string('reply_to')->nullable();
+            $table->string('from_email')->nullable();
             $table->string('reply_to')->nullable();
+            $table->string('query_string')->nullable();
             $table->string('allowed_files')->nullable();
             $table->string('brand_logo')->nullable();
+            $table->text('settings')->nullable();
             $table->timestamps();
         });
     }
