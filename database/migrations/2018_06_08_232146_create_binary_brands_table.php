@@ -16,6 +16,7 @@ class CreateBinaryBrandsTable extends Migration
         Schema::create('binary_brands', function (Blueprint $table) {
             $table->increments('id');
             $table->string('brand_name')->unique();
+            $table->string('slug')->unique();
             $table->string('from_name')->nullable();
             $table->integer('user_id')->unsigned();
             $table->string('from_email')->nullable();
@@ -24,6 +25,7 @@ class CreateBinaryBrandsTable extends Migration
             $table->string('allowed_files')->nullable();
             $table->string('brand_logo')->nullable();
             $table->text('settings')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

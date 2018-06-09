@@ -26,4 +26,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('new-brand', 'BrandController@create')->name('brand.create');
     Route::post('new-brand', 'BrandController@store')->name('brand.store');
+    Route::get('{slug}', 'BrandController@show')->name('brand.show');
 });

@@ -10,7 +10,7 @@ class BinaryBrand extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'brand_name', 'from_name', 'from_email',
+        'brand_name', 'from_name', 'from_email', 'slug',
         'reply_to', 'query_string', 'allowed_files',
         'brand_logo', 'settings'
     ];
