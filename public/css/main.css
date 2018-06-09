@@ -41,3 +41,12 @@ body {
 .login-btn:hover {
     background-color: #fff;
 }
+
+.login-errors {
+    margin: 0 auto;
+    width: 20em;
+}
+
+.brand-body {
+
+}

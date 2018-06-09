@@ -5,7 +5,7 @@
     <div class="main-heading">
         <div class="title is-inline">Select brand</div>
         <div class="is-right">
-            <a href="" class="button is-primary">Add Brand</a>
+            <a href="{{ route('brand.create') }}" class="button is-primary">Add Brand</a>
         </div>
     </div>
 </div>
