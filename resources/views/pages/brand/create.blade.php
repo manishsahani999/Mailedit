@@ -6,11 +6,13 @@
             <div class="title">New brand</div>
         </div>
         <div class="brand-body m-t-1">
-            <form action="{{ route('brand.store') }}">
+            {{--Form start--}}
+            <form action="{{ route('brand.store') }}" method="post">
                 @csrf
                 <div class="columns">
                     <div class="column is-4 m-l-1">
                         <div class="title is-5 ">Brand info</div>
+                            {{--brand name--}}
                             <div class="field">
                                 <div class="control">
                                     <label class="label"> Brand Name
@@ -21,6 +23,7 @@
                                     </label>
                                 </div>
                             </div>
+                            {{--from name--}}
                             <div class="field">
                                 <div class="control">
                                     <label class="label"> From Name
@@ -31,6 +34,7 @@
                                     </label>
                                 </div>
                             </div>
+                            {{--from email--}}
                             <div class="field">
                                 <div class="control">
                                     <label class="label"> From email
@@ -41,6 +45,7 @@
                                     </label>
                                 </div>
                             </div>
+                            {{--replyto email--}}
                             <div class="field">
                                 <div class="control">
                                     <label class="label"> Reply to email
@@ -51,22 +56,24 @@
                                     </label>
                                 </div>
                             </div>
+                            {{--Allowed files--}}
                             <div class="field">
                                 <div class="control">
                                     <label class="label"> Allowed attachments file types
-                                        <input type="email" class="input"
+                                        <input type="text" class="input"
                                                name="allowed_files"
                                                value="{{ old('allowed_files') }}"
                                                required>
                                     </label>
                                 </div>
                             </div>
+                            {{--Brand logo--}}
                             <div class="field">
                                 <div class="control">
                                     <label for="" class="label">Brand logo</label>
                                     <div class="file has-name">
                                         <label class="file-label">
-                                            <input class="file-input" type="file" name="resume">
+                                            <input class="file-input" type="file" name="brand_logo">
                                             <span class="file-cta">
                                       <span class="file-icon">
                                         <i class="fas fa-upload"></i>

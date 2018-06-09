@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBrand;
 use Illuminate\Http\Request;
 use App\Models\BinaryBrand;
 
@@ -33,9 +34,10 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBrand $request)
     {
-        //
+        $new = auth()->user()->binaryBrand()->create($request->all());
+        return $new;
     }
 
     /**

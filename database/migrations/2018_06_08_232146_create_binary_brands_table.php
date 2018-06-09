@@ -17,6 +17,7 @@ class CreateBinaryBrandsTable extends Migration
             $table->increments('id');
             $table->string('brand_name')->unique();
             $table->string('from_name')->nullable();
+            $table->integer('user_id')->unsigned();
             $table->string('from_email')->nullable();
             $table->string('reply_to')->nullable();
             $table->string('query_string')->nullable();

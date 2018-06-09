@@ -18,7 +18,7 @@ class CreateBinaryCampaignsTable extends Migration
             $table->uuid('uuid')->unique()->index();
             $table->string('subject')->nullable();
             $table->string('from_name')->nullable();
-            $table->string('from_email')->nullable();            $table->string('reply_to')->nullable();
+            $table->string('from_email')->nullable();
             $table->string('reply_to')->nullable();
             $table->string('name')->default('Default Name');
             $table->string('description')->default('Default Description');
