@@ -12,7 +12,8 @@
         </div>
         <div class="brand-body m-t-1 m-l-1">
             {{--form--}}
-            <form action="{{ route('campaign.store', $brand->slug) }}">
+            <form action="{{ route('campaign.store', $brand->slug) }}" method="post">
+                @csrf
                 <div class="columns">
                     <div class="column is-4">
                         {{--Select template--}}
@@ -129,7 +130,7 @@
                         {{--html--}}
                         <div class="field">
                             <div class="control">
-                                <textarea name="html" id="editor" class="textarea"></textarea>
+                                <textarea name="html-text" id="html-text" class="textarea"></textarea>
                             </div>
                         </div>
                         {{--notification--}}
@@ -179,7 +180,7 @@
 @section('scripts')
     <script>
         ClassicEditor
-            .create( document.querySelector( '#editor' ) )
+            .create( document.querySelector( '#html-text' ) )
             .then( editor => {
         } )
         .catch( error => {

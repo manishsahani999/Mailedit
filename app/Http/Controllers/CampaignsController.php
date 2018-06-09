@@ -45,13 +45,14 @@ class CampaignsController extends Controller
             'description'   => $request->description,
             'html'          => $request->html,
             'text'          => $request->text,
+            'status'    => $request->status,
             'allowed_files' => $request->allowed_files,
             'query_string'  => null,
             'brand_logo'    => $request->brand_logo,
-            'settingd'      => $request->settings,
         ];
 
         $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+        return $data;
         $campaign = $brand->binaryCampaign()->create($request->all());
     }
 

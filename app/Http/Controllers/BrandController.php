@@ -46,7 +46,7 @@ class BrandController extends Controller
             'allowed_files' => $request->allowed_files,
             'query_string'  => null,
             'brand_logo'    => $request->brand_logo,
-            'settingd'      => $request->settings,
+            'setting'      => $request->settings,
         ];
 
         // Creating new Brand
