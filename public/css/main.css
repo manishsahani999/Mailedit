@@ -1,4 +1,5 @@
 @import './components/navbar.css';
+@import './helper.css';
 
 body {
     margin: 0;

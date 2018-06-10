@@ -2,7 +2,7 @@
 
 @section('links')
     <script src="https://cdn.ckeditor.com/ckeditor5/10.0.1/classic/ckeditor.js"></script>
- @endsection
+@endsection
 
 @section('content')
     <div class="wrap">
@@ -130,7 +130,7 @@
                         {{--html--}}
                         <div class="field">
                             <div class="control">
-                                <textarea name="html-text" id="html-text" class="textarea"></textarea>
+                                <textarea name="htmltext" id="htmltext" class="textarea"></textarea>
                             </div>
                         </div>
                         {{--notification--}}
@@ -180,11 +180,12 @@
 @section('scripts')
     <script>
         ClassicEditor
-            .create( document.querySelector( '#html-text' ) )
+            .create( document.querySelector( '#htmltext' ) )
             .then( editor => {
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
+                console.log( editor );
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
     </script>
 @endsection

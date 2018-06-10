@@ -11,6 +11,15 @@ class BinaryCampaigns extends Model
 {
     use Uuids;
     use SoftDeletes;
+
+    protected $fillable = [
+        'id', 'uuid', 'subject', 'binary_brand_id', 'from_name', 'from_email',
+        'reply_to', 'name', 'description', 'html', 'text', 'starts_at',
+        'ends_at', 'recipients_count', 'description', 'html', 'text', 'starts_at',
+        'allowed_files',
+        'brand_logo', 'settings'
+    ];
+
     public function binaryBrand() {
         return $this->belongsTo('App\Models\BinaryBrand');
     }

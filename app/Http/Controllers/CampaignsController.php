@@ -43,7 +43,7 @@ class CampaignsController extends Controller
             'reply_to'      => $request->reply_to,
             'name'          => $request->name,
             'description'   => $request->description,
-            'html'          => $request->html,
+            'html'          => $request->htmltext,
             'text'          => $request->text,
             'status'    => $request->status,
             'allowed_files' => $request->allowed_files,
@@ -52,8 +52,8 @@ class CampaignsController extends Controller
         ];
 
         $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
-        return $data;
-        $campaign = $brand->binaryCampaign()->create($request->all());
+        $campaign = $brand->binaryCampaign()->create($data);
+        return $campaign;
     }
 
     /**
