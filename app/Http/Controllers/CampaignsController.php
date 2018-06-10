@@ -36,6 +36,7 @@ class CampaignsController extends Controller
      */
     public function store(Request $request, $slug)
     {
+//        data collection
         $data = [
             'subject'       => $request->subject,
             'from_name'     => $request->from_name,
@@ -51,8 +52,13 @@ class CampaignsController extends Controller
             'brand_logo'    => $request->brand_logo,
         ];
 
+//        finding brand
         $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+
+//        Creating Campaign
         $campaign = $brand->binaryCampaign()->create($data);
+
+//        redirecting to show route
         return redirect()->route('campaign.show', [
             'slug' => $brand->slug,
             'uuid' => $campaign->uuid
@@ -68,9 +74,17 @@ class CampaignsController extends Controller
      */
     public function show($slug, $uuid)
     {
+//        find brand
         $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
-        $campaign = $brand->binaryCampaign()->where('uuid', $$uuid)->first();
-        return view('')
+
+//        find campaign
+        $campaign = $brand->binaryCampaign()->where('uuid', $uuid)->first();
+
+//        redirecting
+        return view('pages.campaigns.show', [
+            'brand'     => $brand,
+            'campaign'  => $campaign
+        ]);
     }
 
     /**

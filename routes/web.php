@@ -24,9 +24,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
+//    brand routes
     Route::get('new-brand', 'BrandController@create')->name('brand.create');
     Route::post('new-brand', 'BrandController@store')->name('brand.store');
     Route::get('{slug}', 'BrandController@show')->name('brand.show');
+
+//    campaigns routes
     Route::get('{slug}/new-campaign', 'CampaignsController@create')->name('campaign.create');
     Route::post('{slug}/new-campaign', 'CampaignsController@store')->name('campaign.store');
     Route::get('{slug}/campaign/{uuid}', 'CampaignsController@show')->name('campaign.show');
