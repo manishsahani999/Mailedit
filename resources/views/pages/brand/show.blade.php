@@ -24,7 +24,7 @@
                 @foreach($campaigns as $campaign)
                     <tr>
                         <th>{{ $brand->id }}</th>
-                        <td><a href="{{ route('brand.show', $brand->slug) }}">{{ $brand->brand_name }}</a></td>
+                        <td><a href="{{ route('campaign.show', ['slug' => $brand->slug, 'uuid' => $campaign->uuid]) }}">{{ $brand->brand_name }}</a></td>
                         <td>23</td>
                         <td><a href="" class="button">Edit</a></td>
                         <td><a href="" class="button">Delete</a></td>

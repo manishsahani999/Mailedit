@@ -53,7 +53,11 @@ class CampaignsController extends Controller
 
         $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
         $campaign = $brand->binaryCampaign()->create($data);
-        return $campaign;
+        return redirect()->route('campaign.show', [
+            'slug' => $brand->slug,
+            'uuid' => $campaign->uuid
+        ]);
+
     }
 
     /**
@@ -62,9 +66,11 @@ class CampaignsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug, $uuid)
     {
-        //
+        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+        $campaign = $brand->binaryCampaign()->where('uuid', $$uuid)->first();
+        return view('')
     }
 
     /**

@@ -15,9 +15,8 @@ class BinaryCampaigns extends Model
     protected $fillable = [
         'id', 'uuid', 'subject', 'binary_brand_id', 'from_name', 'from_email',
         'reply_to', 'name', 'description', 'html', 'text', 'starts_at',
-        'ends_at', 'recipients_count', 'description', 'html', 'text', 'starts_at',
+        'ends_at', 'recipients_count', 'sent_count', 'sending_count', 'status',
         'allowed_files',
-        'brand_logo', 'settings'
     ];
 
     public function binaryBrand() {

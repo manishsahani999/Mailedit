@@ -133,6 +133,14 @@
                                 <textarea name="htmltext" id="htmltext" class="textarea"></textarea>
                             </div>
                         </div>
+                        {{--description--}}
+                        <div class="field">
+                            <div class="control">
+                                <label for="" class="label">Description
+                                    <textarea name="description"  class="textarea"></textarea>
+                                </label>
+                            </div>
+                        </div>
                         {{--notification--}}
                         <div class="notification is-dark">
                             <div class="title">Lorem</div>
