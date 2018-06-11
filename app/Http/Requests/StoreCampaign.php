@@ -34,7 +34,6 @@ class StoreCampaign extends FormRequest
             'text'          => 'required',
             'status'        => 'required',
             'allowed_files' => 'required',
-            'query_string'  => 'required',
             'brand_logo'    => 'required',
         ];
     }

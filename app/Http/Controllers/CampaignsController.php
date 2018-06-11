@@ -94,9 +94,19 @@ class CampaignsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug, $uuid)
     {
+        //  find brand
+        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
 
+        // find campaign
+        $campaign = $brand->binaryCampaign()->where('uuid', $uuid)->first();
+
+        // returning
+        return view('pages.campaigns.edit', [
+            'brand'     => $brand,
+            'campaign'  => $campaign
+        ]);
     }
 
     /**
@@ -106,9 +116,38 @@ class CampaignsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreCampaign $request, $slug, $uuid)
     {
-        //
+        // data collection
+        $data = [
+            'subject'       => $request->subject,
+            'from_name'     => $request->from_name,
+            'from_email'    => $request->from_email,
+            'reply_to'      => $request->reply_to,
+            'name'          => $request->name,
+            'description'   => $request->description,
+            'html'          => $request->htmltext,
+            'text'          => $request->text,
+            'status'        => $request->status,
+            'allowed_files' => $request->allowed_files,
+            'query_string'  => null,
+            'brand_logo'    => $request->brand_logo,
+        ];
+
+        //  find brand
+        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+
+        // find campaign
+        $campaign = $brand->binaryCampaign()->where('uuid', $uuid)->first();
+
+        //  updating
+        $updated = $campaign->update($data);
+
+        // return
+        return redirect()-> route('campaign.show', [
+            'slug' => $brand->slug,
+            'uuid' => $campaign->uuid
+        ]);
     }
 
     /**

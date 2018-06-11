@@ -35,5 +35,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('{slug}/new-campaign', 'CampaignsController@create')->name('campaign.create');
     Route::post('{slug}/new-campaign', 'CampaignsController@store')->name('campaign.store');
     Route::get('{slug}/campaign/{uuid}', 'CampaignsController@show')->name('campaign.show');
-    Route::get('{slug}/campaign/{uuid}/edit', 'CampaignsController@show')->name('campaign.edit');
+    Route::get('{slug}/campaign/{uuid}/edit', 'CampaignsController@edit')->name('campaign.edit');
+    Route::put('{slug}/campaign/{uuid}', 'CampaignsController@update')->name('campaign.update');
 });
