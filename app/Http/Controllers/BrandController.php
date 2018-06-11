@@ -93,9 +93,29 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreBrand $request, $slug)
     {
-        //
+        // find
+        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+
+        // Collection  of Request data
+        $data = [
+            'brand_name'    => $request->brand_name,
+            'slug'          => str_slug($request->brand_name, '-'),
+            'from_name'     => $request->from_name,
+            'from_email'    => $request->from_email,
+            'reply_to'      => $request->reply_to,
+            'allowed_files' => $request->allowed_files,
+            'query_string'  => null,
+            'brand_logo'    => $request->brand_logo,
+            'setting'      => $request->settings,
+        ];
+
+        // updating
+        $updated = $brand->update($data);
+
+        // redirecting
+        return redirect()->route('home');
     }
 
     /**
