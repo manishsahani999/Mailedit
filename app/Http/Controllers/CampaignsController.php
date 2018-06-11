@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCampaign;
 use Illuminate\Http\Request;
 use App\Models\{BinaryBrand, BinaryCampaigns};
 
@@ -34,7 +35,7 @@ class CampaignsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $slug)
+    public function store(StoreCampaign $request, $slug)
     {
 //        data collection
         $data = [
@@ -46,7 +47,7 @@ class CampaignsController extends Controller
             'description'   => $request->description,
             'html'          => $request->htmltext,
             'text'          => $request->text,
-            'status'    => $request->status,
+            'status'        => $request->status,
             'allowed_files' => $request->allowed_files,
             'query_string'  => null,
             'brand_logo'    => $request->brand_logo,
@@ -95,7 +96,7 @@ class CampaignsController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**

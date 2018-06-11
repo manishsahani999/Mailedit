@@ -78,9 +78,12 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+        return view('pages.brand.edit', [
+            'brand' => $brand
+        ]);
     }
 
     /**

@@ -6,15 +6,15 @@
 
 @section('content')
     <div class="wrap">
-        <div class="main-heading">
-            <div class="title is-inline">{{ $brand->brand_name }} </div>
-            <div class="title is-5 is-inline">
-                   / {{ $campaign->name }}
-            </div>
-        </div>
-        <div class="brand-body m-t-2 m-l-1">
+        <div class="brand-body m-l-1">
             <div class="columns">
                 <div class="column is-4">
+                    <div class="m-b-1">
+                        <div class="title is-inline">{{ $brand->brand_name }} </div>
+                        <div class="title is-5 is-inline">
+                            / {{ $campaign->name }}
+                        </div>
+                    </div>
                     {{--Test Box--}}
                     <div class="box">
                         <div class="title is-5 m-b-1">Test send this Campaign</div>
@@ -68,8 +68,24 @@
                         <div class="title is-5">
                             schedule this campaign
                         </div>
-                        <input id="datepickerDemo" class="input" type="date">
+                        <div class="field">
+                            <div class="control">
+                                <input id="datepickerDemo" class="input" type="date">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <button class="button">Schedule campaign</button>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <div class="column">
+                    <div class="title is-4">
+                        newsletter
+                    </div>
+                    <div class="box"></div>
                 </div>
             </div>
         </div>
@@ -78,3 +94,4 @@
 
 @section('scripts')
     <script src="{{ asset('dist/js/bulma-calendar.min.js') }}"></script>
+@endsection

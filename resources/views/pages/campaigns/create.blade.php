@@ -11,6 +11,7 @@
             <div class="title is-6 is-inline">/ New Campaign</div>
         </div>
         <div class="brand-body m-t-1 m-l-1">
+            @include('components.errors')
             {{--form--}}
             <form action="{{ route('campaign.store', $brand->slug) }}" method="post">
                 @csrf
