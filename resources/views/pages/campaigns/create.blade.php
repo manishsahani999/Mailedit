@@ -131,7 +131,7 @@
                         {{--html--}}
                         <div class="field">
                             <div class="control">
-                                <textarea name="htmltext" id="htmltext" class="textarea"></textarea>
+                                <textarea name="htmltext" class="textarea"></textarea>
                             </div>
                         </div>
                         {{--description--}}
@@ -187,14 +187,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#htmltext' ) )
-            .then( editor => {
-                console.log( editor );
-            } )
-            .catch( error => {
-                console.error( error );
-            } );
-    </script>
+
 @endsection

@@ -17,6 +17,7 @@ class CreateBinarySubsListsTable extends Migration
             $table->increments('id');
             $table->string('name')->default('Default Name');
             $table->uuid('uuid')->unique();
+            $table->integer('user_id')->unsigned();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -24,21 +24,26 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
+
 //    brand routes
-    Route::get('new-brand', 'BrandController@create')->name('brand.create');
-    Route::post('new-brand', 'BrandController@store')->name('brand.store');
-    Route::get('{slug}', 'BrandController@show')->name('brand.show');
-    Route::get('{slug}/edit', 'BrandController@edit')->name('brand.edit');
-    Route::put('{slug}', 'BrandController@update')->name('brand.update');
+    Route::get('brands/new-brand', 'BrandController@create')->name('brand.create');
+    Route::post('brands/new-brand', 'BrandController@store')->name('brand.store');
+    Route::get('brands/{slug}', 'BrandController@show')->name('brand.show');
+    Route::get('brands/{slug}/edit', 'BrandController@edit')->name('brand.edit');
+    Route::put('brands/{slug}', 'BrandController@update')->name('brand.update');
 
 //    campaigns routes
-    Route::get('{slug}/new-campaign', 'CampaignsController@create')->name('campaign.create');
-    Route::post('{slug}/new-campaign', 'CampaignsController@store')->name('campaign.store');
-    Route::get('{slug}/campaign/{uuid}', 'CampaignsController@show')->name('campaign.show');
-    Route::get('{slug}/campaign/{uuid}/edit', 'CampaignsController@edit')->name('campaign.edit');
-    Route::put('{slug}/campaign/{uuid}', 'CampaignsController@update')->name('campaign.update');
+    Route::get('brands/{slug}/new-campaign', 'CampaignsController@create')->name('campaign.create');
+    Route::post('brands/{slug}/new-campaign', 'CampaignsController@store')->name('campaign.store');
+    Route::get('brands/{slug}/campaign/{uuid}', 'CampaignsController@show')->name('campaign.show');
+    Route::get('brands/{slug}/campaign/{uuid}/edit', 'CampaignsController@edit')->name('campaign.edit');
+    Route::put('brands/{slug}/campaign/{uuid}', 'CampaignsController@update')->name('campaign.update');
+
+//    SubsList Routes
+    Route::get('subscribers', 'SubsListController@index')->name('subs.list.index');
+    Route::get('subscribers/new-lists', 'SubsListController@create')->name('subs.list.create');
 
 //    Subs Routes
-    Route::get('subscribers/', 'SubsController@create')->name('subs.index');
+//    Route::get('subscribers/', 'SubsController@create')->name('subs.index');
     Route::get('subscribers/new-subscriber', 'SubsController@create')->name('subs.create');
 });
