@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('subscribers', 'SubsListController@store')->name('subs.list.store');
     Route::get('subscribers/{uuid}', 'SubsListController@show')->name('subs.list.show');
     Route::get('subscribers/{uuid}/edit', 'SubsListController@edit')->name('subs.list.edit');
+    Route::put('subscribers/{uuid}', 'SubsListController@update')->name('subs.list.update');
 
 //    Subs Routes
     Route::get('subscribers/{uuid}/new-subscriber', 'SubsController@create')->name('subs.create');

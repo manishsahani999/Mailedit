@@ -7,7 +7,7 @@
                 {{ $list->name }}
                 <span class="icon has-text-primary">
                      <i class="fas fa-chevron-right"></i>
-                    </span>
+                </span>
                 subscriber
             </div>
         </div>

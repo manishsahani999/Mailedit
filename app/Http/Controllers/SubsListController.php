@@ -93,7 +93,11 @@ class SubsListController extends Controller
      */
     public function update(StoreSubsList $request, $uuid)
     {
-        //
+//        find old list and updating
+        $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->first()->update($request->all());
+
+//        redirecting to index page
+        return redirect()->route('subs.list.index');
     }
 
     /**
