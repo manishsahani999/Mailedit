@@ -37,4 +37,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('{slug}/campaign/{uuid}', 'CampaignsController@show')->name('campaign.show');
     Route::get('{slug}/campaign/{uuid}/edit', 'CampaignsController@edit')->name('campaign.edit');
     Route::put('{slug}/campaign/{uuid}', 'CampaignsController@update')->name('campaign.update');
+
+//    Subs Routes
+    Route::get('subscribers/', 'SubsController@create')->name('subs.index');
+    Route::get('subscribers/new-subscriber', 'SubsController@create')->name('subs.create');
 });
