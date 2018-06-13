@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSubsList;
 use Illuminate\Http\Request;
 
 class SubsListController extends Controller
@@ -36,7 +37,7 @@ class SubsListController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSubsList $request)
     {
 //        Creating a new List
         $list = auth()->user()->binarySubsList()->create($request->all());
@@ -72,9 +73,15 @@ class SubsListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($uuid)
     {
-        //
+//        find the list
+        $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->first();
+
+//        redirecting to view/subs/lists/edit
+        return view('subs.lists.edit', [
+            'list' => $list
+        ]);
     }
 
     /**
@@ -84,7 +91,7 @@ class SubsListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreSubsList $request, $uuid)
     {
         //
     }

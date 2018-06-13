@@ -42,7 +42,7 @@
                             </a>
                         </td>
                         <td>{{ $count }}</td>
-                        <td><a href="" class="button">Edit</a></td>
+                        <td><a href="{{ route('subs.list.edit', $list->uuid) }}" class="button">Edit</a></td>
                         <td><a href="" class="button">Delete</a></td>
                     </tr>
                 @endforeach

@@ -24,8 +24,11 @@
                     Login
                 </a>
             @else
-                <a class="navbar-item" href="">
+                <a class="navbar-item" href="{{ url('/home') }}">
                     Home
+                </a>
+                <a class="navbar-item" href="{{ route('subs.list.index') }}">
+                    Subscribers
                 </a>
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link" href="#">
