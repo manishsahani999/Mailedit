@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSubs;
 use Illuminate\Http\Request;
 
 class SubsController extends Controller
@@ -35,11 +36,15 @@ class SubsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $uuid)
+    public function store(StoreSubs $request, $uuid)
     {
 //        finding the list
         $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->first();
+
+//        Create New Subscriber
         $sub = $list->binarySubs()->create($request->all());
+
+//        redirecting to list page
         return redirect()->route('subs.list.show', $list->uuid);
     }
 

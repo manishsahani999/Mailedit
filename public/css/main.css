@@ -52,7 +52,7 @@ body {
 
 }
 
-.brand-body .notification.box {
+.brand-body .notification.is-white.box.column {
     height: 7em;
     margin: .5em;
 }

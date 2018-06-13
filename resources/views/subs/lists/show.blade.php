@@ -9,7 +9,7 @@
             </div>
         </div>
         <hr class="m-t-2">
-        <div class="brand-body columns">
+        <div class="brand-body columns is-flex-wrap">
             @foreach($subs as $sub)
                 <div class="notification is-white box column is-2">
                     <div>
