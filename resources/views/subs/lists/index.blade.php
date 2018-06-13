@@ -43,7 +43,13 @@
                         </td>
                         <td>{{ $count }}</td>
                         <td><a href="{{ route('subs.list.edit', $list->uuid) }}" class="button">Edit</a></td>
-                        <td><a href="" class="button">Delete</a></td>
+                        <td>
+                            <form action="{{ route('subs.list.destroy', $list->uuid) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="button">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

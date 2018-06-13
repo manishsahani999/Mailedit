@@ -106,8 +106,12 @@ class SubsListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($uuid)
     {
-        //
+//        find the list
+        $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->first()->delete();
+
+//        return to index page
+        return redirect()->route('subs.list.index');
     }
 }
