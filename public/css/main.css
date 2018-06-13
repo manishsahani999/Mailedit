@@ -52,6 +52,7 @@ body {
 
 }
 
-.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-blurred.ck-editor__editable_inline {
-    min-height: 25em;
+.brand-body .notification.box {
+    height: 7em;
+    margin: .5em;
 }

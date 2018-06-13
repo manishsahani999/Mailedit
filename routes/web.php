@@ -46,4 +46,5 @@ Route::group(['middleware' => ['auth']], function () {
 //    Subs Routes
     Route::get('subscribers/{uuid}/new-subscriber', 'SubsController@create')->name('subs.create');
     Route::post('subscribers/{uuid}/new-subscriber', 'SubsController@store')->name('subs.store');
+    Route::get('subscribers/{uuid}/{email}', 'SubsController@show')->name('subs.show');
 });

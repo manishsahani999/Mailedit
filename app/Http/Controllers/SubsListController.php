@@ -59,7 +59,7 @@ class SubsListController extends Controller
 //        redirecting to show page
         return view('subs.lists.show', [
             'list' => $list,
-            'subs'
+            'subs' => $subs
         ]);
     }
 

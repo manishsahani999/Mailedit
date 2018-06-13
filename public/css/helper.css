@@ -73,3 +73,17 @@
 .p-1 {
     padding: 1em;
 }
+
+.m-1 {
+    margin: 1em;
+}
+
+.is-flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.decoration-none {
+    text-decoration: none !important;
+}
+
