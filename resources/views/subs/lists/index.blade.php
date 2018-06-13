@@ -24,12 +24,16 @@
                 <tr>
                     <th>Id</th>
                     <th>Lists</th>
+                    <th>Subscribers</th>
                     <th>edit</th>
                     <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($lists as $list)
+                    <?php
+                        $count = count($list->binarySubs()->get())
+                    ?>
                     <tr>
                         <th>{{ $list->id }}</th>
                         <td>
@@ -37,6 +41,7 @@
                                 {{ $list->name }}
                             </a>
                         </td>
+                        <td>{{ $count }}</td>
                         <td><a href="" class="button">Edit</a></td>
                         <td><a href="" class="button">Delete</a></td>
                     </tr>

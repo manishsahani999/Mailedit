@@ -13,7 +13,10 @@ class SubsListController extends Controller
      */
     public function index()
     {
+//        all list
         $lists = auth()->user()->binarySubsList()->get();
+
+//        redirecting to view/subs/lists/index
         return view('subs.lists.index', ['lists' => $lists]);
     }
 
