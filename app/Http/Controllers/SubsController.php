@@ -21,9 +21,12 @@ class SubsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($uuid)
     {
-        //
+        $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->first();
+        return view('subs.create', [
+            'list' => $list
+        ]);
     }
 
     /**
@@ -32,9 +35,12 @@ class SubsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $uuid)
     {
-        //
+//        finding the list
+        $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->first();
+        $sub = $list->binarySubs()->create($request->all());
+        return redirect()->route('subs.list.show', $list->uuid);
     }
 
     /**

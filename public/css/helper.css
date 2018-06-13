@@ -69,3 +69,7 @@
 .is-right {
     float: right;
 }
+
+.p-1 {
+    padding: 1em;
+}

@@ -24,7 +24,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
-
 //    brand routes
     Route::get('brands/new-brand', 'BrandController@create')->name('brand.create');
     Route::post('brands/new-brand', 'BrandController@store')->name('brand.store');
@@ -41,9 +40,10 @@ Route::group(['middleware' => ['auth']], function () {
 
 //    SubsList Routes
     Route::get('subscribers', 'SubsListController@index')->name('subs.list.index');
-    Route::get('subscribers/new-lists', 'SubsListController@create')->name('subs.list.create');
+    Route::post('subscribers/new-lists', 'SubsListController@store')->name('subs.list.store');
+    Route::get('subscribers/{uuid}', 'SubsListController@show')->name('subs.list.show');
 
 //    Subs Routes
-//    Route::get('subscribers/', 'SubsController@create')->name('subs.index');
-    Route::get('subscribers/new-subscriber', 'SubsController@create')->name('subs.create');
+    Route::get('subscribers/{uuid}/new-subscriber', 'SubsController@create')->name('subs.create');
+    Route::post('subscribers/{uuid}/new-subscriber', 'SubsController@store')->name('subs.store');
 });

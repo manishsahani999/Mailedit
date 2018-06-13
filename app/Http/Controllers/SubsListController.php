@@ -14,8 +14,7 @@ class SubsListController extends Controller
     public function index()
     {
         $lists = auth()->user()->binarySubsList()->get();
-        return $lists;
-        return view('subs.lists.index');
+        return view('subs.lists.index', ['lists' => $lists]);
     }
 
     /**
@@ -25,7 +24,7 @@ class SubsListController extends Controller
      */
     public function create()
     {
-        return view('subs.lists.create');
+//
     }
 
     /**
@@ -36,7 +35,11 @@ class SubsListController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        Creating a new List
+        $list = auth()->user()->binarySubsList()->create($request->all());
+
+//        redirecting to index page
+        return redirect()->route('subs.list.index');
     }
 
     /**
@@ -45,9 +48,19 @@ class SubsListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
-        //
+//        find the list
+        $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->first();
+
+//        find all subs
+        $subs = $list->binarySubs()->get();
+
+//        redirecting to show page
+        return view('subs.lists.show', [
+            'list' => $list,
+            'subs'
+        ]);
     }
 
     /**

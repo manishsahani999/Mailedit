@@ -18,7 +18,7 @@ class CreateBinarySubscribersTable extends Migration
             $table->uuid('uuid')->unique()->index();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->integer('subs_lists_id')->unsigned();
+            $table->integer('binary_subs_list_id')->unsigned();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->softDeletes();

@@ -11,6 +11,10 @@ class BinarySubscriber extends Model
     use Uuids;
     use SoftDeletes;
 
+    protected $fillable = [
+        'first_name', 'last_name', 'email', 'phone'
+    ];
+
     /**
      *
      * This belongs to BinarySubsList

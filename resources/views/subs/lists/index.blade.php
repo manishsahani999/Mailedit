@@ -5,16 +5,25 @@
         <div class="main-heading">
             <div class="title is-inline">All Lists</div>
             <div class="is-right">
-                <a href="{{ route('subs.list.create') }}" class="button">Add List</a>
+                <form action="{{ route('subs.list.store') }}" method="post">
+                    @csrf
+                    <div class="field">
+                        <div class="control">
+                            <label class="label">
+                                <input type="text" name="name" class="input is-inline">
+                                <button class="button" type="submit">Create new List</button>
+                            </label>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="brand-body">
+        <div class="brand-body m-t-2">
             <table class="table is-fullwidth">
                 <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Brands</th>
-                    <th>lorem</th>
+                    <th>Lists</th>
                     <th>edit</th>
                     <th>Delete</th>
                 </tr>
@@ -22,9 +31,12 @@
                 <tbody>
                 @foreach($lists as $list)
                     <tr>
-                        <th>{{ $brand->id }}</th>
-                        {{--<td><a href="{{ route('campaign.show', ['slug' => $brand->slug, 'uuid' => $campaign->uuid]) }}">{{ $brand->brand_name }}</a></td>--}}
-                        <td>23</td>
+                        <th>{{ $list->id }}</th>
+                        <td>
+                            <a href="{{ route('subs.list.show', $list->uuid) }}">
+                                {{ $list->name }}
+                            </a>
+                        </td>
                         <td><a href="" class="button">Edit</a></td>
                         <td><a href="" class="button">Delete</a></td>
                     </tr>
