@@ -2,30 +2,26 @@
 
 @section('content')
     <div class="wrap">
-        <div class="login-heading">
-            <div class="title has-text-centered">
+        <div class="login-heading m-t-2">
+            <h4 class="title text-center">
                 {{ $list->name }}
                 <span class="icon has-text-primary">
                      <i class="fas fa-chevron-right"></i>
                 </span>
                 edit
-            </div>
+            </h4>
         </div>
         <div class="login-body">
             <form action="{{ route('subs.list.update', $list->uuid) }}" method="post">
                 @csrf
                 @method('PUT')
-                <div class="field">
-                    <div class="control">
-                        <label class="label">
-                            <input type="text" value="{{ $list->name }}" name="name"
-                                   class="input" required>
-                        </label>
-                    </div>
+                <div class="form-group">
+                        <input type="text" value="{{ $list->name }}" name="name"
+                               class="form-control" placeholder="Name" required>
                 </div>
                 <div class="field">
                     <div class="control">
-                        <button class="button login-btn" type="submit">Update</button>
+                        <button class="btn login-btn btn-primary    " type="submit">Update</button>
                     </div>
                 </div>
             </form>

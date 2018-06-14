@@ -23,4 +23,15 @@ class BinarySubscriber extends Model
     public function binarySubsList() {
         return $this->belongsTo('App\Models\BinarySubsList');
     }
+
+    /**
+     *
+     * This has many Emails
+     *
+     */
+    public function emails() {
+        return $this->belongsTo('App\Models\BinaryEmail');
+    }
+
+
 }
