@@ -1,44 +1,48 @@
-<nav class="navbar is-transparent has-shadow">
-    <div class="navbar-brand m-l-1">
-        <a class="navbar-item navbar-logo" href="/">
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <a class="navbar-brand navbar-logo" href="/">
             Mailed it
-            <span class="icon has-text-primary" style="margin-left: 10px;">
+            <span class="icon text-primary m-l-1">
              <i class="fas fa-chevron-right"></i>
             </span>
         </a>
-        <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="navbar-menu">
-
-        <div class="navbar-end m-r-1">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
             @guest
-                <a class="navbar-item" href="{{ route('register') }}">
-                    Register
-                </a>
-                <a class="navbar-item" href="{{ route('login') }}">
-                    Login
-                </a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('register') }}">
+                        Register<span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">
+                        Login
+                    </a>
+                </li>
+
             @else
-                <a class="navbar-item" href="{{ url('/home') }}">
-                    Home
-                </a>
-                <a class="navbar-item" href="{{ route('subs.list.index') }}">
-                    Subscribers
-                </a>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="#">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/home') }}">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('subs.list.index') }}">
+                        Subscribers
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
-                    <div class="navbar-dropdown is-boxed is-right">
-                        <a class="navbar-item dropdown-item" href="{{ url('/home') }}">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ url('/home') }}">
                             Dashboard
                         </a>
-                        <a class="navbar-item dropdown-item" href="{{ route('logout') }}"
+                        <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                            document.getElementById('logout-form').submit();">
                             Logout
@@ -47,9 +51,20 @@
                             {{ csrf_field() }}
                         </form>
                     </div>
+                </li>
+
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">
+
+                    </a>
+                    <div class="navbar-dropdown is-boxed is-right">
+
+
+                    </div>
                 </div>
             @endguest
-        </div>
+
 
     </div>
 </nav>

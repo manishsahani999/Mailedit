@@ -2,53 +2,43 @@
 
 @section('content')
     <div class="wrap">
-        <div class="login-heading">
-            <div class="title is-2 has-text-centered">
+        <div class="login-heading text-center">
+            <h2>
                 Mailed it
                 <a href="{{ route('login') }}">
                     <span class="icon has-text-primary">
                      <i class="fas fa-chevron-right"></i>
                     </span>
                 </a>
-            </div>
+            </h2>
         </div>
         <div class="login-body has-text-centered">
             <form action="{{ route('register') }}" method="post">
                 @csrf
-                <div class="field">
-                    <div class="control">
-                        <input type="text" class="input"
+                <div class="form-group">
+                        <input type="text" class="form-control"
                                name="name" value="{{ old('name') }}"
                                required autofocus
                                placeholder="Username">
-                    </div>
                 </div>
-                <div class="field">
-                    <div class="control">
-                        <input type="text" class="input"
+                <div class="form-group">
+                        <input type="text" class="form-control"
                                name="email" value="{{ old('email') }}"
                                required autofocus
                                placeholder="Email">
-                    </div>
                 </div>
-                <div class="field">
-                    <div class="control">
-                        <input type="password" class="input"
+                <div class="form-group">
+                        <input type="password" class="form-control"
                                name="password" required autofocus
                                placeholder="Password">
-                    </div>
                 </div>
-                <div class="field">
-                    <div class="control">
-                        <input type="password" class="input"
+                <div class="form-group">
+                        <input type="password" class="form-control"
                                name="password_confirmation" required autofocus
                                placeholder="Confirm Password">
-                    </div>
                 </div>
-                <div class="field">
-                    <div class="control">
-                        <button type="submit" class="button is-medium login-btn">Register</button>
-                    </div>
+                <div class="form-group">
+                        <button type="submit" class="btn btn-primary login-btn">Register</button>
                 </div>
             </form>
             @if ($errors->any())

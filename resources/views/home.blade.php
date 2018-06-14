@@ -3,20 +3,20 @@
 @section('content')
 <div class="wrap">
     <div class="main-heading">
-        <div class="title is-inline">Select brand</div>
+        <h4 class="title is-inline">Select brand</h4>
         <div class="is-right">
-            <a href="{{ route('brand.create') }}" class="button is-primary">Add Brand</a>
+            <a href="{{ route('brand.create') }}" class="btn is-primary">Add Brand</a>
         </div>
     </div>
     <div class="main-body m-t-1">
-        <table class="table is-fullwidth">
+        <table class="table">
             <thead>
             <tr>
-                <th>Id</th>
-                <th>Brands</th>
-                <th>lorem</th>
-                <th>edit</th>
-                <th>Delete</th>
+                <th scope="col">Id</th>
+                <th scope="col">Brands</th>
+                <th scope="col">lorem</th>
+                <th scope="col">Act</th>
+                <th scope="col">Delete</th>
             </tr>
             </thead>
             <tbody>

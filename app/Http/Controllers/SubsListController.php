@@ -108,7 +108,7 @@ class SubsListController extends Controller
      */
     public function destroy($uuid)
     {
-//        find the list
+//        find the list and deleting
         $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->first()->delete();
 
 //        return to index page

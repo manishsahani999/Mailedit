@@ -28,7 +28,6 @@ class StoreBrand extends FormRequest
             'from_name' => 'required',
             'from_email' => 'required',
             'reply_to' => 'required',
-            'allowed_files' => 'required',
         ];
     }
 }
