@@ -59,7 +59,7 @@
                     </div>
                     <div class="col">
                         <h5 class="title">Brand settings</h5>
-
+                        @include('components.errors')
                         <div class="jumbotron">
                             <h1 class="display-4">Settings here</h1>
                             <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>

@@ -2,53 +2,37 @@
 
 @section('content')
     <div class="wrap">
-        <div class="login-heading">
-            <div class="title is-4 has-text-centered">
+        <div class="login-heading text-center">
+            <h4 class="title">
                 {{ $list->name }}
-                <span class="icon has-text-primary">
+                <span class="text-primary">
                      <i class="fas fa-chevron-right"></i>
                 </span>
                 subscriber
-            </div>
+            </h4>
         </div>
         <div class="login-body">
             <form action="{{ route('subs.store', $list->uuid) }}" method="post">
                 @csrf
-                <div class="field">
-                    <div class="control">
-                        <label class="label"> First Name
-                            <input type="text" name="first_name" value="{{ old('first_name') }}"
-                                   class="input" required autofocus>
-                        </label>
-                    </div>
+                <div class="form-group">
+                        <input type="text" name="first_name" value="{{ old('first_name') }}"
+                               class="form-control" placeholder="First Name" required autofocus>
                 </div>
-                <div class="field">
-                    <div class="control">
-                        <label class="label"> Last name
-                            <input type="text" class="input" value="{{ old('last_name') }}"
-                                    name="last_name" required autofocus>
-                        </label>
-                    </div>
+                <div class="form-group">
+                        <input type="text" class="form-control" value="{{ old('last_name') }}"
+                                name="last_name" placeholder="Last Name" required autofocus>
                 </div>
-                <div class="field">
-                    <div class="control">
-                        <label class="label"> Email
-                            <input type="text" class="input" value="{{ old('email') }}"
-                                    name="email" required>
-                        </label>
-                    </div>
+                <div class="form-group">
+                        <input type="text" class="form-control" value="{{ old('email') }}"
+                                name="email" placeholder="Email" required>
                 </div>
-                <div class="field">
-                    <div class="control">
-                        <label class="label"> Phone
-                            <input type="text" class="input" value="{{ old('phone') }}"
-                                    name="phone" required>
-                        </label>
-                    </div>
+                <div class="form-group">
+                        <input type="text" class="form-control" value="{{ old('phone') }}"
+                                name="phone" placeholder="Phone" required>
                 </div>
-                <div class="field">
+                <div class="form-group">
                     <div class="control">
-                        <button type="submit" class="button is-medium login-btn is-primary">CREATE</button>
+                        <button type="submit" class="btn login-btn btn-primary">CREATE</button>
                     </div>
                 </div>
             </form>

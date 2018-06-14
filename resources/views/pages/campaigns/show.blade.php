@@ -7,60 +7,48 @@
 @section('content')
     <div class="wrap">
         <div class="brand-body m-l-1">
-            <div class="columns">
-                <div class="column is-4">
+            <div class="row">
+                <div class="col-sm-4">
                     <div class="m-b-1">
-                        <div class="title is-inline">{{ $brand->brand_name }} </div>
-                        <div class="title is-5 is-inline">
+                        <h4 class="title is-inline">{{ $brand->brand_name }} </h4>
+                        <h5 class="title is-inline">
                             / {{ $campaign->name }}
-                        </div>
+                        </h5>
                     </div>
                     {{--Test Box--}}
                     <div class="box">
-                        <div class="title is-5 m-b-1">Test send this Campaign</div>
+                        <h5 class="title m-b-1">Test send this Campaign</h5>
                         {{--Test Input--}}
-                        <div class="field">
-                            <div class="control">
-                                <label for="" class="label">Test emails
-                                    <input type="text" class="input">
-                                </label>
-                            </div>
+                        <div class="form-group">
+                            <label for="">Test emails</label>
+                                <input type="text" class="form-control">
                         </div>
                         {{--Test Buttons--}}
-                        <div class="field">
+                        <div class="form-group">
                             <div class="control">
-                                <button class="button">Test send this newsletter</button>
+                                <button class="btn btn-primary">Test send this newsletter</button>
                             </div>
                         </div>
                     </div>
                     {{--Test box end--}}
 
                     {{--Define Recipients--}}
-                    <div class="title is-5 m-t-1">define recipients</div>
-                    <div class="notification is-dark">
-                        <div class="title is-4">List here</div>
-                        <div class="content">
-                            Lorem ipsum dolor sit amet, consectetur
-                            adipisicing elit. A atque cum deserunt id veritatis. Animi,
-                            cum deleniti deserunt facilis id illum iste
-                            laudantium natus odio omnis pariatur qui quis voluptatum.
-                        </div>
-                        {{--exclude list button--}}
-                        <div class="field">
-                            <div class="control">
-                                <button class="button">Exclude list from this campaign</button>
-                            </div>
-                        </div>
+                    <div class="jumbotron">
+                        <h1 class="display-4">List Here</h1>
+                        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                        <hr class="my-4">
+                        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
                     </div>
 
                     {{--send count info --}}
-                    <div class="box">
+                    <div class="jumbotron">
                         <bold>Recipients: </bold> 139 of 9989 remaining
                         <br>
                         <bold>Send: </bold> 139 of 9989 remaining
                     </div>
                     <div class="m-b-1 m-l-1">
-                        <a class="is-link" href="">Back</a>
+                        <a class="btn btn-dark" href="">Back</a>
                     </div>
 
                     {{--schedule--}}
@@ -68,15 +56,11 @@
                         <div class="title is-5">
                             schedule this campaign
                         </div>
-                        <div class="field">
-                            <div class="control">
-                                <input id="datepickerDemo" class="input" type="date">
-                            </div>
+                        <div class="form-group">
+                                <input id="datepickerDemo" class="form-control" type="date">
                         </div>
-                        <div class="field">
-                            <div class="control">
-                                <button class="button">Schedule campaign</button>
-                            </div>
+                        <div class="form-group">
+                                <button class="btn btn-dark">Schedule campaign</button>
                         </div>
                     </div>
                 </div>

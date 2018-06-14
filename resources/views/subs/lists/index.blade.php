@@ -3,18 +3,14 @@
 @section('content')
     <div class="wrap">
         <div class="main-heading">
-            <div class="title is-inline">All Lists</div>
+            <h3 class="title is-inline">All Lists</h3>
             <div class="is-right">
-                <form action="{{ route('subs.list.store') }}" method="post">
+                <form action="{{ route('subs.list.store') }}" method="post" class="form-inline">
                     @csrf
-                    <div class="field">
-                        <div class="control">
-                            <label class="label">
-                                <input type="text" name="name" class="input is-inline">
-                                <button class="button" type="submit">Create new List</button>
-                            </label>
-                        </div>
+                    <div class="form-group">
+                                <input type="text" name="name" class="form-control is-inline">
                     </div>
+                    <button class="btn btn-primary" type="submit">Create new List</button>
                 </form>
             </div>
         </div>
@@ -22,11 +18,11 @@
             <table class="table is-fullwidth">
                 <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Lists</th>
-                    <th>Subscribers</th>
-                    <th>edit</th>
-                    <th>Delete</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Lists</th>
+                    <th scope="col">Subscribers</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Delete</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -42,12 +38,19 @@
                             </a>
                         </td>
                         <td>{{ $count }}</td>
-                        <td><a href="{{ route('subs.list.edit', $list->uuid) }}" class="button">Edit</a></td>
+                        <td>
+                            <a href="{{ route('subs.list.show', $list->uuid) }}" class="btn btn-primary">
+                                View
+                            </a>
+                            <a href="{{ route('subs.list.edit', $list->uuid) }}" class="btn btn-primary">
+                                Edit
+                            </a>
+                        </td>
                         <td>
                             <form action="{{ route('subs.list.destroy', $list->uuid) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="button">Delete</button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         </td>
                     </tr>

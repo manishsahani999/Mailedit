@@ -71,8 +71,7 @@
                             <label class="label"> Allowed attachments file types </label>
                                     <input type="text" class="form-control"
                                            name="allowed_files"
-                                           value="{{ old('allowed_files') }}"
-                                           required>
+                                           value="{{ old('allowed_files') }}">
                         </div>
                         {{--Brand logo--}}
                         <div class="form-group">

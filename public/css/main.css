@@ -51,7 +51,6 @@ body {
 
 }
 
-.brand-body .notification.is-white.box.column {
-    height: 7em;
+.box {
     margin: .5em;
 }
