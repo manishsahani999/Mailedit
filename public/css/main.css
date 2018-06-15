@@ -54,3 +54,9 @@ body {
 .box {
     margin: .5em;
 }
+
+.template {
+    overflow-y:scroll;
+    height: 30em;
+    padding: 1em;
+}

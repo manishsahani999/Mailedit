@@ -14,6 +14,7 @@ use GuzzleHttp\Client as HttpClient;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Facades\Mail;
 use DB;
+use App\Mail\DefaultMail;
 use Carbon\Carbon;
 use MongoDB\BSON\Binary;
 
@@ -22,6 +23,8 @@ class EmailService
     use DispatchesJobs;
 
     protected $subscriber;
+
+    protected $emailObj;
 
     public function __construct()
     {
@@ -83,5 +86,23 @@ class EmailService
         ]);
 
         return $this->emailObj = $email;
+    }
+
+    public function send($subscriber, $data)
+    {
+
+        $result = DB::transaction( function () use ($subscriber, $data) {
+            $this->getSubscriber($subscriber);
+            $this->getEmail($data);
+
+            Mail::to($this->subscriber->email)
+                ->send(new DefaultMail($this->subscriber,  $this->emailObj));
+
+            $this->emailObj->status = 'sent';
+            return $this->emailObj->save();
+        });
+
+        return $result;
+
     }
 }

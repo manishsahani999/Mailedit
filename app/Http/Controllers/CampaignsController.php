@@ -52,7 +52,6 @@ class CampaignsController extends Controller
             'query_string'  => null,
             'brand_logo'    => $request->brand_logo,
         ];
-
 //        finding brand
         $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
 

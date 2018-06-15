@@ -15,7 +15,7 @@
                 <tr class="text-center">
                     <th>Id</th>
                     <th>Brands</th>
-                    <th>lorem</th>
+                    <th>status</th>
                     <th>edit</th>
                     <th>Delete</th>
                 </tr>
@@ -25,7 +25,23 @@
                     <tr class="text-center">
                         <th>{{ $brand->id }}</th>
                         <td><a href="{{ route('campaign.show', ['slug' => $brand->slug, 'uuid' => $campaign->uuid]) }}">{{ $brand->brand_name }}</a></td>
-                        <td>23</td>
+                        <td>
+                            <span class="badge
+                                @if($campaign->status == 'draft')
+                                    badge-warning
+                                @elseif($campaign->status == 'scheduled')
+                                    badge-primary
+                                @elseif($campaign->status == 'cancelled')
+                                    badge-danger
+                                @elseif($campaign->status == 'sending')
+                                    badge-secondary
+                                @elseif($campaign->status == 'sent')
+                                    badge-success
+                                @endif "
+                            >
+                                {{ $campaign->status }}
+                            </span>
+                        </td>
                         <td><a href="" class="button">Edit</a></td>
                         <td><a href="" class="button">Delete</a></td>
                     </tr>

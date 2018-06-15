@@ -65,11 +65,37 @@
                     </div>
                 </div>
 
-                <div class="column">
-                    <div class="title is-4">
+                <div class="col">
+                    <h4 class="title">
                         newsletter
+                    </h4>
+
+                    <div class="box">
+                        <div class="box">
+                            From <span class="badge badge-primary">{{ $campaign->from_name.' <'.$campaign->from_email.'>' }}</span>
+                        </div>
+                        <div class="box">
+                            Status <span class="badge
+                                    @if($campaign->status == 'draft')
+                                        badge-warning
+                                    @elseif($campaign->status == 'scheduled')
+                                        badge-primary
+                                    @elseif($campaign->status == 'cancelled')
+                                        badge-danger
+                                    @elseif($campaign->status == 'sending')
+                                        badge-secondary
+                                    @elseif($campaign->status == 'sent')
+                                        badge-success
+                                    @endif "
+
+                            >
+                                {{ $campaign->status }}
+                            </span>
+                        </div>
+                        <div class="border template">
+                            {!! $campaign->html !!}
+                        </div>
                     </div>
-                    <div class="box"></div>
                 </div>
             </div>
         </div>

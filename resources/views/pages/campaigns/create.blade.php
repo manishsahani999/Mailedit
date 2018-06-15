@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('links')
-    <script src="https://cdn.ckeditor.com/ckeditor5/10.0.1/classic/ckeditor.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -64,7 +64,9 @@
                         {{--Plain text--}}
                         <div class="form-group">
                             <label class="label"> Plain text</label>
-                                <textarea class="form-control" name="text" id="" cols="30" rows="10"></textarea>
+                                <textarea class="form-control" name="text" id="" rows="10">
+                                    {{ old('text') }}
+                                </textarea>
                         </div>
                         {{--Allowed files--}}
                         <div class="form-group">
@@ -88,12 +90,14 @@
                         <div class="title">Html code</div>
                         {{--html--}}
                         <div class="form-group">
-                                <textarea name="htmltext" id="htmltext" class="textarea"></textarea>
+                            <textarea name="htmltext" id="summernote" class="textarea">
+                                {{ old('htmltext') }}
+                            </textarea>
                         </div>
                         {{--description--}}
                         <div class="form-group">
                             <label>Description</label>
-                                    <textarea name="description"  class="form-control"></textarea>
+                            <textarea name="description"  class="form-control">{{ old('description') }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -103,14 +107,17 @@
 @endsection
 
 @section('scripts')
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
     <script>
-        ClassicEditor
-            .create( document.querySelector( '#htmltext' ) )
-            .then( editor => {
-                console.log( editor );
-            } )
-            .catch( error => {
-                console.error( error );
-            } );
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                placeholder: 'Write something ',
+                tabsize: 2,
+                height: 300,
+                minHeight: null,             // set minimum height of editor
+                maxHeight: null,             // set maximum height of editor
+                dialogsInBody: true,
+            });
+        });
     </script>
 @endsection
