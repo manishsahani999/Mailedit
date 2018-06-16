@@ -18,7 +18,7 @@ class TestMail extends Mailable
      */
     public function __construct()
     {
-        //
+
     }
 
     /**
@@ -28,6 +28,6 @@ class TestMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.email');
+        return $this->view('view.emails.default');
     }
 }

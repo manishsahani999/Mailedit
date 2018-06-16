@@ -22,4 +22,5 @@ class BinaryCampaigns extends Model
     public function binaryBrand() {
         return $this->belongsTo('App\Models\BinaryBrand');
     }
+    
 }

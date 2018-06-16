@@ -2,10 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\EmailService;
 use Illuminate\Http\Request;
 
 class EmailController extends Controller
 {
+
+    public function __construct(EmailService $emailService)
+    {
+        $this->emailService = $emailService;
+    }
+
+    public function test(Request $request)
+    {
+        $test_email = $request->test_email;
+
+        $data = '';
+
+        $this->emailService->send($test_email, $data);
+        return 1;
+    }
     /**
      * Display a listing of the resource.
      *

@@ -28,7 +28,7 @@ class EmailService
 
     public function __construct()
     {
-        //
+
     }
 
     public function getSubscriber($reference)

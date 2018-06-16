@@ -18,17 +18,20 @@
                     {{--Test Box--}}
                     <div class="box">
                         <h5 class="title m-b-1">Test send this Campaign</h5>
-                        {{--Test Input--}}
-                        <div class="form-group">
-                            <label for="">Test emails</label>
+                        <form action="{{ route('email.test') }}" method="post">
+                            @csrf
+                            {{--Test Input--}}
+                            <div class="form-group">
+                                <label for="">Test emails</label>
                                 <input type="text" class="form-control">
-                        </div>
-                        {{--Test Buttons--}}
-                        <div class="form-group">
-                            <div class="control">
-                                <button class="btn btn-primary">Test send this newsletter</button>
                             </div>
-                        </div>
+                            {{--Test Buttons--}}
+                            <div class="form-group">
+                                <div class="control">
+                                    <button class="btn btn-primary">Test send this newsletter</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     {{--Test box end--}}
 
