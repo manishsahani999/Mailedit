@@ -34,6 +34,7 @@ class User extends Authenticatable
      *
      * A user can have many brands
      *
+     * @return this 
      */
     public function binaryBrand() {
         return $this->hasMany('App\Models\BinaryBrand');
@@ -43,6 +44,7 @@ class User extends Authenticatable
      *
      * A user can have many Subs List
      *
+     * @return this
      */
     public function binarySubsList() {
         return $this->hasMany('App\Models\BinarySubsList');

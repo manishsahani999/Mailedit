@@ -17,11 +17,12 @@ class BinarySubscriber extends Model
 
     /**
      *
-     * This belongs to BinarySubsList
+     * This belongs to Many BinarySubsLists
      *
+     * @return this
      */
     public function binarySubsList() {
-        return $this->belongsTo('App\Models\BinarySubsList');
+        return $this->belongsToMany('App\Models\BinarySubsList');
     }
 
     /**

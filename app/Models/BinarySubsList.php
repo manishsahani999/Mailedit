@@ -15,10 +15,12 @@ class BinarySubsList extends Model
     protected $fillable = [
         'name', 'uuid',
     ];
+    
     /**
      *
-     *  This belongs to user
+     * This belongs to a User
      *
+     * @return this 
      */
     public function user() {
         return $this->belongsTo('App\User');
@@ -26,10 +28,12 @@ class BinarySubsList extends Model
 
     /**
      *
-     * A SubsList has many Subscribers
+     * A SubsList has many Subscribers and 
+     * Subscribers can belongs to many list
      *
+     * @return this
      */
     public function binarySubs() {
-        return $this->hasMany('App\Models\BinarySubscriber');
+        return $this->belongsToMany('App\Models\BinarySubscriber', 'list_subs', 'list_id', 'subscriber_id');
     }
 }

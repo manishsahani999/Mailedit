@@ -19,6 +19,12 @@ class BinaryCampaigns extends Model
         'allowed_files',
     ];
 
+    /**
+     *
+     * This belongs to a Brand
+     *
+     * @return this 
+     */
     public function binaryBrand() {
         return $this->belongsTo('App\Models\BinaryBrand');
     }

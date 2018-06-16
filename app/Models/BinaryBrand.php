@@ -15,10 +15,22 @@ class BinaryBrand extends Model
         'brand_logo', 'settings'
     ];
 
+    /**
+     *
+     * This belongs to a User
+     *
+     * @return this 
+     */
     public function user() {
         return $this->belongsTo('App\User');
     }
 
+    /**
+     *
+     * A user can have many brands
+     *
+     * @return this 
+     */
     public function binaryCampaign() {
         return $this->hasMany('App\Models\BinaryCampaigns');
     }

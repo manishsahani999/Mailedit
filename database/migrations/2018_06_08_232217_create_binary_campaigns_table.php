@@ -16,15 +16,16 @@ class CreateBinaryCampaignsTable extends Migration
         Schema::create('binary_campaigns', function (Blueprint $table) {
             $table->increments('id');
             $table->uuid('uuid')->unique()->index();
+            $table->string('title')->default('Default Title');
             $table->string('subject')->nullable();
             $table->integer('binary_brand_id')->unsigned();
             $table->string('from_name')->nullable();
             $table->string('from_email')->nullable();
             $table->string('reply_to')->nullable();
-            $table->string('name')->default('Default Name');
             $table->string('description')->default('Default Description');
             $table->longText('html')->nullable();
             $table->longText('text')->nullable();
+            $table->text('data')->nullable();
             $table->timestamp('starts_at')->nullable();
             $table->timestamp('ends_at')->nullable();
             $table->bigInteger('recipients_count')->default(0);
