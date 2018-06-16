@@ -33,7 +33,6 @@ class StoreCampaign extends FormRequest
             'htmltext'          => 'required',
             'text'          => 'required',
             'status'        => 'required',
-            'allowed_files' => 'required',
         ];
     }
 }

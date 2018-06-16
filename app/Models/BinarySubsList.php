@@ -36,4 +36,14 @@ class BinarySubsList extends Model
     public function binarySubs() {
         return $this->belongsToMany('App\Models\BinarySubscriber', 'list_subs', 'list_id', 'subscriber_id');
     }
+
+    /**
+     *
+     * This belongs to Many Campaigns
+     *
+     * @return this
+     */
+    public function binarySubsList() {
+        return $this->belongsToMany('App\Models\BinaryCampaigns');
+    }
 }

@@ -74,6 +74,10 @@
     padding: 1em;
 }
 
+.p-0-5 {
+    padding: .5em;
+}
+
 .m-1 {
     margin: 1em;
 }

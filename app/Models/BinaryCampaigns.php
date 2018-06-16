@@ -29,4 +29,14 @@ class BinaryCampaigns extends Model
         return $this->belongsTo('App\Models\BinaryBrand');
     }
     
+    /**
+     *
+     * A Campaign can have many Lists and 
+     * A List can belongs to many Campaigns
+     *
+     * @return this
+     */
+    public function binarySubsList() {
+        return $this->belongsToMany('App\Models\BinarySubsList', 'campaign_list', 'campaign_id', 'list_id');
+    }
 }

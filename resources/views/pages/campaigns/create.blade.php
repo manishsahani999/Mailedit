@@ -12,7 +12,7 @@
         </div>
         <div class="brand-body m-t-1 m-l-1">
             @include('components.errors')
-            {{--form--}}
+            {{--form--}} 
             <form action="{{ route('campaign.store', $brand->slug) }}" method="post">
                 @csrf
                 <div class="row">
@@ -44,21 +44,21 @@
                         <div class="form-group">
                             <label class="label"> From name </label>
                                 <input type="text" class="form-control"
-                                       value="{{ old('from_name') }}"
+                                       value="{{ old('from_name') ? old('from_name') : $brand->from_name }}"
                                        name="from_name">
                         </div>
                         {{--From email--}}
                         <div class="form-group">
                             <label class="label"> From email</label>
                                 <input type="text" class="form-control"
-                                       value="{{ old('from_email') }}"
+                                       value="{{ old('from_email') ? old('from_email') : $brand->from_email }}"
                                        name="from_email">
                         </div>
                         {{--Reply to--}}
                         <div class="form-group">
                             <label class="label"> Reply to email</label>
                                     <input type="text" class="form-control"
-                                           value="{{ old('reply_to') }}"
+                                           value="{{ old('reply_to') ? old('reply_to') : $brand->reply_to }}"
                                            name="reply_to">
                         </div>
                         {{--Plain text--}}

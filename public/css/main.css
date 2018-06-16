@@ -47,10 +47,6 @@ body {
     width: 20em;
 }
 
-.brand-body {
-
-}
-
 .box {
     margin: .5em;
 }
@@ -59,4 +55,8 @@ body {
     overflow-y:scroll;
     height: 30em;
     padding: 1em;
+}
+
+.lists_wrap {
+    padding: 1.5em 1em;
 }

@@ -35,13 +35,35 @@
                     </div>
                     {{--Test box end--}}
 
-                    {{--Define Recipients--}}
-                    <div class="jumbotron">
-                        <h1 class="display-4">List Here</h1>
-                        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                        <hr class="my-4">
-                        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                    <!-- Define Recipients -->
+                    <div class="jumbotron lists_wrap">
+                        <h3>Lists</h3>
+                        
+                        <!-- All lists -->
+                        <div class="form-group">
+                            <select class="custom-select" multiple>
+                                @foreach($campaign->binarySubsList as $list)
+                                    <option value="" selected>{{ $list->name }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <!-- form for adding lists to Campaign -->
+                        <form action="{{ route('campaign.add.lists', [
+                                'slug' => $brand->slug, 
+                                'uuid' => $campaign->uuid
+                            ]) }}" method="post">
+                            @csrf
+                            <div class="form-group">
+                                <select class="custom-select" name="lists" multiple>
+                                @foreach($lists as $list)
+                                    <option value="{{ $list->id }}">{{ $list->name }}</option>
+                                @endforeach
+                            </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add List</button> 
+                        </form>
+                        <!-- form end -->
                     </div>
 
                     {{--send count info --}}
@@ -56,14 +78,13 @@
 
                     {{--schedule--}}
                     <div class="box">
-                        <div class="title is-5">
-                            schedule this campaign
+                        <div class="form-group">    
+                            <label for="">Select Date</label>
+                            <input type='date' class="form-control" />
                         </div>
-                        <div class="form-group">
-                                <input id="datepickerDemo" class="form-control" type="date">
-                        </div>
-                        <div class="form-group">
-                                <button class="btn btn-dark">Schedule campaign</button>
+                        <div class="form-group">    
+                            <label for="">Select Time</label>
+                            <input type='time' class="form-control" />
                         </div>
                     </div>
                 </div>
@@ -107,4 +128,7 @@
 
 @section('scripts')
     <script src="{{ asset('dist/js/bulma-calendar.min.js') }}"></script>
+    <script>
+        
+    </script>
 @endsection

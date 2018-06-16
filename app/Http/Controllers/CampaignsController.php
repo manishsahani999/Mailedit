@@ -43,7 +43,7 @@ class CampaignsController extends Controller
             'from_name'     => $request->from_name,
             'from_email'    => $request->from_email,
             'reply_to'      => $request->reply_to,
-            'name'          => $request->name,
+            'title'         => $request->name,
             'description'   => $request->description,
             'html'          => $request->htmltext,
             'text'          => $request->text,
@@ -74,17 +74,38 @@ class CampaignsController extends Controller
      */
     public function show($slug, $uuid)
     {
-//        find brand
+        // find brand
         $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
 
-//        find campaign
+        // find campaign
         $campaign = $brand->binaryCampaign()->where('uuid', $uuid)->first();
 
-//        redirecting
+        // finding all lists
+        $lists = auth()->user()->binarySubsList()->get();
+
+        // redirecting
         return view('pages.campaigns.show', [
             'brand'     => $brand,
-            'campaign'  => $campaign
+            'campaign'  => $campaign,
+            'lists'     => $lists
         ]);
+    }
+
+    /**
+     * Add Lists to Campaigns
+     *
+     *  
+     * 
+     */
+    public function addListsToCampaign(Request $request, $slug, $uuid) {
+        // find brand
+        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+
+        // find campaign
+        $campaign = $brand->binaryCampaign()->where('uuid', $uuid)->first();
+
+        //  Attaching the lists to table
+        $campaign->binarySubsList()->attach($request->lists);
     }
 
     /**
