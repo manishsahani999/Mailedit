@@ -106,6 +106,12 @@ class CampaignsController extends Controller
 
         //  Attaching the lists to table
         $campaign->binarySubsList()->attach($request->lists);
+
+        //        redirecting to show route
+        return redirect()->route('campaign.show', [
+            'slug' => $brand->slug,
+            'uuid' => $campaign->uuid
+        ]);
     }
 
     /**
