@@ -40,13 +40,22 @@
                         <h3>Lists</h3>
                         
                         <!-- All lists -->
-                        <div class="form-group">
-                            <select class="custom-select" multiple>
-                                @foreach($campaign->binarySubsList as $list)
-                                    <option value="" selected>{{ $list->name }} </option>
-                                @endforeach
-                            </select>
+                        <form action="{{ route('campaign.remove.lists', [
+                                    'slug' => $brand->slug,
+                                    'uuid' => $campaign->uuid
+                            ]) }}" method="post">
+                            @csrf
+                            <div class="form-group">
+                            <div class="form-group">
+                                <select class="custom-select" name="lists" multiple>
+                                    @foreach($campaign->binarySubsList as $list)
+                                        <option value="{{ $list->id }}">{{ $list->name }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button class="btn btn-danger">Remove list</button>
                         </div>
+                        </form>
                         
                         <!-- form for adding lists to Campaign -->
                         <form action="{{ route('campaign.add.lists', [

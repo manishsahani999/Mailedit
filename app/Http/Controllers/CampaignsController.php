@@ -115,6 +115,29 @@ class CampaignsController extends Controller
     }
 
     /**
+     * Remove Lists to Campaigns
+     *
+     *  
+     * 
+     */
+    public function removeListsToCampaign(Request $request, $slug, $uuid) {
+        // find brand
+        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+
+        // find campaign
+        $campaign = $brand->binaryCampaign()->where('uuid', $uuid)->first();
+
+        //  Attaching the lists to table
+        $campaign->binarySubsList()->detach($request->lists);
+
+        //        redirecting to show route
+        return redirect()->route('campaign.show', [
+            'slug' => $brand->slug,
+            'uuid' => $campaign->uuid
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

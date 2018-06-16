@@ -38,8 +38,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('brands/{slug}/campaign/{uuid}/edit', 'CampaignsController@edit')->name('campaign.edit');
     Route::put('brands/{slug}/campaign/{uuid}', 'CampaignsController@update')->name('campaign.update');
 
-//    Adding list to Campaign
+//    Adding and Removing list to Campaign
     Route::post('brands/{slug}/campaign/{uuid}/add-list', 'CampaignsController@addListsToCampaign')->name('campaign.add.lists');
+    Route::post('brands/{slug}/campaign/{uuid}/remove-list', 'CampaignsController@removeListsToCampaign')->name('campaign.remove.lists');
 
 //    SubsList Routes
     Route::get('subscribers', 'SubsListController@index')->name('subs.list.index');
