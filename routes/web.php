@@ -41,7 +41,6 @@ Route::group(['middleware' => ['auth']], function () {
 //    Scheduling a Camapign 
     Route::put('brands/{slug}/campaign/{uuid}/schedule', 'CampaignsController@storeSchedule')->name('campaign.schedule.store');
 
-
 //    Adding and Removing list to Campaign
     Route::post('brands/{slug}/campaign/{uuid}/add-list', 'CampaignsController@addListsToCampaign')->name('campaign.add.lists');
     Route::post('brands/{slug}/campaign/{uuid}/remove-list', 'CampaignsController@removeListsToCampaign')->name('campaign.remove.lists');
@@ -60,6 +59,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('subscribers/{uuid}/{email}', 'SubsController@show')->name('subs.show');
 
 //    Email Routes
-    Route::post('email/testing', 'EmailController@test')->name('email.test');
+    Route::get('emails', 'EmailController@index')->name('email.index');
+    Route::post('emails/testing', 'EmailController@test')->name('email.test');
 
 });

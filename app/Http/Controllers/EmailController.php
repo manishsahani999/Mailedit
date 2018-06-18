@@ -6,6 +6,8 @@ use App\Services\EmailService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\{TestMail, DefaultMail};
+use Carbon\Carbon;
+use App\Models\BinaryEmail;
 
 class EmailController extends Controller
 {
@@ -29,7 +31,12 @@ class EmailController extends Controller
      */
     public function index()
     {
-        //
+        $today = Carbon::today();
+        $date  = $today->subHours(5)->subMinutes(30);
+
+        $emails = BinaryEmail::with('binarySubscriber')->orderBy('scheduled_time', 'desc');
+        return $emails;
+        return ['date' => $date, 'today' => $today];
     }
 
     /**

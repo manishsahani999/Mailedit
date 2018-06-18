@@ -31,6 +31,7 @@ class CreateBinaryCampaignsTable extends Migration
             $table->bigInteger('recipients_count')->default(0);
             $table->bigInteger('sent_count')->default(0);
             $table->bigInteger('sending_count')->default(0);
+             $table->bigInteger('error_count')->default(0);
             $table->string('allowed_files')->nullable();
             $table->string('brand_logo')->nullable();
             $table->enum('status', ['draft', 'sent', 'scheduled', 'cancelled', 'sending']);

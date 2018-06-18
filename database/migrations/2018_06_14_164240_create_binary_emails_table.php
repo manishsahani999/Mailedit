@@ -26,10 +26,13 @@ class CreateBinaryEmailsTable extends Migration
             $table->string('from_email')->nullable();
             $table->string('reply_to')->nullable();
             $table->string('token');
+            $table->string('ses_message_id')->nullable();
+            $table->longText('meta')->nullable();
             $table->timestamp('scheduled_time')->nullable();
             $table->timestamp('sent_on')->nullable();
-            $table->enum('status', ['not_sent' , 'queued' , 'sent', 'delivered' , 'bounced', 'failed']);
+            $table->enum('status', ['not_sent' , 'queued' , 'sent', 'delivered', 'hard_bounced', 'soft_bounced']);
             $table->boolean('opened')->default(false);
+            $table->integer('clicks')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
