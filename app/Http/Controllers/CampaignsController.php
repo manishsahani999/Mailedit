@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCampaign;
 use Illuminate\Http\Request;
 use App\Models\{BinaryBrand, BinaryCampaigns};
+use Carbon\Carbon;
 
 class CampaignsController extends Controller
 {
@@ -208,5 +209,32 @@ class CampaignsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Update the schedule 
+     *
+     * \
+     * @return 
+     */
+    public function storeSchedule(Request $request, $slug, $uuid)
+    {
+        // find the brand
+        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+
+        // find campaign
+        $campaign = $brand->binaryCampaign()->where('uuid', $uuid)->first();
+
+        // starts at
+        $campaign_starts_at = $request->date.' '.$request->time;
+
+        $campaign->update(['status' => 'scheduled', 'starts_at' => $campaign_starts_at]);
+
+        $request->session()->flash('success', 'Campaign Scheduled successfully');
+        
+        return redirect()->route('campaign.show', [
+            'slug' => $brand->slug,
+            'uuid' => $campaign->uuid
+        ]);
     }
 }

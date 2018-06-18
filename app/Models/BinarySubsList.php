@@ -43,7 +43,7 @@ class BinarySubsList extends Model
      *
      * @return this
      */
-    public function binarySubsList() {
+    public function binaryCampaign() {
         return $this->belongsToMany('App\Models\BinaryCampaigns');
     }
 }

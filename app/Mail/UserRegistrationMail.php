@@ -6,19 +6,22 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\User;
 
-class TestMail extends Mailable
+class UserRegistrationMail extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public $user;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-
+        $this->user = $user;
     }
 
     /**
@@ -28,6 +31,7 @@ class TestMail extends Mailable
      */
     public function build()
     {
-        return $this->from('mani00manu@gmail.com')->view('emails.default');
+        return $this->subject("Welcome to Mailedit, {$this->user->name}")
+                 ->markdown('emails.user.registration');
     }
 }

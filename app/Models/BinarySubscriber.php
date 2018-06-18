@@ -31,7 +31,7 @@ class BinarySubscriber extends Model
      *
      */
     public function emails() {
-        return $this->belongsTo('App\Models\BinaryEmail');
+        return $this->hasMany('App\Models\BinaryEmail');
     }
 
 

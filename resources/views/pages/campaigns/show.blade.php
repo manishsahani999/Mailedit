@@ -8,6 +8,7 @@
     <div class="wrap">
         <div class="brand-body m-l-1">
             <div class="row">
+            @include('components.sessions')
                 <div class="col-sm-4">
                     <div class="m-b-1">
                         <h4 class="title is-inline">{{ $brand->brand_name }} </h4>
@@ -18,14 +19,15 @@
                     {{--Test Box--}}
                     <div class="box">
                         <h5 class="title m-b-1">Test send this Campaign</h5>
+                        <!-- Email test form -->
                         <form action="{{ route('email.test') }}" method="post">
                             @csrf
-                            {{--Test Input--}}
+                            <!-- Test Input -->
                             <div class="form-group">
                                 <label for="">Test emails</label>
-                                <input type="text" class="form-control">
+                                <input type="text" name="test_email" class="form-control">
                             </div>
-                            {{--Test Buttons--}}
+                            <!-- Test Buttons -->
                             <div class="form-group">
                                 <div class="control">
                                     <button class="btn btn-primary">Test send this newsletter</button>
@@ -86,15 +88,24 @@
                     </div>
 
                     {{--schedule--}}
-                    <div class="box">
-                        <div class="form-group">    
-                            <label for="">Select Date</label>
-                            <input type='date' class="form-control" />
-                        </div>
-                        <div class="form-group">    
-                            <label for="">Select Time</label>
-                            <input type='time' class="form-control" />
-                        </div>
+                    <div class="jumbotron list_wrap">
+                        <h3>Schedule</h3>
+                        <form action="{{ route('campaign.schedule.store', [
+                            'slug' => $brand->slug,
+                            'uuid' => $campaign->uuid
+                        ]) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                            <div class="form-group">    
+                                <label for="">Select Date</label>
+                                <input type='date' name="date" class="form-control" required/>
+                            </div>
+                            <div class="form-group">    
+                                <label for="">Select Time</label>
+                                <input type='time' name="time" class="form-control" required/>
+                            </div>
+                            <button class="btn btn-primary">Submit</button>
+                        </form>    
                     </div>
                 </div>
 
@@ -102,7 +113,6 @@
                     <h4 class="title">
                         newsletter
                     </h4>
-
                     <div class="box">
                         <div class="box">
                             From <span class="badge badge-primary">{{ $campaign->from_name.' <'.$campaign->from_email.'>' }}</span>

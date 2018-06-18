@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\EmailService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\{TestMail, DefaultMail};
 
 class EmailController extends Controller
 {
@@ -13,14 +15,12 @@ class EmailController extends Controller
         $this->emailService = $emailService;
     }
 
+    
+
     public function test(Request $request)
     {
-        $test_email = $request->test_email;
-
-        $data = '';
-
-        $this->emailService->send($test_email, $data);
-        return 1;
+        $email = $request->test_email;
+        return Mail::to($email)->send(new TestMail($email));
     }
     /**
      * Display a listing of the resource.
