@@ -52,6 +52,9 @@ class BrandController extends Controller
         // Creating new Brand
         $new = auth()->user()->binaryBrand()->create($data);
 
+        // Session Message
+        $request->session()->flash('success', 'Brand Created successfully');
+
         // redirecting to show page
         return redirect()->route('brand.show', $new->slug);
     }
@@ -113,6 +116,9 @@ class BrandController extends Controller
 
         // updating
         $updated = $brand->update($data);
+
+        // Session Message
+        $request->session()->flash('success', 'Brand Updated successfully');
 
         // redirecting
         return redirect()->route('home');

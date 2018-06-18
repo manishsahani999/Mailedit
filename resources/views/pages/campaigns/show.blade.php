@@ -7,8 +7,8 @@
 @section('content')
     <div class="wrap">
         <div class="brand-body m-l-1">
+        @include('components.sessions')
             <div class="row">
-            @include('components.sessions')
                 <div class="col-sm-4">
                     <div class="m-b-1">
                         <h4 class="title is-inline">{{ $brand->brand_name }} </h4>

@@ -8,6 +8,7 @@
             <a href="{{ route('brand.create') }}" class="btn btn-primary">Add Brand</a>
         </div>
     </div>
+    @include('components.sessions')
     <div class="main-body m-t-1">
         <table class="table">
             <thead>

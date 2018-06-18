@@ -5,6 +5,7 @@
         <div class="main-heading">
             <h4 class="title">{{ $brand->brand_name }}</h4>
         </div>
+        @include('components.sessions')
         <div class="brand-body m-t-1 m-l-1">
             <h5 class="title is-inline">All Campaigns</h5>
             <div class="is-right">

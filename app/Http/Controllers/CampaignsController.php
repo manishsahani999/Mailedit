@@ -59,6 +59,9 @@ class CampaignsController extends Controller
 //        Creating Campaign
         $campaign = $brand->binaryCampaign()->create($data);
 
+        // Session Message
+        $request->session()->flash('success', 'Campaign created successfully');
+
 //        redirecting to show route
         return redirect()->route('campaign.show', [
             'slug' => $brand->slug,
@@ -108,6 +111,9 @@ class CampaignsController extends Controller
         //  Attaching the lists to table
         $campaign->binarySubsList()->attach($request->lists);
 
+        // Session Message
+        $request->session()->flash('success', 'List added successfully');
+
         //        redirecting to show route
         return redirect()->route('campaign.show', [
             'slug' => $brand->slug,
@@ -130,6 +136,9 @@ class CampaignsController extends Controller
 
         //  Attaching the lists to table
         $campaign->binarySubsList()->detach($request->lists);
+
+        // Session Message
+        $request->session()->flash('success', 'List removed successfully');
 
         //        redirecting to show route
         return redirect()->route('campaign.show', [
@@ -193,6 +202,9 @@ class CampaignsController extends Controller
         //  updating
         $updated = $campaign->update($data);
 
+        // Session message
+        $request->session()->flash('success', 'Campaign Updated successfully');
+
         // return
         return redirect()-> route('campaign.show', [
             'slug' => $brand->slug,
@@ -228,10 +240,13 @@ class CampaignsController extends Controller
         // starts at
         $campaign_starts_at = $request->date.' '.$request->time;
 
+        // Updating the Campaign
         $campaign->update(['status' => 'scheduled', 'starts_at' => $campaign_starts_at]);
 
+        // Session message
         $request->session()->flash('success', 'Campaign Scheduled successfully');
         
+        // returning to show page
         return redirect()->route('campaign.show', [
             'slug' => $brand->slug,
             'uuid' => $campaign->uuid
