@@ -33,7 +33,11 @@ class EmailController extends Controller
             'content' => $campaign->html,
         ];
 
+        // Mailing to the email
         Mail::to($request->test_email)->send(new TestMail($data));
+
+        // Session Messsage
+        $request->session()->flash('success', 'Mail Sent successfully');
 
         return redirect()->route('campaign.show', [
             'slug' => $brand->slug,
