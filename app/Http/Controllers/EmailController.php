@@ -19,10 +19,26 @@ class EmailController extends Controller
 
     
 
-    public function test(Request $request)
+    public function test(Request $request, $slug, $uuid)
     {
-        $email = $request->test_email;
-        return Mail::to($email)->send(new TestMail($email));
+        //  find brand
+        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+
+        // find campaign
+        $campaign = $brand->binaryCampaign()->where('uuid', $uuid)->first(); 
+        
+        // Campaign Data
+        $data = [
+            'subject' => $campaign->subject,
+            'content' => $campaign->html,
+        ];
+
+        Mail::to($request->test_email)->send(new TestMail($data));
+
+        return redirect()->route('campaign.show', [
+            'slug' => $brand->slug,
+            'uuid' => $campaign->uuid
+        ]);
     }
     /**
      * Display a listing of the resource.

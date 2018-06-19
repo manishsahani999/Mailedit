@@ -60,6 +60,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 //    Email Routes
     Route::get('emails', 'EmailController@index')->name('email.index');
-    Route::post('emails/testing', 'EmailController@test')->name('email.test');
+    Route::post('brands/{slug}/campaign/{uuid}/email-testing', 'EmailController@test')->name('email.test');
 
 });

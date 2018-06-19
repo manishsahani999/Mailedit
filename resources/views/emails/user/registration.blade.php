@@ -2,14 +2,14 @@
 
 @component('mail::panel')
 
-Hi {{ $user->first_name }},
+Hi {{ $user->name }},
 
 Thank you for registering with Mailedit <br>
 We are grateful to have you on board.
 <br><br>
 
 
-@component('mail::button', ['url' => '#'])
+@component('mail::button', ['url' => 'https://messmerising.com/home'])
 Login to Dashboard
 @endcomponent
 

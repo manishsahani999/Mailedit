@@ -20,7 +20,10 @@
                     <div class="box">
                         <h5 class="title m-b-1">Test send this Campaign</h5>
                         <!-- Email test form -->
-                        <form action="{{ route('email.test') }}" method="post">
+                        <form action="{{ route('email.test', [
+                                'slug' => $brand->slug,
+                                'uuid' => $campaign->uuid
+                        ]) }}" method="post">
                             @csrf
                             <!-- Test Input -->
                             <div class="form-group">
@@ -109,7 +112,7 @@
                     </div>
                 </div>
 
-                <div class="col">
+                <div class="col-sm-8">
                     <h4 class="title">
                         newsletter
                     </h4>
