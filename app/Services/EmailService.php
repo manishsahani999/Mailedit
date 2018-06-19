@@ -42,7 +42,7 @@ class EmailService
                 'first_name'  => '',
                 'middle_name' => '',
                 'last_name'   => ''
-                ];
+            ];
 
 //        finding the subscriber
         $subscriber = BinarySubscriber::where('email', $email)->first();
@@ -94,6 +94,7 @@ class EmailService
         $result = DB::transaction( function () use ($subscriber, $data) {
             $this->getSubscriber($subscriber);
             $this->getEmail($data);
+            
 
             Mail::to($this->subscriber->email)
                 ->send(new DefaultMail($this->subscriber,  $this->emailObj));

@@ -32,11 +32,9 @@ class EmailController extends Controller
     public function index()
     {
         $today = Carbon::today();
-        $date  = $today->subHours(5)->subMinutes(30);
 
         $emails = BinaryEmail::with('binarySubscriber')->orderBy('scheduled_time', 'desc');
         return $emails;
-        return ['date' => $date, 'today' => $today];
     }
 
     /**
