@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Services;
-
+use App\Models\BinaryCampaigns;
 
 
 class VariableService
@@ -38,4 +38,33 @@ class VariableService
         return auth()->user()->binarySubsList()->whereUuid($uuid)->first();
     }
 
+    /*
+    * Find ALL Lists linked to Campaign
+    */
+    public function getAllList($uuid)
+    {
+        return BinaryCampaigns::whereUuid($uuid)->first()->binarySubsList()->get();
+    }
+
+    /*
+    * Find all members linked to Lists which are linked to Campaign 
+    */
+    public function getListMembers($uuid)
+    {
+        $lists = $this->getAllList($uuid);
+
+        $emails = [];
+
+        foreach ($lists as $list) {
+            $members = $list->binarySubs()->get();
+            
+            foreach ($members as $member) {
+                array_push($emails, $member);
+            }
+        }
+
+        return $emails;
+    }
+
+        
 }

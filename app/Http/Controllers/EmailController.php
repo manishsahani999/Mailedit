@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\EmailService;
+use App\Services\{EmailService, VariableService};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\{TestMail, DefaultMail};
@@ -13,9 +13,10 @@ use App\Jobs\SendEmail;
 class EmailController extends Controller
 {
 
-    public function __construct(EmailService $emailService)
+    public function __construct(EmailService $emailService, VariableService $variables)
     {
         $this->emailService = $emailService;
+        $this->variables = $variables;
     }
 
     
@@ -26,10 +27,7 @@ class EmailController extends Controller
      */
     public function index()
     {
-        $today = Carbon::today();
-
-        $emails = BinaryEmail::with('binarySubscriber')->orderBy('scheduled_time', 'desc');
-        return $emails;
+        //
     }
 
     /**
@@ -107,11 +105,8 @@ class EmailController extends Controller
     */
     public function test(Request $request, $slug, $uuid)
     {
-        //  find brand
-        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
-
         // find campaign
-        $campaign = $brand->binaryCampaign()->where('uuid', $uuid)->first(); 
+        $campaign = $this->variables->getCampaign($slug, $uuid); 
         
         // Campaign Data
         $data = [
@@ -126,8 +121,8 @@ class EmailController extends Controller
         $request->session()->flash('success', 'Mail Sent successfully');
 
         return redirect()->route('campaign.show', [
-            'slug' => $brand->slug,
-            'uuid' => $campaign->uuid
+            'slug' => $slug,
+            'uuid' => $uuid
         ]);
     }
 
@@ -139,28 +134,9 @@ class EmailController extends Controller
      */
     public function jobsTest($uuid)
     {
-       // Finding the Campaign 
-       $campaign = BinaryCampaigns::whereUuid($uuid)->first();
-       
-       // Finding all lists linked to this campaign
-       $lists = $campaign->binarySubsList()->get();
+        $this->dispatch(new SendEmail($uuid));
+    
+        return redirect('home');
 
-       // All members emails 
-       $emails = [];
-
-       // Pushing into array 
-       foreach ($lists as $list) {
-            
-            //  Finding all the members in the list 
-            $members = $list->binarySubs()->get();
-
-            foreach ($members as $member) {
-            array_push($emails, $member); 
-            }  
-
-       }
-
-       $test_email = $emails[0];
-       return $this->emailService->send($test_email, $campaign);
     }
 }
