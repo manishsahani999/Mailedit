@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSubs;
 use Illuminate\Http\Request;
+use App\Services\VariableService;
 
 class SubsController extends Controller
 {
+
+    public function __construct(VariableService $variables)
+    {
+        $this->variables = $variables;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +31,8 @@ class SubsController extends Controller
      */
     public function create($uuid)
     {
-        $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->first();
+        $list = $this->variables->getList($uuid);
+
         return view('subs.create', [
             'list' => $list
         ]);
@@ -38,14 +46,11 @@ class SubsController extends Controller
      */
     public function store(StoreSubs $request, $uuid)
     {
-//        finding the list
-        $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->first();
+        // finding the list and updating
+        $sub = $this->variables->getList($uuid)->binarySubs()->create($request->all());
 
-//        Create New Subscriber
-        $sub = $list->binarySubs()->create($request->all());
-
-//        redirecting to list page
-        return redirect()->route('subs.list.show', $list->uuid);
+        // redirecting to list page
+        return redirect()->route('subs.list.show', $uuid);
     }
 
     /**
@@ -57,7 +62,7 @@ class SubsController extends Controller
     public function show($uuid, $email)
     {
         //  Finding the list
-        $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->first();
+        $list = $this->variables->getList($uuid);
 
         // Find the Subscriber
         $subs = $list->binarySubs()->whereEmail($email)->first();

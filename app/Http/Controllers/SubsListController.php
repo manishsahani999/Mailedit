@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSubsList;
 use Illuminate\Http\Request;
+use App\Services\VariableService;
 
 class SubsListController extends Controller
 {
+    public function __construct(VariableService $variables)
+    {
+        $this->variables = $variables;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,21 +20,11 @@ class SubsListController extends Controller
      */
     public function index()
     {
-//        all list
+        // all list
         $lists = auth()->user()->binarySubsList()->get();
 
-//        redirecting to view/subs/lists/index
+        // redirecting to view/subs/lists/index
         return view('subs.lists.index', ['lists' => $lists]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-//
     }
 
     /**
@@ -39,10 +35,10 @@ class SubsListController extends Controller
      */
     public function store(StoreSubsList $request)
     {
-//        Creating a new List
+        // Creating a new List
         $list = auth()->user()->binarySubsList()->create($request->all());
 
-//        redirecting to index page
+        // redirecting to index page
         return redirect()->route('subs.list.index');
     }
 
@@ -55,7 +51,7 @@ class SubsListController extends Controller
     public function show($uuid)
     {
 //        find the list
-        $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->first();
+        $list = $this->variables->getList($uuid);;
 
 //        find all subs
         $subs = $list->binarySubs()->get();
@@ -94,7 +90,7 @@ class SubsListController extends Controller
     public function update(StoreSubsList $request, $uuid)
     {
 //        find old list and updating
-        $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->first()->update($request->all());
+        $list = $this->variables->getList($uuid)->update($request->all());
 
 //        redirecting to index page
         return redirect()->route('subs.list.index');
@@ -109,7 +105,7 @@ class SubsListController extends Controller
     public function destroy($uuid)
     {
 //        find the list and deleting
-        $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->first()->delete();
+        $list = $this->variables->getList($uuid)->delete();
 
 //        return to index page
         return redirect()->route('subs.list.index');

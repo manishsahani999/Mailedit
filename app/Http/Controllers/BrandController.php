@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBrand;
 use Illuminate\Http\Request;
 use App\Models\BinaryBrand;
+use App\Services\VariableService;
 
 class BrandController extends Controller
 {
+    
+
+    public function __construct(VariableService $variables)
+    {
+        $this->variables = $variables;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -68,9 +76,10 @@ class BrandController extends Controller
     public function show($slug)
     {
         // find the brand
-        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+        $brand = $this->variables->getBrand($slug);
 
-        $campaigns = $brand->binaryCampaign()->get();
+        // All Campaigns
+        $campaigns = $this->variables->getAllCampaigns($slug);
 
         return view('pages.brand.show', [
             'brand' => $brand,
@@ -86,7 +95,7 @@ class BrandController extends Controller
      */
     public function edit($slug)
     {
-        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+        $brand = $this->variables->getBrand($slug);
         
         return view('pages.brand.edit', [
             'brand' => $brand
@@ -102,9 +111,6 @@ class BrandController extends Controller
      */
     public function update(StoreBrand $request, $slug)
     {
-        // find
-        $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
-
         // Collection  of Request data
         $data = [
             'brand_name'    => $request->brand_name,
@@ -119,7 +125,7 @@ class BrandController extends Controller
         ];
 
         // updating
-        $updated = $brand->update($data);
+        $this->variables->getBrand($slug)->update($data);
 
         // Session Message
         $request->session()->flash('success', 'Brand Updated successfully');
