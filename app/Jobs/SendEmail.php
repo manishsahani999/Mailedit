@@ -36,9 +36,16 @@ class SendEmail implements ShouldQueue
         $members = $variables->getListMembers($this->uuid);
 
         if (isset($members)) {
+            $campaign->update([
+                'recipients_count' => count($members),
+                'status'           => 'sending' 
+            ]);
             foreach ($members as $member ) {
-                $emailService->send($member, $campaign);
+                $emailService->send($member, $campaign); 
             }
+            $campaign->update([
+                'status' => 'sent'
+            ]);
         }
 
     }

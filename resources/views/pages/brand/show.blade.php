@@ -15,8 +15,11 @@
                 <thead>
                 <tr class="text-center">
                     <th>Id</th>
-                    <th>Brands</th>
+                    <th>Campaigns</th>
                     <th>status</th>
+                    <th>Recipients Count</th>
+                    <th>Sent</th>
+                    <th>View</th>
                     <th>edit</th>
                     <th>Delete</th>
                 </tr>
@@ -24,8 +27,8 @@
                 <tbody>
                 @foreach($campaigns as $campaign)
                     <tr class="text-center">
-                        <th>{{ $brand->id }}</th>
-                        <td><a href="{{ route('campaign.show', ['slug' => $brand->slug, 'uuid' => $campaign->uuid]) }}">{{ $brand->brand_name }}</a></td>
+                        <th>{{ $campaign->id }}</th>
+                        <td><a href="{{ route('campaign.show', ['slug' => $brand->slug, 'uuid' => $campaign->uuid]) }}">{{ $campaign->title }}</a></td>
                         <td>
                             <span class="badge
                                 @if($campaign->status == 'draft')
@@ -43,6 +46,9 @@
                                 {{ $campaign->status }}
                             </span>
                         </td>
+                        <td>{{ $campaign->recipients_count }}</td>
+                        <td>{{ $campaign->sent_count }}</td>
+                        <td><a href="{{ route('campaign.show', ['slug' => $brand->slug, 'uuid' => $campaign->uuid]) }}">View</a></td>
                         <td><a href="" class="button">Edit</a></td>
                         <td><a href="" class="button">Delete</a></td>
                     </tr>

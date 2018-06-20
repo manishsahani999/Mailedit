@@ -21,7 +21,16 @@
                         </a>
                     </div>
                     <div class="m-b-1">{{ ucwords($sub->email) }}</div>
-                    <div><a href="" class="btn btn-danger btn-sm">Delete</a></div>
+                    <div>
+                        <form action="{{ route('subs.destroy', [
+                                'uuid'  => $list->uuid,
+                                'email' => $sub->email
+                        ]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
                 </div>
             @endforeach
         </div>

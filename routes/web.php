@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('subscribers/{uuid}/new-subscriber', 'SubsController@create')->name('subs.create');
     Route::post('subscribers/{uuid}/new-subscriber', 'SubsController@store')->name('subs.store');
     Route::get('subscribers/{uuid}/{email}', 'SubsController@show')->name('subs.show');
+    Route::delete('subscribers/{uuid}/{email}', 'SubsController@destroy')->name('subs.destroy');
 
 //    Email Routes
     Route::get('emails', 'EmailController@index')->name('email.index');

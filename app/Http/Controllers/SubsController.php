@@ -106,8 +106,11 @@ class SubsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($uuid, $email)
     {
-        //
+        $subs = $this->variables->getList($uuid)->binarySubs()->whereEmail($email)->first()->delete();
+
+        return redirect()->route('subs.list.show', $uuid);
+
     }
 }
