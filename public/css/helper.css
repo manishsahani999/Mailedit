@@ -78,6 +78,10 @@
     padding: .5em;
 }
 
+.p-2 {
+    padding: 2em;
+}
+
 .m-1 {
     margin: 1em;
 }

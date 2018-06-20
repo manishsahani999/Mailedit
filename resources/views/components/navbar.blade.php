@@ -29,11 +29,18 @@
                         Home
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('subs.list.index') }}">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Subscribers
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('subs.list.index') }}">
+                            All Lists
+                        </a>
+                    </div>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
@@ -52,17 +59,6 @@
                         </form>
                     </div>
                 </li>
-
-
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="#">
-
-                    </a>
-                    <div class="navbar-dropdown is-boxed is-right">
-
-
-                    </div>
-                </div>
             @endguest
 
 

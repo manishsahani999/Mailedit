@@ -54,9 +54,22 @@ class SubsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid, $email)
     {
-        //
+        //  Finding the list
+        $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->first();
+
+        // Find the Subscriber
+        $subs = $list->binarySubs()->whereEmail($email)->first();
+
+        // Emails related to the user
+        $emails = $subs->emails()->get();
+
+        return view('subs.show', [
+            'list'  => $list,
+            'subs'  => $subs,
+            'emails'=> $emails
+        ]);
     }
 
     /**

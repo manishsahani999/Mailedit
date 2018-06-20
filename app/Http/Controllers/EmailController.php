@@ -161,7 +161,6 @@ class EmailController extends Controller
        }
 
        $test_email = $emails[0];
-       return $this->emailService->send($test_email, $campaign); 
-       return $emails[0];
+       return $this->emailService->send($test_email, $campaign);
     }
 }
