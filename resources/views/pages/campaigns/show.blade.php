@@ -133,14 +133,21 @@
                                     @elseif($campaign->status == 'sent')
                                         badge-success
                                     @endif "
-
                             >
                                 {{ $campaign->status }}
                             </span>
                         </div>
-                        <div class="border template">
+                        <div class="border template m-b-1">
                             {!! $campaign->html !!}
                         </div>
+                        @if($campaign->status == 'draft')
+                            <form action="{{ route('email.send', $campaign->uuid) }}" method="get">
+                            @csrf
+                                <div class="form-group">
+                                    <button class="btn btn-primary">Send</button>
+                                </div>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>

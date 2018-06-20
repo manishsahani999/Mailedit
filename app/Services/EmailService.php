@@ -77,6 +77,7 @@ class EmailService
 
         }
 
+
         $email = $this->subscriber->emails()->create([
             'token' => bin2hex(random_bytes(32)),
             'binary_template_id' => 1,
@@ -90,7 +91,6 @@ class EmailService
 
     public function send($subscriber, $data)
     {
-
         $result = DB::transaction( function () use ($subscriber, $data) {
             $this->getSubscriber($subscriber);
             $this->getEmail($data);

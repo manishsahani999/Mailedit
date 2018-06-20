@@ -14,7 +14,7 @@ class DefaultMail extends Mailable implements ShouldQueue
     protected $email;
     protected $subscriber;
 
-    public function __construct(BinarySubscriber $subscriber, BinaryEmail $email)
+    public function __construct($subscriber, $email)
     {
         $this->email = $email;
         $this->subscriber = $subscriber;
@@ -27,6 +27,10 @@ class DefaultMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->view('emails.default');
+        $email_data = json_decode($this->email->content, true);
+
+        return $this->view('emails.default')
+                        ->subject($emailData['subject'])
+                        ->with($data);
     }
 }
