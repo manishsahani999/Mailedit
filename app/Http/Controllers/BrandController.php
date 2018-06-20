@@ -67,8 +67,11 @@ class BrandController extends Controller
      */
     public function show($slug)
     {
+        // find the brand
         $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+
         $campaigns = $brand->binaryCampaign()->get();
+
         return view('pages.brand.show', [
             'brand' => $brand,
             'campaigns' => $campaigns
@@ -84,6 +87,7 @@ class BrandController extends Controller
     public function edit($slug)
     {
         $brand = auth()->user()->binaryBrand()->where('slug', $slug)->first();
+        
         return view('pages.brand.edit', [
             'brand' => $brand
         ]);
