@@ -1,6 +1,7 @@
 @import './helper.css';
 @import './components/navbar.css';
 @import './components/footer.css';
+@import './components/login.css';
 
 
 
@@ -114,6 +115,9 @@
     border-bottom: 1px solid lightgray;
 }
 
+#create-brand-icon {
+    width: 15em;
+}
 
 
 

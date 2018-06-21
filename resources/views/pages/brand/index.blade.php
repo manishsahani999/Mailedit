@@ -10,6 +10,7 @@
         <div class="mt-1">
             <span>You can send campaigns by creating a brand.</span>
         </div>
+        @include('components/sessions')
     </div>
     @include('components.sessions')
 

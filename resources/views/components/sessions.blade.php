@@ -1,7 +1,5 @@
 @if (Session::has('success'))
-    
-    <div class="content is-success" role="alert">
-      <strong>Success:</strong> {{ Session::get('success') }}
-    </div>
-
+      <div class="mt-0">
+          <span><strong>{{ Session::get('success') }}</strong></span>
+      </div>
 @endif

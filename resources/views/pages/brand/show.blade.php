@@ -3,13 +3,14 @@
 @section('content')
     <div class="wrap">
         <div class="home-header">
-            <h2 class="inline-pc">{{ $brand->brand_name }}</h2>
+            <h2 class="inline-pc">{{ ucwords($brand->brand_name) }}</h2>
             <div class="right-pc">
                 <a href="{{ route('campaign.create', $brand->slug) }}" class="btn btn-secondary bt">Create Campaigns</a>
             </div>
             <div class="mt-1">
                 <span>Created {{ $brand->created_at->diffForHumans() }} by {{ Auth::user()->name }}.</span>
             </div>
+            @include('components.sessions')
         </div>
         @include('components.sessions')
         <div class="home-body">

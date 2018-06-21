@@ -15,6 +15,7 @@
                 <div class="mt-1">
                     <span>You can design, schedule, and send a campaign.</span>
                 </div>
+                @include('components/sessions')
             </div>
             <div class="home-body">
                 <span id="body-tab">Campaign info</span>

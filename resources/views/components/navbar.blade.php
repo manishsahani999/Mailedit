@@ -39,7 +39,7 @@
                     </div>
                 </li>
                 <li class="mt-auto mb-auto">
-                    <a href="" class="btn btn-info bt">
+                    <a href="{{ route('brand.create') }}" class="btn btn-info bt">
                         Create brand
                     </a>
                 </li>

@@ -2,77 +2,76 @@
 
 @section('content')
     <div class="wrap">
-        <div class="main-heading">
-            <h3 class="title">New brand</h3>
+        <div class="home-header">
+            <h2>Get Started with Brands</h2>
+            <div class="mt-1">
+                <span>For Sending Campaigns, create a brand first.</span>
+            </div>
+            @include('components/sessions')
         </div>
-        <div class="brand-body m-t-1">
-            {{--Form start--}}
+        <div class="home-body">
+            <span id="body-tab">Create Brand</span>            
+            <hr class="mt-0"> 
+            @include('components.errors')
+            <!-- Form start -->
             <form action="{{ route('brand.store') }}" method="post">
                 @csrf
                 <div class="row">
-                    <div class="col-sm-4 m-l-1">
-                        <h5 class="title">Brand info</h5>
+                    <div class="col-sm-4 m-t-5 text-right" id="register-left">
+                        <div>
+                            <img class="m-t-5" id="create-brand-icon" src="{{ asset('img/create.svg') }}" alt="">
+                        </div>
+                    </div>
+                    <div class="col m-l-2" id="register-right">
+                        <div class="m-t-5">
+                            <h2>Create Brand</h2>
+                            @include('components.errors')
+                        </div>
+                        <div class="register_wrap m-t-2">
                             {{--brand name--}}
                             <div class="form-group">
-                                    <label> Brand Name</label>
-                                    <input type="text" class="form-control"
-                                            name="brand_name"
-                                           value="{{ old('brand_name') }}"
-                                           required>
+                                <input type="text" class="form-control form-control-lg"
+                                    name="brand_name" value="{{ old('brand_name') }}"
+                                    required placeholder="Brand Name">
                             </div>
                             {{--from name--}}
                             <div class="form-group">
-                                <label class="label"> From Name </label>
-                                    <input type="text" class="form-control"
-                                           name="from_name"
-                                           value="{{ old('from_name') }}"
-                                           required>
+                                <input type="text" class="form-control form-control-lg"
+                                        name="from_name" value="{{ old('from_name') }}"
+                                        required placeholder="From name">
                             </div>
                             {{--from email--}}
                             <div class="form-group">
-                                    <label class="label"> From email</label>
-                                        <input type="email" class="form-control"
-                                               name="from_email"
-                                               value="{{ old('from_email') }}"
-                                               required>
+                                <input type="email" class="form-control form-control-lg"
+                                        name="from_email" value="{{ old('from_email') }}"
+                                        required placeholder="From email">
                             </div>
                             {{--replyto email--}}
                             <div class="form-group">
-                                    <label class="label"> Reply to email</label>
-                                        <input type="email" class="form-control"
-                                               name="reply_to"
-                                               value="{{ old('reply_to') }}"
-                                               required>
+                                <input type="email" class="form-control form-control-lg"
+                                        name="reply_to" value="{{ old('reply_to') }}"
+                                        required placeholder="Reply to">
                             </div>
                             {{--Allowed files--}}
                             <div class="form-group">
-                                    <label class="label"> Allowed attachments file types</label>
-                                        <input type="text" class="form-control"
-                                               name="allowed_files"
-                                               value="{{ old('allowed_files') }}">
+                                <input type="text" class="form-control form-control-lg"
+                                        name="allowed_files"
+                                        value="{{ old('allowed_files') }}"
+                                        placeholder="Allowed attachments file types">
                             </div>
-                            {{--Brand logo--}}
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Brand Logo</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <h5 class="title">Brand settings</h5>
-                        @include('components.errors')
-                        <div class="jumbotron">
-                            <h1 class="display-4">Settings here</h1>
-                            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                            <hr class="my-4">
-                            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                        </div>
-                        <div class="form-group">
-                                <button type="submit" class="btn btn-primary">
-                                    Save
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-info register-btn">
+                                    Create brand
                                 </button>
+                            </div>
                         </div>
+                        <!-- register_wrap ends -->
                     </div>
+                    <!-- register right ends -->
                 </div>
+                <!-- home body ends -->
+                <span id="body-tab">Brand Settings</span>            
+                <hr class="mt-0">
             </form>
         </div>
 
