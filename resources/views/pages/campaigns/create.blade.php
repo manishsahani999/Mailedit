@@ -13,7 +13,7 @@
                 <h2 class="inline-pc">{{ $brand->brand_name }}</h2>
                 <h5 class="inline-pc"> / New Campaign</h5>
                 <div class="mt-1">
-                    <span>You can design, send, schedule a campaign.</span>
+                    <span>You can design, schedule, and send a campaign.</span>
                 </div>
             </div>
             <div class="home-body">
