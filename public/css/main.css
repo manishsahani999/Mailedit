@@ -1,9 +1,6 @@
 @import './components/navbar.css';
 @import './helper.css';
 
-body {
-    margin: 0;
-}
 
 .welcome {
     padding: 2.5em 5em 0 5em;

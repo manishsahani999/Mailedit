@@ -70,6 +70,10 @@
     margin-bottom: 1em !important;
 }
 
+.m-b-2 {
+    margin-bottom: 2em !important;
+}
+
 .is-right {
     float: right;
 }

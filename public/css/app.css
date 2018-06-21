@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Condensed|Indie+Flower|Lato|Nanum+Gothic|Open+Sans|Quicksand|Raleway|Roboto');
+@import './bootstrap.css';
 @import './helper.css';
 
 html, body {
