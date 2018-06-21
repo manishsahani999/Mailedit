@@ -2,6 +2,21 @@
 
 @section('content')
 <div class="wrap">
+
+    <div class="home-header">
+        <h2 class="inline-pc">Hello, {{ Auth::user()->name }}</h2>
+        <div class="inline-pc right-pc">
+            <a href="{{ route('brand.create') }}" class="btn btn-secondary bt">Create Brand</a>
+        </div>
+        <div class="mt-1">
+            <span>Start your day off right with some account stats and recommendations.</span>
+        </div>
+    </div>
+
+    <div class="home-body">
+        <span id="body-tab">Overview</span>
+        <hr class="mt-0"> 
+    </div>
     <div class="main-heading"> 
         <h4 class="title is-inline">Select brand</h4>
         <div class="is-right">

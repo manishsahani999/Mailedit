@@ -23,5 +23,13 @@ nav.navbar {
     background-color: #bdb7b736;
 }
 
-.dropdown-menu {
+.dropdown-item {
+    padding: 1em 2em;
+    font-size: .9em;
+    font-family: 'Open Sans', sans-serif; 
+    transition: .3s;   
+}
+
+.dropdown-item:hover {
+   background-color: #bdb7b736;
 }

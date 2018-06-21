@@ -6,7 +6,7 @@
     padding: 2.5em 5em 0 5em;
     text-align: center;
     font-size: 5em;
-    color: #636b6f;
+    color: #484848;
     font-family: 'Raleway', sans-serif;
     font-weight: 100;
 }
@@ -56,4 +56,43 @@
 
 .lists_wrap {
     padding: 1.5em 1em;
+}
+
+
+/* new changes */
+
+.home-header {
+    padding: 2.5em 1em;
+}
+
+.home-body {
+    padding: 0 1em;
+}
+
+.bt {
+    font-size: .9em;
+    font-weight: 500;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}
+
+#body-tab {
+    padding: 2px .5em;
+    border-bottom: 1px solid gray;
+}
+
+
+@media only screen and (max-width: 780px) {
+    .inline-mobile {
+        display: inline;
+    }
+}
+
+@media only screen and (min-width: 780px) {
+    .inline-pc {
+        display: inline;
+    }
+    .right-pc {
+        float: right;
+    }
 }

@@ -38,16 +38,21 @@
                         </a>
                     </div>
                 </li>
-
+                <li class="mt-auto mb-auto">
+                    <a href="" class="btn btn-primary bt">
+                        Create brand
+                    </a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right mr-1" aria-labelledby="navbarDropdown">
-                        <h6 class="dropdown-header">Dropdown header</h6>
+                        <h6 class="dropdown-header">Menu</h6>
                         <a class="dropdown-item" href="{{ url('/home') }}">
                             Dashboard
                         </a>
+                        <hr class="m-b-0 m-t-0">
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                            document.getElementById('logout-form').submit();">

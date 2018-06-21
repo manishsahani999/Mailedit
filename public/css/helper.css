@@ -90,6 +90,15 @@
     padding: 2em;
 }
 
+.p-3 {
+    padding: 3em;
+}
+
+.p-4 {
+    padding: 4em;
+}
+
+
 .m-1 {
     margin: 1em;
 }
