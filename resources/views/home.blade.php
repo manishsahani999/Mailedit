@@ -6,7 +6,7 @@
     <div class="home-header">
         <h2 class="inline-pc">Hello, {{ Auth::user()->name }}</h2>
         <div class="inline-pc right-pc">
-            <a href="{{ route('brand.create') }}" class="btn btn-secondary bt">Create Brand</a>
+            <a href="{{ route('brand.index') }}" class="btn btn-secondary bt">View all Brand</a>
         </div>
         <div class="mt-1">
             <span>Start your day off right with some account stats and recommendations.</span>

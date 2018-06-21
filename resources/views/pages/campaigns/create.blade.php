@@ -5,16 +5,21 @@
 @endsection
 
 @section('content')
-    <div class="wrap">
+<form action="{{ route('campaign.store', $brand->slug) }}" method="post">
+    @csrf
+    @include('components.campaign_navbar')
+        <div class="wrap">
+            <div class="home-header">
+                <h2>{{ $brand->brand_name }} / New Campaign</h2>
+            </div>
+        </div>
         <div class="main-heading">
-            <div class="title is-inline">{{ $brand->brand_name }}</div>
-            <div class="title is-6 is-inline">/ New Campaign</div>
+            <div class="title is-inline"></div>
+            <div class="title is-6 is-inline">/</div>
         </div>
         <div class="brand-body m-t-1 m-l-1">
             @include('components.errors')
-            {{--form--}} 
-            <form action="{{ route('campaign.store', $brand->slug) }}" method="post">
-                @csrf
+            
                 <div class="row">
                     <div class="col is-4">
                         {{--Select template--}}
@@ -80,11 +85,7 @@
                             <label for="exampleFormControlFile1">Brand logo</label>
                             <input type="file" class="form-control-file" id="exampleFormControlFile1">
                         </div>
-                        {{--button--}}
-                        <div class="form-group">
-                            <button class="btn" name="status" value="draft">Save</button>
-                            <button class="btn btn-dark" name="status" value="sent">Save and Exit</button>
-                        </div>
+                        
                     </div>
                     <div class="col-sm-8">
                         <div class="title">Html code</div>
@@ -103,7 +104,6 @@
                 </div>
             </form>
         </div>
-    </div>
 @endsection
 
 @section('scripts')

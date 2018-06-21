@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar main-navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand m-l-1" href="/">
             <span id="navbar-text">mailedit</span>
         </a>

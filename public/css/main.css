@@ -78,6 +78,11 @@
     padding-right: 1.5em;
 }
 
+.lb {
+    padding: .4em 1em;
+    font-size: .8em;
+}
+
 #body-tab {
     padding: 2px .5em;
     border-bottom: 1px solid gray;
@@ -91,6 +96,16 @@
 #home-section-icon {
     width: 8em;
 }
+
+.body-table {
+    border: 1px solid lightgray;
+    border-radius: 9px;
+}
+
+
+
+
+
 
 @media only screen and (max-width: 780px) {
     .inline-mobile {

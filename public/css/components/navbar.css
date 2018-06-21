@@ -1,4 +1,4 @@
-nav.navbar {
+.main-navbar {
     padding: 0;
     border-bottom: 1px solid #bdb7b736;
 }
@@ -32,4 +32,17 @@ nav.navbar {
 
 .dropdown-item:hover {
    background-color: #bdb7b736;
+}
+
+
+
+/* 
+
+secondary navbar / campaign navbar
+
+*/
+
+.sec-navbar {
+    padding: 1em;
+    border-bottom: 2px solid #bdb7b736;;
 }
