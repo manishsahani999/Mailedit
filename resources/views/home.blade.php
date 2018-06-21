@@ -16,39 +16,26 @@
     <div class="home-body">
         <span id="body-tab">Overview</span>
         <hr class="mt-0"> 
-    </div>
-    <div class="main-heading"> 
-        <h4 class="title is-inline">Select brand</h4>
-        <div class="is-right">
-            <a href="{{ route('brand.create') }}" class="btn btn-primary">Add Brand</a>
+
+        <h4>Campaign</h4>
+        <div class="mt-2" id="home-section">
+            <div class="row">
+                <div class="col-sm-4 ml-1 t-right-pc">
+                    <img class="mt-4" id="home-section-icon" src="{{ asset('img/paper-plane.svg') }}" alt="">
+                </div>
+                <div class="col-sm-4 ml-3">
+                    <h5 class="mb-3">Create your first Campaign</h5>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                        Aliquid voluptates et quae, veniam quia autem in maxime esse 
+                        assumenda, earum praesentium iure eius, voluptatem maiores 
+                        deleniti adipisci officiis nisi ipsam!
+                    </p>
+                    <a href="{{ route('brand.create') }}" class="btn btn-warning bt">Create a brand</a>
+                </div>
+            </div>
         </div>
     </div>
-    @include('components.sessions')
-    <div class="main-body m-t-1">
-        <table class="table">
-            <thead>
-            <tr class="text-center">
-                <th scope="col">Id</th>
-                <th scope="col">Brands</th>
-                <th scope="col">lorem</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($brands as $brand)
-                <tr class="text-center">
-                    <th>{{ $brand->id }}</th>
-                    <td><a href="{{ route('brand.show', $brand->slug) }}">{{ $brand->brand_name }}</a></td>
-                    <td>23</td>
-                    <td class="text-center">
-                        <a href="{{ route('brand.show', $brand->slug) }}" class="btn btn-primary">View</a>
-                        <a href="{{ route('brand.edit', $brand->slug) }}" class="btn">Edit</a>
-                        <a href="" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
+    
 </div>
 @endsection

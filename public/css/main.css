@@ -1,5 +1,7 @@
-@import './components/navbar.css';
 @import './helper.css';
+@import './components/navbar.css';
+@import './components/footer.css';
+
 
 
 .welcome {
@@ -81,6 +83,14 @@
     border-bottom: 1px solid gray;
 }
 
+#home-section {
+    padding: 4em 0;
+    background-color: #f8f8f8;
+}
+
+#home-section-icon {
+    width: 8em;
+}
 
 @media only screen and (max-width: 780px) {
     .inline-mobile {
@@ -94,5 +104,8 @@
     }
     .right-pc {
         float: right;
+    }
+    .t-right-pc {
+        text-align: right;
     }
 }

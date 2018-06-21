@@ -1,0 +1,10 @@
+.footer {
+    width: 100%;
+    padding: 1em;
+    font-size: .9em;
+}
+
+#footer-brand {
+    font-family: 'Indie Flower', cursive;
+    font-size: 3em;
+}

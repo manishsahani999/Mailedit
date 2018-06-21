@@ -23,7 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $brands = auth()->user()->binaryBrand()->get();
-        return view('home', ['brands' => $brands]);
+        return view('home');
     }
 }
