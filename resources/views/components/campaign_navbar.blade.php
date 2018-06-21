@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg sec-navbar">
+<nav class="navbar navbar-expand-lg sec-navbar navbar-light bg-light sticky-top">
     <div class="navbar-item ml-5">
         <img src="{{ asset('img/email_sec.png') }}" alt="">
         <span class="ml-2">Let's get started</span>

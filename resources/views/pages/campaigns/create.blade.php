@@ -10,13 +10,18 @@
     @include('components.campaign_navbar')
         <div class="wrap">
             <div class="home-header">
-                <h2>{{ $brand->brand_name }} / New Campaign</h2>
+                <h2 class="inline-pc">{{ $brand->brand_name }}</h2>
+                <h5 class="inline-pc"> / New Campaign</h5>
+                <div class="mt-1">
+                    <span>You can design, send, schedule a campaign.</span>
+                </div>
+            </div>
+            <div class="home-body">
+                <span id="body-tab">Campaign info</span>
+                <hr class="mt-0">
             </div>
         </div>
-        <div class="main-heading">
-            <div class="title is-inline"></div>
-            <div class="title is-6 is-inline">/</div>
-        </div>
+
         <div class="brand-body m-t-1 m-l-1">
             @include('components.errors')
             
