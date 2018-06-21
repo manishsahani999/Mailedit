@@ -1,0 +1,24 @@
+ html, body, .wrap, .row {
+     height: 100%;
+ }
+
+ #mailman {
+     width: 8em;
+ }
+
+#login-left {
+    padding: 2em 1em;
+}
+
+#mail-big {
+    width: 23em;
+}
+
+#gmail {
+    width: 2em;
+}
+
+#login-right {
+    background-color: #f9f9f9;
+    height: 100%;
+}
