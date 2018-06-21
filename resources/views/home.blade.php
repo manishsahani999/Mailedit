@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="wrap">
-    <div class="main-heading">
+    <div class="main-heading"> 
         <h4 class="title is-inline">Select brand</h4>
         <div class="is-right">
             <a href="{{ route('brand.create') }}" class="btn btn-primary">Add Brand</a>

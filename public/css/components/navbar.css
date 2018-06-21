@@ -1,8 +1,27 @@
-.navbar-logo {
-    font-size: 1.4em;
+nav.navbar {
+    padding: 0;
+    border-bottom: 1px solid #bdb7b736;
 }
 
-.navbar-logo span i {
-    margin-top: 3px;
-    margin-left: -22px;
+#navbar-text {
+    font-size: 1.3em;
+    font-family: 'Indie Flower', sans-serif;
+}
+
+.nav-item {
+    padding: .6em 1em;
+    transition: .3s;
+    font-size: .9em;
+    font-family: 'Nanum Gothic', sans-serif;    
+}
+
+.active{
+    border-bottom: 3px solid #64b5f6;   
+}
+
+.nav-item:hover {
+    background-color: #bdb7b736;
+}
+
+.dropdown-menu {
 }

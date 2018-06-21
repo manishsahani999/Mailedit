@@ -1,18 +1,16 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <a class="navbar-brand navbar-logo" href="/">
-            Mailed it
-            <span class="icon text-primary m-l-1">
-             <i class="fas fa-chevron-right"></i>
-            </span>
+<nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand m-l-1" href="/">
+            <span id="navbar-text">mailedit</span>
         </a>
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav ml-auto">
             @guest
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('register') }}">
                         Register<span class="sr-only">(current)</span>
                     </a>
@@ -24,7 +22,7 @@
                 </li>
 
             @else
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="{{ url('/home') }}">
                         Home
                     </a>
@@ -45,7 +43,8 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu dropdown-menu-right mr-1" aria-labelledby="navbarDropdown">
+                        <h6 class="dropdown-header">Dropdown header</h6>
                         <a class="dropdown-item" href="{{ url('/home') }}">
                             Dashboard
                         </a>
@@ -60,7 +59,7 @@
                     </div>
                 </li>
             @endguest
-
+        </ul>
 
     </div>
 </nav>

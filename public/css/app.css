@@ -2,6 +2,19 @@
 @import './bootstrap.css';
 @import './helper.css';
 
+
+
+/* 
+font-family: 'Open Sans', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Encode Sans Condensed', sans-serif;
+font-family: 'Lato', sans-serif;
+font-family: 'Raleway', sans-serif;
+font-family: 'Indie Flower', cursive;
+font-family: 'Nanum Gothic', sans-serif;
+font-family: 'Quicksand', sans-serif;
+*/
+
 html, body {
     padding: 0;
     margin: 0;
