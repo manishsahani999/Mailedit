@@ -19,96 +19,136 @@
             <div class="home-body">
                 <span id="body-tab">Campaign info</span>
                 <hr class="mt-0">
-            </div>
-        </div>
-
-        <div class="brand-body m-t-1 m-l-1">
-            @include('components.errors')
-            
-                <div class="row">
-                    <div class="col is-4">
-                        {{--Select template--}}
-                        <div class="form-group">
-                            <label>Select Template</label>
-                            <select class="form-control">
-                                <option>Select template</option>
-                            </select>
+                @include('components.errors')
+                <div class="create-campaign-outer">
+                    <!-- name -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            <h5>Name</h5>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="name"
+                                    value="{{ old('name') }}"
+                                    class="form-control form-control-lg">
                         </div>
-                        {{--Name--}}
-                        <div class="form-group">
-                                <label> Name</label>
-                                <input type="text" name="name"
-                                       value="{{ old('name') }}"
-                                       class="form-control">
-
-                        </div>
-                        {{--subject--}}
-                        <div class="form-group">
-                                <label> Subject</label>
-                                <input type="text" name="subject"
+                    </div>
+                    <!-- subject -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            <h5>Subject</h5>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="subject"
                                        value="{{ old('subject') }}"
-                                       class="form-control">
-
+                                       class="form-control form-control-lg">
                         </div>
-                        {{--From name--}}
-                        <div class="form-group">
-                            <label class="label"> From name </label>
-                                <input type="text" class="form-control"
+                    </div>
+                    <!-- from name -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            <h5>From name</h5>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control  form-control-lg"
                                        value="{{ old('from_name') ? old('from_name') : $brand->from_name }}"
                                        name="from_name">
                         </div>
-                        {{--From email--}}
-                        <div class="form-group">
-                            <label class="label"> From email</label>
-                                <input type="text" class="form-control"
+                    </div>
+                    <!-- from email -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            <h5>From email</h5>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control form-control-lg"
                                        value="{{ old('from_email') ? old('from_email') : $brand->from_email }}"
                                        name="from_email">
                         </div>
-                        {{--Reply to--}}
-                        <div class="form-group">
-                            <label class="label"> Reply to email</label>
-                                    <input type="text" class="form-control"
+                    </div>
+                    <!-- Reply to -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            <h5>Reply to</h5>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control form-control-lg"
                                            value="{{ old('reply_to') ? old('reply_to') : $brand->reply_to }}"
                                            name="reply_to">
                         </div>
-                        {{--Plain text--}}
-                        <div class="form-group">
-                            <label class="label"> Plain text</label>
-                                <textarea class="form-control" name="text" id="" rows="10">
-                                    {{ old('text') }}
-                                </textarea>
-                        </div>
-                        {{--Allowed files--}}
-                        <div class="form-group">
-                            <label class="label"> Allowed attachments file types </label>
-                                    <input type="text" class="form-control"
-                                           name="allowed_files"
-                                           value="{{ old('allowed_files') }}">
-                        </div>
-                        {{--Brand logo--}}
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Brand logo</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                        </div>
-                        
                     </div>
-                    <div class="col-sm-8">
-                        <div class="title">Html code</div>
-                        {{--html--}}
-                        <div class="form-group">
-                            <textarea name="htmltext" id="summernote" class="textarea">
-                                {{ old('htmltext') }}
+                    <!-- Plain text -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            <h5>Plain text</h5>
+                        </label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" name="text" id="" rows="6">
+                                {{ old('text') }}
                             </textarea>
                         </div>
-                        {{--description--}}
-                        <div class="form-group">
-                            <label>Description</label>
-                            <textarea name="description"  class="form-control">{{ old('description') }}</textarea>
+                    </div>  
+                    <!-- Allowed files -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            <h5>Allowed files</h5>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control form-control-lg"
+                                    name="allowed_files"
+                                    value="{{ old('allowed_files') }}">
+                        </div>
+                    </div> 
+                    <!-- brand logo -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            <h5>Brand Logo</h5>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1">                            
+                        </div>
+                    </div> 
+                    <!-- description -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            <h5>Description</h5>
+                        </label>
+                        <div class="col-sm-6">
+                            <textarea name="description" rows="4" class="form-control">{{ old('description') }}</textarea>                                                    
                         </div>
                     </div>
+                    
                 </div>
-            </form>
-        </div>
+                <!-- campaign outer -->
+                <span id="body-tab">Email Design</span>
+                <hr class="mt-0">
+                <!-- campaign outer -->
+                <div class="create-campaign-outer">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            <h5>Select template</h5>
+                        </label>
+                        <div class="col-sm-6">
+                            <select class="form-control">
+                                <option>Select template</option>
+                            </select>                                                    
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="">
+                            <h5>Design a new template</h5>
+                        </label>
+                        <textarea name="htmltext" id="summernote" class="textarea">
+                            {{ old('htmltext') }}
+                        </textarea>
+                    </div>
+                </div>
+                <!-- campaign outer ends -->
+            </div>
+            <!-- wrap ends -->
+        </div>          
+        <!-- body ends -->
+</form>
 @endsection
 
 @section('scripts')
@@ -118,7 +158,7 @@
             $('#summernote').summernote({
                 placeholder: 'Write something ',
                 tabsize: 2,
-                height: 300,
+                height: 400,
                 minHeight: null,             // set minimum height of editor
                 maxHeight: null,             // set maximum height of editor
                 dialogsInBody: true,

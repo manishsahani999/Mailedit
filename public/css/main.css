@@ -102,7 +102,17 @@
     border-radius: 9px;
 }
 
+.create-campaign-outer {
+    /* border: 1px solid lightgray; */
+    border-radius: 9px;
+    padding: 2em 3em;
+}
 
+.create-campaign-inner {
+    padding-top: 1em;
+    border-radius: 9px;
+    border-bottom: 1px solid lightgray;
+}
 
 
 
