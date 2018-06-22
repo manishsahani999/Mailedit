@@ -31,6 +31,14 @@ class VariableService
     }
 
     /*
+    * Find All the Campaign
+    */
+    public function getLatestCampaigns($slug)
+    {
+        return $this->getBrand($slug)->binaryCampaign()->latest()->get();
+    }
+
+    /*
     * Find List
     */
     public function getList($uuid)

@@ -80,7 +80,7 @@ class BrandController extends Controller
         $brand = $this->variables->getBrand($slug);
 
         // All Campaigns
-        $campaigns = $this->variables->getAllCampaigns($slug);
+        $campaigns = $this->variables->getLatestCampaigns($slug);
 
         return view('pages.brand.show', [
             'brand' => $brand,
