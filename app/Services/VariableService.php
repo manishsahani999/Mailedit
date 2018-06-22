@@ -101,7 +101,7 @@ class VariableService
     */
     public function getAllUserTemplates()
     {
-        return auth()->user()->template()->get();
+        return auth()->user()->template()->latest()->get();
     }
 
     /*

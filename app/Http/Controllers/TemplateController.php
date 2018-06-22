@@ -38,7 +38,7 @@ class TemplateController extends Controller
      */
     public function create()
     {
-        
+        return view('pages.template.create');
     }
 
     /**
@@ -47,9 +47,11 @@ class TemplateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($data)
+    public function store(Request $request)
     {
-        return $this->create->createUserTemplate($data);
+        $template = $this->create->createUserTemplate($request->all());
+
+        return redirect()->route('template.show', $template->uuid);
     }
 
     /**
