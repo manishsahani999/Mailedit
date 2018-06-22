@@ -90,4 +90,20 @@ class TemplateController extends Controller
     {
         //
     }
+
+    /*
+    * Find template content
+    */
+    public function getContent($id)
+    {   
+        //  find template
+        $template = $this->variables->getTemplate($id);
+
+        if (($template)) {
+            return response()->json($template);
+        }
+        else {
+            return response()->json(['error' => 'Not found']);
+        }
+    }
 }

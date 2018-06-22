@@ -17,9 +17,10 @@ class CreateBinaryEmailTemplatesTable extends Migration
             $table->increments('id');
             $table->uuid('uuid')->unique()->index();
             $table->string('name')->default('Default Name');
+            $table->string('subject')->nullable();
             $table->integer('user_id')->unsigned()->default(1);
             $table->integer('channel_id')->unsigned()->nullable();
-            $table->integer('parent_template')->unsigned()->nullable();
+            $table->string('parent_template')->nullable();
             $table->longtext('content')->nullable();
             $table->string('markdown')->nullable();
             $table->string('description')->nullable();

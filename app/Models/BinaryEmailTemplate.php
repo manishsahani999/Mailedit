@@ -13,7 +13,7 @@ class BinaryEmailTemplate extends Model
     protected $fillable = [
         'name', 'description', 'markdown', 
         'channel_id', 'content', 'parent_template',
-        'user_id'
+        'user_id', 'subject'
     ];
 
     public function user() 

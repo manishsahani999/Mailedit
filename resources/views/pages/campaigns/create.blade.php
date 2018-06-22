@@ -137,11 +137,16 @@
                 <div class="create-campaign-outer">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
-                            <h5>Select template</h5>
+                            <h5>Select template</h5> 
                         </label>
                         <div class="col-sm-6">
-                            <select class="form-control">
+                            <select class="form-control" id="template-select">
                                 <option>Select template</option>
+                                @foreach($templates as $template)
+                                <option value="{{ $template->id }}">
+                                    {{ $template->name }}
+                                </option>
+                                @endforeach
                             </select>                                                    
                         </div>
                     </div>
@@ -151,7 +156,7 @@
                             <h5>Design a new template</h5>
                         </label>
                         <textarea name="html" id="summernote" class="textarea">
-                            {{ old('html') }}
+                            {!! (old('html')) ? old('html') : '' !!}
                         </textarea>
                     </div>
                 </div>
@@ -175,6 +180,22 @@
                 maxHeight: null,             // set maximum height of editor
                 dialogsInBody: true,
             });
+
+            $('#template-select').on('change', function (e) {
+                var optionSelected = $("option:selected", this);
+                var id = this.value;
+                $.ajax({
+                    type: "GET",
+                    url: '/templates/'+id+'/get',
+                    success: function(data) {
+                        if ((data.error)) {
+                            console.log(error);
+                        }
+                        $("#summernote").summernote("code", data.content);
+                    }
+                });
+            });
+
         });
     </script>
 @endsection

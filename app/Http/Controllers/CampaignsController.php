@@ -24,9 +24,16 @@ class CampaignsController extends Controller
      */
     public function create($slug)
     {
+        //  brand
         $brand = $this->variables->getBrand($slug);
+
+        //  All templates
+        $templates = $this->variables->getAllUserTemplates();
         
-        return view('pages.campaigns.create', ['brand' => $brand]);
+        return view('pages.campaigns.create', [
+            'brand' => $brand,
+            'templates' => $templates
+            ]);
     }
 
     /**

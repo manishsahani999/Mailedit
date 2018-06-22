@@ -96,5 +96,21 @@ class VariableService
         return $emails;
     }
 
+    /*
+    * Find all templates 
+    */
+    public function getAllUserTemplates()
+    {
+        return auth()->user()->template()->get();
+    }
+
+    /*
+    * Find template 
+    */
+    public function getTemplate($id)
+    {
+        return auth()->user()->template()->whereId($id)->first();
+    }
+
         
 }
