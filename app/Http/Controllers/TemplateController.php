@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\{VariableService, CreateService};
+use App\Http\Requests\StoreTemplate;
 
 class TemplateController extends Controller
 {
+
+    public function __construct(VariableService $variables, CreateService $create)
+    {
+        $this->variables = $variables;
+        $this->create = $create;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +32,7 @@ class TemplateController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -32,9 +41,9 @@ class TemplateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($data)
     {
-        //
+        return $this->create->createUserTemplate($data);
     }
 
     /**

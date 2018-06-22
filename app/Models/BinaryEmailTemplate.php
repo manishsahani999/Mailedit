@@ -12,7 +12,12 @@ class BinaryEmailTemplate extends Model
 
     protected $fillable = [
         'name', 'description', 'markdown', 
-        'channel_id', 'content', 'subject', 
-        'heading', 'parent_template', 'binary_email_type'
+        'channel_id', 'content', 'parent_template',
+        'user_id'
     ];
+
+    public function user() 
+    {
+        return $this->belongsTo('App\User');
+    }
 }

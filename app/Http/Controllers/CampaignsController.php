@@ -37,22 +37,9 @@ class CampaignsController extends Controller
      */
     public function store(StoreCampaign $request, $slug)
     {
-//        data collection
-        $data = [
-            'subject'       => $request->subject,
-            'from_name'     => $request->from_name,
-            'from_email'    => $request->from_email,
-            'reply_to'      => $request->reply_to,
-            'title'         => $request->name,
-            'description'   => $request->description,
-            'html'          => $request->htmltext,
-            'text'          => $request->text,
-            'status'        => $request->status,
-            'allowed_files' => $request->allowed_files,
-            'query_string'  => null,
-            'brand_logo'    => $request->brand_logo,
-        ];
-
+        // data collection
+        $data = $this->variables->campaignRequest($request->all());
+        
         // Finding brand and Creating Campaign
         $campaign = $this->variables->getBrand($slug)->binaryCampaign()->create($data);
 
@@ -170,22 +157,6 @@ class CampaignsController extends Controller
      */
     public function update(StoreCampaign $request, $slug, $uuid)
     {
-        // data collection
-        $data = [
-            'subject'       => $request->subject,
-            'from_name'     => $request->from_name,
-            'from_email'    => $request->from_email,
-            'reply_to'      => $request->reply_to,
-            'name'          => $request->name,
-            'description'   => $request->description,
-            'html'          => $request->htmltext,
-            'text'          => $request->text,
-            'status'        => $request->status,
-            'allowed_files' => $request->allowed_files,
-            'query_string'  => null,
-            'brand_logo'    => $request->brand_logo,
-        ];
-
         //  find brand
         $brand = $this->variables->getBrand($slug);
 

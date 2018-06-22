@@ -25,11 +25,11 @@
                     <!-- name -->
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
-                            <h5>Name</h5>
+                            <h5>Title</h5>
                         </label>
                         <div class="col-sm-6">
-                            <input type="text" name="name"
-                                    value="{{ old('name') }}"
+                            <input type="text" name="title"
+                                    value="{{ old('title') }}"
                                     class="form-control form-control-lg">
                         </div>
                     </div>
@@ -98,6 +98,17 @@
                                     name="allowed_files"
                                     value="{{ old('allowed_files') }}">
                         </div>
+                    </div>
+                    <!-- query string -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            <h5>Query Strings</h5>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control form-control-lg"
+                                    name="query_string"
+                                    value="{{ old('query_string') }}">
+                        </div>
                     </div> 
                     <!-- brand logo -->
                     <div class="form-group row">
@@ -139,8 +150,8 @@
                         <label for="">
                             <h5>Design a new template</h5>
                         </label>
-                        <textarea name="htmltext" id="summernote" class="textarea">
-                            {{ old('htmltext') }}
+                        <textarea name="html" id="summernote" class="textarea">
+                            {{ old('html') }}
                         </textarea>
                     </div>
                 </div>

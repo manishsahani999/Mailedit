@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCampaign extends FormRequest
+class StoreTemplate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,7 @@ class StoreCampaign extends FormRequest
     public function rules()
     {
         return [
-            'subject'       => 'required',
-            'from_name'     => 'required',
-            'from_email'    => 'required',
-            'reply_to'      => 'required',
-            'title'         => 'required',
-            'description'   => 'required',
-            'html'          => 'required',
-            'text'          => 'required',
-            'status'        => 'required',
+            // 
         ];
     }
 }

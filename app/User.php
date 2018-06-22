@@ -50,4 +50,14 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\BinarySubsList');
     }
 
+    /**
+     *
+     * A user can have many Subs List
+     *
+     * @return this
+     */
+    public function template() {
+        return $this->hasMany('App\Models\BinaryEmailTemplate', 'user_id');
+    }
+
 }

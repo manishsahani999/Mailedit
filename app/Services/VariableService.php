@@ -23,6 +23,28 @@ class VariableService
     }
 
     /*
+    * return request data
+    */
+    public function campaignRequest($data)
+    {
+        return [
+            'subject'       => $data['subject'],
+            'from_name'     => $data['from_name'],
+            'from_email'    => $data['from_email'],
+            'reply_to'      => $data['reply_to'],
+            'name'          => (isset($data['title'])) ? $data['title'] : 'Default Name',
+            'description'   => $data['description'],
+            'html'          => $data['html'],
+            'text'          => $data['text'],
+            'status'        => $data['status'],
+            'allowed_files' => $data['allowed_files'],
+            'query_string'  => (isset($data['query_string'])) ? $data['query_string']: null,
+            'brand_logo'    => (isset($data['brand_logo'])) ? $data['brand_log']: null,
+        ];
+
+    }
+
+    /*
     * Find All the Campaign
     */
     public function getAllCampaigns($slug)
@@ -31,7 +53,7 @@ class VariableService
     }
 
     /*
-    * Find All the Campaign
+    * Find the Latest Campaign
     */
     public function getLatestCampaigns($slug)
     {

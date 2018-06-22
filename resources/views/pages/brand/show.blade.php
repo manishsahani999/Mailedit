@@ -44,8 +44,6 @@
                     <span id="body-tab">All Campaigns</span>
                     <hr class="mt-0">
                     <div class="n-table-wrap">
-                        <!-- <table class="table">
-                            <tbody> -->
                             @foreach($campaigns as $campaign)
                                 <div class="n-table row">
                                     <div class="col-sm-1 n-col-1">
@@ -55,7 +53,7 @@
                                         <h5 class="mb-0">
                                             <a href="{{ route('campaign.show', [
                                                 'slug' => $brand->slug, 'uuid' => $campaign->uuid
-                                                ]) }}">{{ $campaign->title }}</a>
+                                                ]) }}">{{ $campaign->name }}</a>
                                             <!-- <img id="n-draft" src="{{ asset('img/draft.svg') }}" alt="">     -->
                                         </h5>
                                         <span>{{ $campaign->status }}</span>
@@ -88,28 +86,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                                
-                                    <!-- <td>{{ $campaign->recipients_count }}</td>
-                                    <td>{{ $campaign->sent_count }}</td>
-                                    <td>
-                                        <a class="btn btn-secondary bt" 
-                                            href="{{ route('campaign.show', [
-                                                'slug' => $brand->slug, 'uuid' => $campaign->uuid
-                                            ]) }}">View</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('campaign.edit', [
-                                                'slug' => $brand->slug, 
-                                                'uuid' => $campaign->uuid
-                                            ]) }}" class="btn btn-warning bt">Edit</a>
-                                    </td>
-                                    <td>
-                                        <a href="" class="btn btn-danger bt">Delete</a>
-                                    </td>
-                                </tr>  -->
                             @endforeach
-                            <!-- </tbody>
-                        </table> -->
                     </div>
                 </div>
             </div>
