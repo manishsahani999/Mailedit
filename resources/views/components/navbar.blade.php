@@ -27,7 +27,20 @@
                         Home
                     </a>
                 </li>
-
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Templates
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('template.index') }}">
+                            All Templates
+                        </a>
+                        <hr class="mt-0 mb-0">
+                        <a class="dropdown-item" href="{{ route('template.create') }}">
+                           Create Template
+                        </a>
+                    </div>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Subscribers

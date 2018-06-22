@@ -22,7 +22,13 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        //
+        //  Get all Templates
+        $templates = $this->variables->getAllUserTemplates();
+
+        // return view
+        return view('pages.template.index', [
+            'templates' => $templates
+        ]);
     }
 
     /**

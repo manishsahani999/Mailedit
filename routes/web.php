@@ -66,6 +66,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('campaign/{uuid}/email-sending', 'EmailController@jobsTest')->name('email.send');
     
 //    Email Templates Route
+    Route::get('templates', 'TemplateController@index')->name('template.index');
+    Route::get('templates/new', 'TemplateController@create')->name('template.create');
     Route::post('templates/new-template', 'TemplateController@store')->name('template.store');
     Route::get('templates/{id}/get', 'TemplateController@getContent')->name('template.get.content');
 

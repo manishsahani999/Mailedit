@@ -12,7 +12,6 @@
         </div>
         @include('components/sessions')
     </div>
-    @include('components.sessions')
 
     <div class="home-body">
         <hr>
