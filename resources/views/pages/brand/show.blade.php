@@ -4,6 +4,7 @@
     <div class="wrap">
         <div class="home-header">
             <h2 class="inline-pc">{{ ucwords($brand->brand_name) }}</h2>
+            <h4 class="inline-pc">/ All Campaigns</h4>
             <div class="right-pc">
                 <a href="{{ route('campaign.create', $brand->slug) }}" class="btn btn-secondary bt">Create Campaigns</a>
             </div>
@@ -12,67 +13,105 @@
             </div>
             @include('components.sessions')
         </div>
-        @include('components.sessions')
         <div class="home-body">
-            <hr>
-            <h5 class="ml-2">All Campaigns</h5>
-            <div class="body-table">
-                <table class="table">
-                    <thead>
-                    <tr class="text-center">
-                        <th>S no.</th>
-                        <th>Campaign Name</th>
-                        <th>Status</th>
-                        <th>Recipients Count</th>
-                        <th>Sent to</th>
-                        <th>View</th>
-                        <th>edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($campaigns as $campaign)
-                        <tr class="text-center">
-                            <th>{{ $loop->index+1 }}</th>
-                            <td><a href="{{ route('campaign.show', ['slug' => $brand->slug, 'uuid' => $campaign->uuid]) }}">{{ $campaign->title }}</a></td>
-                            <td>
-                                <span class="badge
-                                    @if($campaign->status == 'draft')
-                                        badge-warning
-                                    @elseif($campaign->status == 'scheduled')
-                                        badge-primary
-                                    @elseif($campaign->status == 'cancelled')
-                                        badge-danger
-                                    @elseif($campaign->status == 'sending')
-                                        badge-secondary
-                                    @elseif($campaign->status == 'sent')
-                                        badge-success
-                                    @endif lb"
-                                >
-                                    {{ $campaign->status }}
-                                </span>
-                            </td>
-                            <td>{{ $campaign->recipients_count }}</td>
-                            <td>{{ $campaign->sent_count }}</td>
-                            <td>
-                                <a class="btn btn-secondary bt" 
-                                    href="{{ route('campaign.show', [
-                                        'slug' => $brand->slug, 'uuid' => $campaign->uuid
-                                    ]) }}">View</a>
-                            </td>
-                            <td>
-                                <a href="{{ route('campaign.edit', [
-                                        'slug' => $brand->slug, 
-                                        'uuid' => $campaign->uuid
-                                    ]) }}" class="btn btn-warning bt">Edit</a>
-                            </td>
-                            <td>
-                                <a href="" class="btn btn-danger bt">Delete</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="p-3">
+                        <div class="mb-3">
+                            <a href="" class="home-sidebar text-dark">
+                                <i class="far fa-clock mr-2 home-sidebar-icon"></i> Recent
+                            </a>
+                        </div>
+                        <div class="mb-3">
+                            <a href="" class="home-sidebar text-dark">
+                                <i class="fas fa-arrow-right mr-2 home-sidebar-icon"></i> ongoing
+                            </a>
+                        </div>
+                        <div class="mb-3">
+                            <a href="" class="home-sidebar text-dark">
+                                <i class="fas fa-edit mr-2 home-sidebar-icon"></i> Draft
+                            </a>
+                        </div>
+                        <div class="mb-3">
+                            <a href="" class="home-sidebar text-dark">
+                                <i class="fas fa-check mr-2 home-sidebar-icon"></i> Complete
+                            </a>
+                        </div>
+                    </div>
+                    <hr class="mr-5">
+                </div>
+                <div class="col">
+                    <span id="body-tab">All Campaigns</span>
+                    <hr class="mt-0">
+                    <div class="n-table-wrap">
+                        <!-- <table class="table">
+                            <tbody> -->
+                            @foreach($campaigns as $campaign)
+                                <div class="n-table row">
+                                    <div class="col-sm-1 n-col-1">
+                                        <img class="n-col-icon" src="{{ asset('img/paper-plane.svg') }}" alt="">
+                                    </div>
+                                    <div class="col-sm-5 n-col-2">
+                                        <h5 class="mb-0">
+                                            <a href="{{ route('campaign.show', [
+                                                'slug' => $brand->slug, 'uuid' => $campaign->uuid
+                                                ]) }}">{{ $campaign->title }}</a>
+                                            <!-- <img id="n-draft" src="{{ asset('img/draft.svg') }}" alt="">     -->
+                                        </h5>
+                                        <span>{{ $campaign->status }}</span>
+                                        <div>
+                                            <span>
+                                                Edited <strong>{{ $brand->updated_at->diffForHumans() }}</strong>, by <strong>You</strong>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 p-1">
+                                        <label class="n-lb mt-4
+                                            @if($campaign->status == 'draft')
+                                                n-lb-draft
+                                            @elseif($campaign->status == 'scheduled')
+                                                n-lb-schedule
+                                            @elseif($campaign->status == 'cancelled')
+                                                n-lb-cancel
+                                            @elseif($campaign->status == 'sending')
+                                                n-lb-sending
+                                            @elseif($campaign->status == 'sent')
+                                                n-lb-sent
+                                            @endif">{{ $campaign->status }}</label>
+                                    </div>
+                                    <div class="col-sm-3 offset-sm-1 pt-3">
+                                        <a href="{{ route('campaign.edit', [
+                                                'slug' => $brand->slug, 
+                                                'uuid' => $campaign->uuid
+                                            ]) }}" class="btn n-lb-draft bt">Edit</a>
+                                        <a href="" class="btn n-lb-cancel bt">Delete</a>
+                                    </div>
+                                </div>
+                                <hr>
+                                
+                                    <!-- <td>{{ $campaign->recipients_count }}</td>
+                                    <td>{{ $campaign->sent_count }}</td>
+                                    <td>
+                                        <a class="btn btn-secondary bt" 
+                                            href="{{ route('campaign.show', [
+                                                'slug' => $brand->slug, 'uuid' => $campaign->uuid
+                                            ]) }}">View</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('campaign.edit', [
+                                                'slug' => $brand->slug, 
+                                                'uuid' => $campaign->uuid
+                                            ]) }}" class="btn btn-warning bt">Edit</a>
+                                    </td>
+                                    <td>
+                                        <a href="" class="btn btn-danger bt">Delete</a>
+                                    </td>
+                                </tr>  -->
+                            @endforeach
+                            <!-- </tbody>
+                        </table> -->
+                    </div>
+                </div>
             </div>
             
         </div>

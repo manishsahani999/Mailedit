@@ -119,6 +119,68 @@
     width: 15em;
 }
 
+.home-sidebar-icon {
+    color: lightgray;
+    font-size: 1.3em;
+}
+
+.home-sidebar {
+    font-size: 1em;
+    font-weight: 500;
+    color : #484848;
+    text-decoration: none !important;
+}
+
+
+.n-col-1 {
+    padding: 1em 2em;
+}
+
+.n-col-icon {
+    width: 2em;
+}
+
+.n-col-2 span {
+    font-size: .9em;
+}
+
+#n-col-2-icon {
+    width: 4em;
+}
+
+.n-lb {
+    padding: .3em .6em;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: .7em;
+    border-radius: 5px;
+}
+
+.n-lb-draft {
+    background-color: #EDE5E3;
+    color: #484848;
+}
+
+.n-lb-schedule {
+    background-color: #FA4721;
+    color: #ffffff;
+}
+
+.n-lb-cancel {
+    background-color: #E72424;
+    color: #f8f8f8;
+}
+
+.n-lb-sending {
+    background-color: #21AFF1;
+    color: #f8f8f8;
+}
+
+.n-lb-sent {
+    background-color: #30BD03;
+    color: #f8f8f8;
+}
+
 
 
 @media only screen and (max-width: 780px) {
