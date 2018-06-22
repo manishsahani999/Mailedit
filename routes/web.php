@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('templates', 'TemplateController@index')->name('template.index');
     Route::get('templates/new', 'TemplateController@create')->name('template.create');
     Route::post('templates/new-template', 'TemplateController@store')->name('template.store');
+    Route::get('templates/{uuid}', 'TemplateController@show')->name('template.show');
+    Route::get('templates/{uuid}/edit', 'TemplateController@edit')->name('template.edit');
     Route::get('templates/{id}/get', 'TemplateController@getContent')->name('template.get.content');
 
 });
