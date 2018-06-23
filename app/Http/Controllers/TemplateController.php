@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\{VariableService, CreateService};
+use App\Services\{UtilityService, CreateService};
 use App\Http\Requests\StoreTemplate;
 
 class TemplateController extends Controller
 {
 
-    public function __construct(VariableService $variables, CreateService $create)
+    public function __construct(UtilityService $utility, CreateService $create)
     {
-        $this->variables = $variables;
+        $this->utility = $utility;
         $this->create = $create;
     }
 
@@ -23,7 +23,7 @@ class TemplateController extends Controller
     public function index()
     {
         //  Get all Templates
-        $templates = $this->variables->getAllUserTemplates();
+        $templates = $this->utility->getAllUserTemplates();
 
         // return view
         return view('pages.template.index', [
@@ -105,7 +105,7 @@ class TemplateController extends Controller
     public function getContent($id)
     {   
         //  find template
-        $template = $this->variables->getTemplate($id);
+        $template = $this->utility->getTemplate($id);
 
         if (($template)) {
             return response()->json($template);

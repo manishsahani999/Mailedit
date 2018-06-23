@@ -6,15 +6,15 @@ use App\Http\Requests\StoreCampaign;
 use Illuminate\Http\Request;
 use App\Models\{BinaryBrand, BinaryCampaigns};
 use Carbon\Carbon;
-use App\Services\VariableService;
+use App\Services\UtilityService;
 
 class CampaignsController extends Controller
 {
 
 
-    public function __construct(VariableService $variables)
+    public function __construct(UtilityService $utility)
     {
-        $this->variables = $variables;
+        $this->utility = $utility;
     }
 
     /**
@@ -25,15 +25,15 @@ class CampaignsController extends Controller
     public function create($slug)
     {
         //  brand
-        $brand = $this->variables->getBrand($slug);
+        $brand = $this->utility->getBrand($slug);
 
         //  All templates
-        $templates = $this->variables->getAllUserTemplates();
+        $templates = $this->utility->getAllUserTemplates();
         
         return view('pages.campaigns.create', [
             'brand' => $brand,
             'templates' => $templates
-            ]);
+        ]);
     }
 
     /**
@@ -45,10 +45,10 @@ class CampaignsController extends Controller
     public function store(StoreCampaign $request, $slug)
     {
         // data collection
-        $data = $this->variables->campaignRequest($request->all());
+        $data = $this->utility->campaignRequest($request->all());
         
         // Finding brand and Creating Campaign
-        $campaign = $this->variables->getBrand($slug)->binaryCampaign()->create($data);
+        $campaign = $this->utility->getBrand($slug)->binaryCampaign()->create($data);
 
         // Session Message
         $request->session()->flash('success', 'Campaign created successfully');
@@ -70,10 +70,10 @@ class CampaignsController extends Controller
     public function show($slug, $uuid)
     {
         // find brand
-        $brand = $this->variables->getBrand($slug);        
+        $brand = $this->utility->getBrand($slug);        
 
         // find campaign
-        $campaign = $this->variables->getCampaign($slug, $uuid);
+        $campaign = $this->utility->getCampaign($slug, $uuid);
 
         // finding all lists
         $lists = auth()->user()->binarySubsList()->get();
@@ -95,10 +95,10 @@ class CampaignsController extends Controller
     public function addListsToCampaign(Request $request, $slug, $uuid) 
     {
         // find brand
-        $brand = $this->variables->getBrand($slug);        
+        $brand = $this->utility->getBrand($slug);        
 
         // find campaign and Attaching the lists to table
-        $campaign = $this->variables->getCampaign($slug, $uuid)->binarySubsList()->attach($request->lists);
+        $campaign = $this->utility->getCampaign($slug, $uuid)->binarySubsList()->attach($request->lists);
 
         // Session Message
         $request->session()->flash('success', 'List added successfully');
@@ -119,10 +119,10 @@ class CampaignsController extends Controller
     public function removeListsToCampaign(Request $request, $slug, $uuid) 
     {
         // find brand
-        $brand = $this->variables->getBrand($slug);
+        $brand = $this->utility->getBrand($slug);
 
         // find campaign and Attaching the lists to table
-        $campaign = $this->variables->getCampaign($slug, $uuid)->binarySubsList()->detach($request->lists);
+        $campaign = $this->utility->getCampaign($slug, $uuid)->binarySubsList()->detach($request->lists);
 
         // Session Message
         $request->session()->flash('success', 'List removed successfully');
@@ -143,10 +143,10 @@ class CampaignsController extends Controller
     public function edit($slug, $uuid)
     {
         //  find brand
-        $brand = $this->variables->getBrand($slug);
+        $brand = $this->utility->getBrand($slug);
 
         // find campaign
-        $campaign = $this->variables->getCampaign($slug, $uuid);
+        $campaign = $this->utility->getCampaign($slug, $uuid);
 
         // returning
         return view('pages.campaigns.edit', [
@@ -165,10 +165,10 @@ class CampaignsController extends Controller
     public function update(StoreCampaign $request, $slug, $uuid)
     {
         //  find brand
-        $brand = $this->variables->getBrand($slug);
+        $brand = $this->utility->getBrand($slug);
 
         // find campaign and Updating
-        $campaign = $this->variables->getCampaign($slug, $uuid)->update($data);
+        $campaign = $this->utility->getCampaign($slug, $uuid)->update($data);
 
         // Session message
         $request->session()->flash('success', 'Campaign Updated successfully');
@@ -200,10 +200,10 @@ class CampaignsController extends Controller
     public function storeSchedule(Request $request, $slug, $uuid)
     {
         // find the brand
-        $brand = $this->variables->getBrand($slug);       
+        $brand = $this->utility->getBrand($slug);       
 
         // find campaign
-        $campaign = $this->variables->getCampaign($slug, $uuid);
+        $campaign = $this->utility->getCampaign($slug, $uuid);
 
         // starts at
         $campaign_starts_at = $request->date.' '.$request->time;

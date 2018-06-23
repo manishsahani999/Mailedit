@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSubs;
 use Illuminate\Http\Request;
-use App\Services\VariableService;
+use App\Services\UtilityService;
 
 class SubsController extends Controller
 {
 
-    public function __construct(VariableService $variables)
+    public function __construct(UtilityService $utility)
     {
-        $this->variables = $variables;
+        $this->utility = $utility;
     }
 
     /**
@@ -31,7 +31,7 @@ class SubsController extends Controller
      */
     public function create($uuid)
     {
-        $list = $this->variables->getList($uuid);
+        $list = $this->utility->getList($uuid);
 
         return view('subs.create', [
             'list' => $list
@@ -47,7 +47,7 @@ class SubsController extends Controller
     public function store(StoreSubs $request, $uuid)
     {
         // finding the list and updating
-        $sub = $this->variables->getList($uuid)->binarySubs()->create($request->all());
+        $sub = $this->utility->getList($uuid)->binarySubs()->create($request->all());
 
         // redirecting to list page
         return redirect()->route('subs.list.show', $uuid);
@@ -62,7 +62,7 @@ class SubsController extends Controller
     public function show($uuid, $email)
     {
         //  Finding the list
-        $list = $this->variables->getList($uuid);
+        $list = $this->utility->getList($uuid);
 
         // Find the Subscriber
         $subs = $list->binarySubs()->whereEmail($email)->first();
@@ -108,7 +108,7 @@ class SubsController extends Controller
      */
     public function destroy($uuid, $email)
     {
-        $subs = $this->variables->getList($uuid)->binarySubs()->whereEmail($email)->first()->delete();
+        $subs = $this->utility->getList($uuid)->binarySubs()->whereEmail($email)->first()->delete();
 
         return redirect()->route('subs.list.show', $uuid);
 

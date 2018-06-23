@@ -8,7 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Models\BinaryCampaigns;
-use App\Services\{VariableService, EmailService};
+use App\Services\{UtilityService, EmailService};
 
 class SendEmail implements ShouldQueue
 {
@@ -28,12 +28,12 @@ class SendEmail implements ShouldQueue
     /**
      * Execute the job.
      *
-     * @return void
+     * @return void 
      */
-    public function handle(EmailService $emailService, VariableService $variables)
+    public function handle(EmailService $emailService, UtilityService $utility)
     {
         $campaign = BinaryCampaigns::whereUuid($this->uuid)->first();
-        $members = $variables->getListMembers($this->uuid);
+        $members = $utility->getListMembers($this->uuid);
 
         if (isset($members)) {
             $campaign->update([

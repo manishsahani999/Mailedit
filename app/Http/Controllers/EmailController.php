@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\{EmailService, VariableService};
+use App\Services\{EmailService, UtilityService};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\{TestMail, DefaultMail};
@@ -13,10 +13,10 @@ use App\Jobs\SendEmail;
 class EmailController extends Controller
 {
 
-    public function __construct(EmailService $emailService, VariableService $variables)
+    public function __construct(EmailService $emailService, UtilityService $utility)
     {
         $this->emailService = $emailService;
-        $this->variables = $variables;
+        $this->utility = $utility;
     }
 
     
@@ -106,7 +106,7 @@ class EmailController extends Controller
     public function test(Request $request, $slug, $uuid)
     {
         // find campaign
-        $campaign = $this->variables->getCampaign($slug, $uuid); 
+        $campaign = $this->utility->getCampaign($slug, $uuid); 
         
         // Campaign Data
         $data = [

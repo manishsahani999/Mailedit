@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSubsList;
 use Illuminate\Http\Request;
-use App\Services\VariableService;
+use App\Services\UtilityService;
 
 class SubsListController extends Controller
 {
-    public function __construct(VariableService $variables)
+    public function __construct(UtilityService $utility)
     {
-        $this->variables = $variables;
+        $this->utility = $utility;
     }
 
     /**
@@ -51,7 +51,7 @@ class SubsListController extends Controller
     public function show($uuid)
     {
 //        find the list
-        $list = $this->variables->getList($uuid);;
+        $list = $this->utility->getList($uuid);;
 
 //        find all subs
         $subs = $list->binarySubs()->get();
@@ -90,7 +90,7 @@ class SubsListController extends Controller
     public function update(StoreSubsList $request, $uuid)
     {
 //        find old list and updating
-        $list = $this->variables->getList($uuid)->update($request->all());
+        $list = $this->utility->getList($uuid)->update($request->all());
 
 //        redirecting to index page
         return redirect()->route('subs.list.index');
@@ -105,7 +105,7 @@ class SubsListController extends Controller
     public function destroy($uuid)
     {
 //        find the list and deleting
-        $list = $this->variables->getList($uuid)->delete();
+        $list = $this->utility->getList($uuid)->delete();
 
 //        return to index page
         return redirect()->route('subs.list.index');

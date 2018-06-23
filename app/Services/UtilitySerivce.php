@@ -4,7 +4,7 @@ namespace App\Services;
 use App\Models\BinaryCampaigns;
 
 
-class VariableService
+class UtilityService
 {
     /*
     * Find the brand 

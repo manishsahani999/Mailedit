@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBrand;
 use Illuminate\Http\Request;
 use App\Models\BinaryBrand;
-use App\Services\VariableService;
+use App\Services\UtilityService;
 
 class BrandController extends Controller
 {
     
 
-    public function __construct(VariableService $variables)
+    public function __construct(UtilityService $utility)
     {
-        $this->variables = $variables;
+        $this->utility = $utility;
     }
 
     /**
@@ -77,10 +77,10 @@ class BrandController extends Controller
     public function show($slug)
     {
         // find the brand
-        $brand = $this->variables->getBrand($slug);
+        $brand = $this->utility->getBrand($slug);
 
         // All Campaigns
-        $campaigns = $this->variables->getLatestCampaigns($slug);
+        $campaigns = $this->utility->getLatestCampaigns($slug);
 
         return view('pages.brand.show', [
             'brand' => $brand,
@@ -96,7 +96,7 @@ class BrandController extends Controller
      */
     public function edit($slug)
     {
-        $brand = $this->variables->getBrand($slug);
+        $brand = $this->utility->getBrand($slug);
         
         return view('pages.brand.edit', [
             'brand' => $brand
@@ -126,7 +126,7 @@ class BrandController extends Controller
         ];
 
         // updating
-        $this->variables->getBrand($slug)->update($data);
+        $this->utility->getBrand($slug)->update($data);
 
         // Session Message
         $request->session()->flash('success', 'Brand Updated successfully');
