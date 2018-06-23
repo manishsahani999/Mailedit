@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Models\BinaryCampaigns;
 use App\Services\{UtilityService, EmailService};
+use Carbon\Carbon;
 
 class SendEmail implements ShouldQueue
 {
@@ -30,23 +31,46 @@ class SendEmail implements ShouldQueue
      *
      * @return void 
      */
-    public function handle(EmailService $emailService, UtilityService $utility)
+    public function handle(UtilityService $utility)
     {
-        $campaign = BinaryCampaigns::whereUuid($this->uuid)->first();
-        $members = $utility->getListMembers($this->uuid);
 
-        if (isset($members)) {
-            $campaign->update([
-                'recipients_count' => count($members),
-                'status'           => 'sending' 
-            ]);
-            foreach ($members as $member ) {
-                $emailService->send($member, $campaign); 
-            }
-            $campaign->update([
-                'status' => 'sent'
-            ]);
+        if($this->validateList())
+        {
+        $no_of_members = count($members);
+
+        $limit = (int)config('settings.limit');
+        $no_of_batches = $no_of_members/$limit;
+        $left_subs = $no_of_members%$limit;
+
+        if($no_of_batches == 0)
+            $no_of_batches++;
+
+        $start= 0;
+        $end = $limit;
+        $time = Carbon::now()->addSeconds(0);
+        for ($i = 0; $i < $no_of_batches; $j++ ) {
+            $subscribers = array_slice($member, $start, $end);
+            dispatch(new SendCampaginBatch($subscribers, $uuid))->delay($time);
+            $start = $end;
+            $end = $end + $limit;
+
+            $time->addSeconds(config('settings.jobDelayTime'));
+        }
+        
+        $last = $no_of_members - 1;
+        $subscribers = array_slice($member, $end, $last);
         }
 
+
+    }
+
+    public function validateList()
+    {
+        $members = $utility->getListMembers($this->uuid);
+
+        if(count($members) == 0)
+            return false;
+        else
+            return $members;
     }
 }

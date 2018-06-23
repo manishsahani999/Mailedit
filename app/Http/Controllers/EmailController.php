@@ -137,6 +137,5 @@ class EmailController extends Controller
         dispatch(new SendEmail($uuid));
     
         return redirect('home');
-
     }
 }
