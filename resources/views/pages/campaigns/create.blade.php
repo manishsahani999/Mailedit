@@ -13,9 +13,9 @@
                 <h2 class="inline-pc">{{ $brand->brand_name }}</h2>
                 <h5 class="inline-pc"> / New Campaign</h5>
                 <div class="mt-1">
-                    <span>You can design, schedule, and send a campaign.</span>
+                    <span>lorem some quote here lorem.</span>
                 </div>
-                @include('components/sessions')
+                @include('components.sessions')
             </div>
             <div class="home-body">
                 <span id="body-tab">Campaign info</span>
@@ -76,18 +76,7 @@
                                            value="{{ old('reply_to') ? old('reply_to') : $brand->reply_to }}"
                                            name="reply_to">
                         </div>
-                    </div>
-                    <!-- Plain text -->
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">
-                            <h5>Plain text</h5>
-                        </label>
-                        <div class="col-sm-6">
-                            <textarea class="form-control" name="text" id="" rows="6">
-                                {{ old('text') }}
-                            </textarea>
-                        </div>
-                    </div>  
+                    </div> 
                     <!-- Allowed files -->
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
@@ -130,37 +119,6 @@
                     </div>
                     
                 </div>
-                <!-- campaign outer -->
-                <span id="body-tab">Email Design</span>
-                <hr class="mt-0">
-                <!-- campaign outer -->
-                <div class="create-campaign-outer">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">
-                            <h5>Select template</h5> 
-                        </label>
-                        <div class="col-sm-6">
-                            <select class="form-control" id="template-select">
-                                <option>Select template</option>
-                                @foreach($templates as $template)
-                                <option value="{{ $template->id }}">
-                                    {{ $template->name }}
-                                </option>
-                                @endforeach
-                            </select>                                                    
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="form-group">
-                        <label for="">
-                            <h5>Design a new template</h5>
-                        </label>
-                        <textarea name="html" id="summernote" class="textarea">
-                            {!! (old('html')) ? old('html') : '' !!}
-                        </textarea>
-                    </div>
-                </div>
-                <!-- campaign outer ends -->
             </div>
             <!-- wrap ends -->
         </div>          
@@ -169,33 +127,5 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#summernote').summernote({
-                placeholder: 'Write something ',
-                tabsize: 2,
-                height: 400,
-                minHeight: null,             // set minimum height of editor
-                maxHeight: null,             // set maximum height of editor
-                dialogsInBody: true,
-            });
-
-            $('#template-select').on('change', function (e) {
-                var optionSelected = $("option:selected", this);
-                var id = this.value;
-                $.ajax({
-                    type: "GET",
-                    url: '/templates/'+id+'/get',
-                    success: function(data) {
-                        if ((data.error)) {
-                            console.log(error);
-                        }
-                        $("#summernote").summernote("code", data.content);
-                    }
-                });
-            });
-
-        });
-    </script>
+    
 @endsection

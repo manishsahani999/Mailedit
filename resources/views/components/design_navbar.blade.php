@@ -5,13 +5,16 @@
     </div>
     <ul class="navbar-nav ml-auto">
         <li class="navbar-item">
-            <a href="{{ route('brand.show', $brand->slug) }}" class="btn bt">go back</a>
+            <a href="{{ route('brand.show', $brand->slug) }}" class="btn bt"> Go back all Campaigns</a>
+        </li>
+        <li class="navbar-item">
+            <a class="btn btn-warning bt" href="#">Edit info</a>
         </li>
         <li class="navbar-item ml-1">
-            <button class="btn btn-white bt" name="status" value="draft">Save as draft</button>
+            <button class="btn btn-white bt" name="draft">Save as draft</button>
         </li>
         <li class="navbar-item ml-1">
-            <button class="btn btn-primary bt" name="status" value="scheduled">Design Campaign and send</button>
+            <button class="btn btn-primary bt" name="scheduled">Schedule or send</button>
         </li>
     </ul>
 </nav>

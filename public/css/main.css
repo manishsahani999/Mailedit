@@ -131,7 +131,6 @@
     text-decoration: none !important;
 }
 
-
 .n-col-1 {
     padding: 1em 2em;
 }
@@ -197,6 +196,22 @@
 
 .btn-template:hover {
     background-color: #31978c;
+}
+
+.bb-gray {
+    border-bottom: 2px solid #bdb7b736;
+}
+
+.n-nav-item {
+    padding: 0;
+}
+
+.n-nav-link {
+    padding: 1em 2em;
+}
+
+#test-send-icon {
+    width: 7em;
 }
 
 @media only screen and (max-width: 780px) {

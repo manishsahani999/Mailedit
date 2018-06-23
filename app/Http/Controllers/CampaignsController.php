@@ -26,13 +26,9 @@ class CampaignsController extends Controller
     {
         //  brand
         $brand = $this->utility->getBrand($slug);
-
-        //  All templates
-        $templates = $this->utility->getAllUserTemplates();
         
         return view('pages.campaigns.create', [
             'brand' => $brand,
-            'templates' => $templates
         ]);
     }
 
@@ -54,11 +50,59 @@ class CampaignsController extends Controller
         $request->session()->flash('success', 'Campaign created successfully');
 
         // redirecting to show route
-        return redirect()->route('campaign.show', [
-            'slug' => $slug,
-            'uuid' => $campaign->uuid
-        ]);
+        if ($request->status == 'draft') {
+            return redirect()->route('brand.show', [
+                'slug' => $slug
+            ]);
+        } else {
+            return redirect()->route('campaign.content.create', [
+                'slug' => $slug,
+                'uuid' => $campaign->uuid
+            ]);
+        }
 
+    }
+
+    public function content($slug, $uuid)
+    {
+        // find brand
+        $brand = $this->utility->getBrand($slug);        
+
+        // find campaign
+        $campaign = $this->utility->getCampaign($slug, $uuid);
+
+        //  All templates
+        $templates = $this->utility->getAllUserTemplates();
+
+        // redirecting
+        return view('pages.campaigns.content', [
+            'brand'     => $brand,
+            'campaign'  => $campaign,
+            'templates' => $templates
+        ]);
+    }
+
+    public function contentStore(Request $request, $slug, $uuid)
+    {
+        // find brand
+        $brand = $this->utility->getBrand($slug);        
+
+        // find campaign
+        $campaign = $this->utility->getCampaign($slug, $uuid)->update([
+            'html' => (isset($request->html)) ? $request->html : null,
+            'text' => (isset($request->text)) ? $request->text : null
+        ]);
+        
+        // redirecting to show route
+        if ($request->has('draft')) {
+            return redirect()->route('brand.show', $brand->slug);
+        }
+        else {
+            return redirect()->route('campaign.show', [
+                'slug' => $slug,
+                'uuid' => $uuid
+            ]);
+        }        
     }
 
     /**

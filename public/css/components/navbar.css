@@ -15,10 +15,13 @@
     font-family: 'Nanum Gothic', sans-serif;    
 }
 
-.active{
+.active, .is-active{
     border-bottom: 3px solid #64b5f6;   
 }
 
+.active.show {
+    border-bottom: 0px;
+}
 .nav-item:hover {
     background-color: #bdb7b736;
 }
@@ -46,3 +49,4 @@ secondary navbar / campaign navbar
     padding: 1em;
     border-bottom: 2px solid #bdb7b736;;
 }
+
