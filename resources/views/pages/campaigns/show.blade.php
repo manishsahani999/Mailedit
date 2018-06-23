@@ -112,17 +112,24 @@
                             <label for="">Select Time</label>
                             <input type='time' name="time" class="form-control" required/>
                         </div>
-                        <button class="btn btn-primary bt">Schedule</button>
+                        <div class="form-group">
+                            <button class="btn btn-primary bt">Schedule</button>
+                        </div>
                     </form> 
+                    <form action="{{ route('email.send', $campaign->uuid) }}" method="get">
+                    @csrf
+                        <div class="form-group m-t-1">
+                            <button class="btn btn-dark bt">Send now</button>
+                        </div>
+                    </form>
                 </div>
                 <div class="col-sm-8">
                     <h5>Preview</h5>
                     <div class="border template m-b-1">
                             {!! $campaign->html !!}
-                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>                
 @endsection

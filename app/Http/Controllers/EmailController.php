@@ -134,7 +134,7 @@ class EmailController extends Controller
      */
     public function jobsTest($uuid)
     {
-        $this->dispatch(new SendEmail($uuid));
+        dispatch(new SendEmail($uuid));
     
         return redirect('home');
 
