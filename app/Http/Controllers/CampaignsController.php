@@ -50,7 +50,7 @@ class CampaignsController extends Controller
         $request->session()->flash('success', 'Campaign created successfully');
 
         // redirecting to show route
-        if ($request->status == 'draft') {
+        if (!$request->has('content')) {
             return redirect()->route('brand.show', [
                 'slug' => $slug
             ]);

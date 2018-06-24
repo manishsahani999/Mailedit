@@ -13,15 +13,18 @@ class SendCampaignBatch implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    protected $campaign;
+
+    protected $subscribers;
     /**
      * Create a new job instance. 
      *
      * @return void
      */
-    public function __construct($subscribers, $uuid)
+    public function __construct($subscribers, $campaign)
     {
-        $this->uuid = $uuid;
         $this->subscribers = $subscribers;
+        $this->campaign = $campaign;
     }
 
     /**
@@ -31,8 +34,6 @@ class SendCampaignBatch implements ShouldQueue
      */
     public function handle(EmailService $emailService)
     {
-        $campaign = BinaryCampaigns::whereUuid($this->uuid)->first();
-
         $campaign->update(['status' => 'sending' ]);
 
         foreach($subscribers as $subs)

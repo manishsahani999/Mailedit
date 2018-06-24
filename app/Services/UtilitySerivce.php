@@ -36,7 +36,7 @@ class UtilityService
             'description'   => $data['description'],
             'html'          => (isset($data['html'])) ? $data['html']: null,
             'text'          => (isset($data['text'])) ? $data['text']: null,
-            'status'        => $data['status'],
+            'status'        => (isset($data['status'])) ? $data['status'] : 'draft',
             'allowed_files' => $data['allowed_files'],
             'query_string'  => (isset($data['query_string'])) ? $data['query_string']: null,
             'brand_logo'    => (isset($data['brand_logo'])) ? $data['brand_log']: null,

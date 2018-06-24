@@ -6,6 +6,7 @@ use App\Http\Requests\StoreBrand;
 use Illuminate\Http\Request;
 use App\Models\BinaryBrand;
 use App\Services\UtilityService;
+use Session;
 
 class BrandController extends Controller
 {
@@ -132,7 +133,7 @@ class BrandController extends Controller
         $request->session()->flash('success', 'Brand Updated successfully');
 
         // redirecting
-        return redirect()->route('home');
+        return redirect()->route('brand.show', $slug);
     }
 
     /**
@@ -141,8 +142,12 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        //
+        $this->utility->getBrand($slug)->delete();
+
+        Session::flash('success', 'Brand deleted successfuly');
+
+        return redirect()->route('brand.index');
     }
 }

@@ -75,7 +75,7 @@
             </form>
 
             <!-- add lists -->
-            <span id="body-tab">Add Recipients</span>
+            <span id="body-tab">Add Recipients </span>
             <hr class="mt-0">
             
             <div class="row m-t-2 b-t-3">

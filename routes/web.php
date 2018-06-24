@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('brands/{slug}', 'BrandController@show')->name('brand.show');
     Route::get('brands/{slug}/edit', 'BrandController@edit')->name('brand.edit');
     Route::put('brands/{slug}', 'BrandController@update')->name('brand.update');
+    Route::delete('brand/{slug}', 'BrandController@destroy')->name('brand.destroy');
 
 //    campaigns routes
     Route::get('brands/{slug}/new-campaign', 'CampaignsController@create')->name('campaign.create');

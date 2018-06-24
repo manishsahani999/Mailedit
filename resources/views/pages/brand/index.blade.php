@@ -46,7 +46,11 @@
                         <a href="{{ route('brand.edit', $brand->slug) }}" class="btn btn-warning bt">Edit</a>
                     </td>
                     <td>
-                        <a href="" class="btn btn-danger">Delete</a>
+                        <form action="{{ route('brand.destroy', $brand->slug) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger bt">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

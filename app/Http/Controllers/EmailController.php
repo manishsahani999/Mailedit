@@ -139,8 +139,13 @@ class EmailController extends Controller
         dispatch(new SendEmail($uuid));
         
         // Session Message
-
         Session::flash('success', 'Sending Campaign');
         return redirect()->back();
+
+        // $list = $this->utility->getListMembers($uuid);
+        // $subscribers = array_slice($list, 0, 2);
+
+        // return $subscribers;
+        
     }
 }

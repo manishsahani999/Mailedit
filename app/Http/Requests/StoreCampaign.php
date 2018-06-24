@@ -30,7 +30,6 @@ class StoreCampaign extends FormRequest
             'reply_to'      => 'required',
             'title'         => 'required',
             'description'   => 'required',
-            'status'        => 'required',
         ];
     }
 }

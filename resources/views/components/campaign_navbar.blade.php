@@ -11,7 +11,7 @@
             <button class="btn btn-white bt" name="status" value="draft">Save as draft</button>
         </li>
         <li class="navbar-item ml-1">
-            <button class="btn btn-primary bt" name="status" value="scheduled">Design Campaign and send</button>
+            <button class="btn btn-primary bt" name="content">Design Campaign and send</button>
         </li>
     </ul>
 </nav>
