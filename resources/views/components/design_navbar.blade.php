@@ -8,7 +8,7 @@
             <a href="{{ route('brand.show', $brand->slug) }}" class="btn bt"> Go back all Campaigns</a>
         </li>
         <li class="navbar-item">
-            <a class="btn btn-warning bt" href="#">Edit info</a>
+            <a class="btn btn-warning bt" href="{{ route('campaign.edit', [$brand->slug, $campaign->uuid]) }}">Edit info</a>
         </li>
         <li class="navbar-item ml-1">
             <button class="btn btn-white bt" name="draft">Save as draft</button>

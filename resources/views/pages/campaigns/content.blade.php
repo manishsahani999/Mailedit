@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        <textarea class="form-control form-control-lg" name="text" id="" rows="15">{{ old('text') }}</textarea>
+                        <textarea class="form-control form-control-lg" name="text" id="" rows="15">{{ ($campaign->text) ? $campaign->text : '' }}</textarea>
                     </div>
                 </div>
             </div>

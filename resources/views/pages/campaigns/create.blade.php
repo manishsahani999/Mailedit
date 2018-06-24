@@ -1,8 +1,5 @@
 @extends('layouts.app')
 
-@section('links')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
-@endsection
 
 @section('content')
 <form action="{{ route('campaign.store', $brand->slug) }}" method="post">

@@ -9,6 +9,7 @@ use App\Mail\{TestMail, DefaultMail};
 use Carbon\Carbon;
 use App\Models\{BinaryEmail, BinaryCampaigns};
 use App\Jobs\SendEmail;
+use Session;
 
 class EmailController extends Controller
 {
@@ -136,7 +137,10 @@ class EmailController extends Controller
     {
 
         dispatch(new SendEmail($uuid));
-    
+        
+        // Session Message
+
+        Session::flash('success', 'Sending Campaign');
         return redirect()->back();
     }
 }

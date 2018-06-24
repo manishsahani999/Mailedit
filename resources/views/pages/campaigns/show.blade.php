@@ -5,8 +5,30 @@
 @enDsection
 
 @section('content')
+<nav class="navbar navbar-expand-lg sec-navbar navbar-light bg-light sticky-top">
+    <div class="navbar-item ml-5">
+        <img src="{{ asset('img/email_sec.png') }}" alt="">
+        <span class="ml-2">Let's get started</span>
+    </div>
+    <ul class="navbar-nav ml-auto">
+        <li class="navbar-item">
+            <a href="{{ route('brand.show', $brand->slug) }}" class="btn bt"> Go back all Campaigns</a>
+        </li>
+        <li class="navbar-item">
+            <a class="btn btn-warning bt" href="{{ route('campaign.edit', [$brand->slug, $campaign->uuid]) }}">Edit info</a>
+        </li>
+        <li class="navbar-item ml-1">
+            <a href="#schedule" class="btn btn-primary bt" name="draft">Schedule</a href="#schedule">
+        </li>
+        <li class="navbar-item ml-1">
+            <form action="{{ route('email.send', $campaign->uuid) }}" method="get">
+            @csrf
+                    <button class="btn btn-info bt">Send now</button>
+            </form>
+        </li>
+    </ul>
+</nav>
     <div class="wrap">
-
         <div class="home-header">
             <h2 class="inline-pc">{{ $brand->brand_name }}</h2>
             <h4 class="inline-pc mt-1">
@@ -52,9 +74,11 @@
             <span id="body-tab">Add Recipients</span>
             <hr class="mt-0">
             
-            <div class="row m-t-3 b-t-3">
+            <div class="row m-t-2 b-t-3">
                 <div class="col-sm-6">
                     <!-- add list form -->
+                    <span id="body-tab">Campaign List</span>
+                    <hr class="mt-0">
                     <form action="{{ route('campaign.remove.lists', [
                                             'slug' => $brand->slug,
                                             'uuid' => $campaign->uuid
@@ -74,6 +98,8 @@
                 </div>
                 <div class="col-sm-6">
                     <!-- form for adding lists to Campaign -->
+                    <span id="body-tab">All List</span>
+                    <hr class="mt-0">
                     <form action="{{ route('campaign.add.lists', [
                             'slug' => $brand->slug, 
                             'uuid' => $campaign->uuid
@@ -86,7 +112,7 @@
                             @endforeach
                         </select>
                         </div>
-                        <button type="submit" class="btn bt btn-primary">Add List</button> 
+                        <button id="schedule" type="submit" class="btn bt btn-primary">Add List</button> 
                     </form>
                     <!-- form end -->
                 </div>
@@ -116,12 +142,6 @@
                             <button class="btn btn-primary bt">Schedule</button>
                         </div>
                     </form> 
-                    <form action="{{ route('email.send', $campaign->uuid) }}" method="get">
-                    @csrf
-                        <div class="form-group m-t-1">
-                            <button class="btn btn-dark bt">Send now</button>
-                        </div>
-                    </form>
                 </div>
                 <div class="col-sm-8">
                     <h5>Preview</h5>

@@ -208,6 +208,9 @@ class CampaignsController extends Controller
      */
     public function update(StoreCampaign $request, $slug, $uuid)
     {
+        // data collection
+        $data = $this->utility->campaignRequest($request->all());
+        
         //  find brand
         $brand = $this->utility->getBrand($slug);
 
@@ -217,11 +220,17 @@ class CampaignsController extends Controller
         // Session message
         $request->session()->flash('success', 'Campaign Updated successfully');
 
-        // return
-        return redirect()-> route('campaign.show', [
-            'slug' => $slug,
-            'uuid' => $uuid
-        ]);
+        // redirecting to show route
+        if ($request->status == 'draft') {
+            return redirect()->route('brand.show', [
+                'slug' => $slug
+            ]);
+        } else {
+            return redirect()->route('campaign.content.create', [
+                'slug' => $slug,
+                'uuid' => $uuid
+            ]);
+        }
     }
 
     /**
