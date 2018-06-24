@@ -21,10 +21,14 @@
             <a href="#schedule" class="btn btn-primary bt" name="draft">Schedule</a href="#schedule">
         </li>
         <li class="navbar-item ml-1">
+            @if(count($campaign->binarySubsList) == 0)
+                <button class="btn btn-info bt" disabled>Send now</button>
+            @else
             <form action="{{ route('email.send', $campaign->uuid) }}" method="get">
             @csrf
                     <button class="btn btn-info bt">Send now</button>
             </form>
+            @endif
         </li>
     </ul>
 </nav>
@@ -85,7 +89,7 @@
                                     ]) }}" method="post">
                     @csrf
                     <div class="form-group">
-                        <select class="custom-select" name="lists" multiple>
+                        <select class="custom-select" id="campaign-lists" name="lists" multiple>
                             @foreach($campaign->binarySubsList as $list)
                                 <option value="{{ $list->id }}">{{ $list->name }} </option>
                             @endforeach
@@ -155,7 +159,6 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('dist/js/bulma-calendar.min.js') }}"></script>
     <script>
         
     </script>
