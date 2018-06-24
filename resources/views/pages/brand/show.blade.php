@@ -77,12 +77,20 @@
                                                 n-lb-sent
                                             @endif">{{ $campaign->status }}</label>
                                     </div>
-                                    <div class="col-sm-3 offset-sm-1 pt-3">
+                                    <div class="col-sm-1 offset-sm-1 pt-3">
                                         <a href="{{ route('campaign.edit', [
                                                 'slug' => $brand->slug, 
                                                 'uuid' => $campaign->uuid
                                             ]) }}" class="btn n-lb-draft bt">Edit</a>
-                                        <a href="" class="btn n-lb-cancel bt">Delete</a>
+                                    </div>
+                                    <div class="col-sm-1 pt-3">
+                                        <form action="{{ route('campaign.destroy', [
+                                                'slug' => $brand->slug,
+                                                'uuid' => $campaign->uuid]) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn n-lb-cancel bt">Delete</button>
+                                        </form>
                                     </div>
                                 </div>
                                 <hr>

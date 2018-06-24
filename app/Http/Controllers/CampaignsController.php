@@ -230,9 +230,13 @@ class CampaignsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug, $uuid)
     {
-        //
+        // find the list and deleting
+        $list = $this->utility->getCampaign($slug ,$uuid)->delete();
+
+        // return to index page
+        return redirect()->route('brand.show', $slug);
     }
 
     /**
