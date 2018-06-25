@@ -25,3 +25,7 @@ html, body {
 a {
     text-decoration: none !important;
 }
+
+.wrap {
+    min-height: 100%;
+}

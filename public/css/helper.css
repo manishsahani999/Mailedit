@@ -116,3 +116,10 @@
     display: inline;
 }
 
+.t-lg {
+    color: lightgray !important;
+}
+
+.h-2 {
+    height: 2em;
+}

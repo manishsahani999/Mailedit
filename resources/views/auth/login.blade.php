@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="wrap">
-        <div class="row">
+        <div class="row h-100">
         <div class="col-sm-4 text-center" id="login-left">
             <div>
                 <img class="m-t-2" id="mailman" src="{{ asset('img/postman.svg') }}" alt="">
