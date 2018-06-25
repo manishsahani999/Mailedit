@@ -61,7 +61,7 @@ class SendEmail implements ShouldQueue
                 
                 $start = $end;
                 $end += $limit;
-                $time = $time->addMinutes(10);
+                $time = $time->addMinutes(config('settings.jobDelayTime'));
             }
 
             $subscribers = array_slice($list, $end, $count);
