@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\{BinaryBrand, BinaryCampaigns};
 use Carbon\Carbon;
 use App\Services\UtilityService;
-use Toastr;
 
 class CampaignsController extends Controller
 {
@@ -67,7 +66,7 @@ class CampaignsController extends Controller
         $campaign = $this->utility->getBrand($slug)->binaryCampaign()->create($data);
 
         // Session Message
-        $request->session()->flash('success', 'Campaign created successfully');
+        Toastr()->success('Campaign Created', $campaign->name, ["positionClass" => "toast-bottom-right"]);
 
         // redirecting to show route
         if (!$request->has('content')) {
@@ -112,6 +111,8 @@ class CampaignsController extends Controller
             'html' => (isset($request->html)) ? $request->html : null,
             'text' => (isset($request->text)) ? $request->text : null
         ]);
+
+        Toastr()->info('Campaign Designed', $this->utility->getCampaign($slug, $uuid)->name, ["positionClass" => "toast-bottom-right"]);
         
         // redirecting to show route
         if ($request->has('draft')) {
@@ -165,7 +166,7 @@ class CampaignsController extends Controller
         $campaign = $this->utility->getCampaign($slug, $uuid)->binarySubsList()->attach($request->lists);
 
         // Session Message
-        Toastr::success('List Added', 'Title', ["positionClass" => "toast-bottom-right"]);
+        Toastr()->success('List Added', $campaign->name, ["positionClass" => "toast-bottom-right"]);
 
         //        redirecting to show route
         return redirect()->route('campaign.show', [
@@ -189,7 +190,7 @@ class CampaignsController extends Controller
         $campaign = $this->utility->getCampaign($slug, $uuid)->binarySubsList()->detach($request->lists);
 
         // Session Message
-        Toastr::success('List Removed', 'Title', ["positionClass" => "toast-bottom-right"]);
+        Toastr()->success('List Removed', $campaign->name, ["positionClass" => "toast-bottom-right"]);
 
         //        redirecting to show route
         return redirect()->route('campaign.show', [
@@ -238,7 +239,7 @@ class CampaignsController extends Controller
         $campaign = $this->utility->getCampaign($slug, $uuid)->update($data);
 
         // Session message
-        $request->session()->flash('success', 'Campaign Updated successfully');
+        Toastr()->info('Campaign Updated', 'Campaign', ["positionClass" => "toast-bottom-right"]);
 
         // redirecting to show route
         if ($request->status == 'draft') {
@@ -263,6 +264,8 @@ class CampaignsController extends Controller
     {
         // find the list and deleting
         $list = $this->utility->getCampaign($slug ,$uuid)->delete();
+
+        Toastr()->error('Campaign Deleted', 'Campaign', ["positionClass" => "toast-bottom-right"]);
 
         // return to index page
         return redirect()->route('brand.show', $slug);
@@ -289,7 +292,7 @@ class CampaignsController extends Controller
         $campaign->update(['status' => 'scheduled', 'starts_at' => $campaign_starts_at]);
 
         // Session message
-        $request->session()->flash('success', 'Campaign Scheduled successfully');
+        Toastr()->info('Campaign Scheduled', 'Campaign', ["positionClass" => "toast-bottom-right"]);        
         
         // returning to show page
         return redirect()->route('campaign.show', [

@@ -24,7 +24,7 @@ class StoreBrand extends FormRequest
     public function rules()
     {
         return [
-            'brand_name' => 'required',
+            'brand_name' => 'required|unique:binary_brands',
             'from_name' => 'required',
             'from_email' => 'required',
             'reply_to' => 'required',

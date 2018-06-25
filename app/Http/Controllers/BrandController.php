@@ -63,7 +63,7 @@ class BrandController extends Controller
         $new = auth()->user()->binaryBrand()->create($data);
 
         // Session Message
-        $request->session()->flash('success', 'Brand Created successfully');
+        Toastr()->success('Created Succesfully', $data['brand_name'], ["positionClass" => "toast-bottom-right"]);        
 
         // redirecting to show page
         return redirect()->route('brand.show', $new->slug);
@@ -130,10 +130,10 @@ class BrandController extends Controller
         $this->utility->getBrand($slug)->update($data);
 
         // Session Message
-        $request->session()->flash('success', 'Brand Updated successfully');
+        Toastr()->info('Updated Succesfully', $data['brand_name'], ["positionClass" => "toast-bottom-right"]);    
 
         // redirecting
-        return redirect()->route('brand.show', $slug);
+        return redirect()->route('brand.index');
     }
 
     /**
@@ -146,7 +146,7 @@ class BrandController extends Controller
     {
         $this->utility->getBrand($slug)->delete();
 
-        Session::flash('success', 'Brand deleted successfuly');
+        Toastr()->error('Deleted Successfully', 'Brand', ["positionClass" => "toast-bottom-right"]);        
 
         return redirect()->route('brand.index');
     }
