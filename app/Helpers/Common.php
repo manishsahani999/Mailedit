@@ -43,6 +43,36 @@ if (!function_exists('array_compare_assoc')) {
     }
 }
 
+if(!function_exists('injectLinkTracker')) {
+    
+    function injectLinkTracker($html, $uuid, $trackLink)
+    {
+        $html = preg_replace_callback("/(<a[^>]*href=['\"])([^'\"]*)/",
+                function($matches) use($uuid, $trackLink)
+                {
+                    if(strpos($matches[2], 'mailto:') !== false) {
+                        return $matches[0];
+                    } else {
+                        if (empty($matches[2])) {
+                            $url = app()->make('url')->to('/');
+                        } else {
+                            $url = str_replace('&amp;', '&', $matches[2]);
+                        }
+
+                        $temp = config('settings.app.frontend_host_url').route($trackLink,
+                        [
+                            str_replace("/","$",base64_encode($url)),
+                            $uuid
+                        ], false); 
+
+                        return $matches[1].$temp;     
+                    }
+                },
+                $html);
+    
+        return $html;
+    }
+}
 
 if (!function_exists('array_group_by')) {
     /**

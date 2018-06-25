@@ -7,7 +7,8 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Models\BinaryCampaigns;
+use App\Services\{UtilityService, EmailService};
+use Log;
 
 class SendCampaignBatch implements ShouldQueue
 {
@@ -34,14 +35,14 @@ class SendCampaignBatch implements ShouldQueue
      */
     public function handle(EmailService $emailService)
     {
-        $campaign->update(['status' => 'sending' ]);
+        $this->campaign->update(['status' => 'sending' ]);
 
-        foreach($subscribers as $subs)
+        foreach($this->subscribers as $subs)
         {
-            $emailService->send($subs, $campaign);
+            $emailService->send($subs, $this->campaign);
         }
         
-        $campaign->update(['status' => 'sent']);
+        $this->campaign->update(['status' => 'sent']);
         
     }
 }

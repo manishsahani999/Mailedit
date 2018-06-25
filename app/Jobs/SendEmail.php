@@ -11,13 +11,13 @@ use App\Models\BinaryCampaigns;
 use App\Services\{UtilityService, EmailService};
 use Carbon\Carbon;
 use App\Jobs\SendCampaignBatch;
+use Log;
 
 class SendEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $uuid;
-
     protected $list;
     /**
      * Create a new job instance.
@@ -41,7 +41,7 @@ class SendEmail implements ShouldQueue
         $campaign = BinaryCampaigns::whereUuid($this->uuid)->firstOrFail();
 
         
-        $count = count($members);
+        $count = count($list);
         $limit = config('settings.limit');
 
         $no_of_batches = $count/$limit;
@@ -68,50 +68,6 @@ class SendEmail implements ShouldQueue
             dispatch(new SendCampaignBatch($subscribers, $campaign))->delay($time);
         }
 
-        // for($i=0; $i<$no_of_batches; $i++)
-        // {
-        //     $subscribers = array_slice($members, $start, $end);
-        //     dispatch(new SendCampaginBatch($subscribers, $uuid))->delay($time);
-
-        //     $time->addMinutes(3);
-        //     $start = $end + 1;
-        //     $end  += $limit;
-        // }
-
-        // $no_of_members = count($members);
-
-        // $limit = (int)config('settings.limit');
-        // $no_of_batches = $no_of_members/$limit;
-        // $left_subs = $no_of_members%$limit;
-
-        // if($no_of_batches == 0)
-        //     $no_of_batches++;
-
-        // $start= 0;
-        // $end = $limit;
-        // $time = Carbon::now()->addSeconds(0);
-        // for ($i = 0; $i < $no_of_batches; $j++ ) {
-        //     $subscribers = array_slice($members, $start, $end);
-        //     dispatch(new SendCampaginBatch($subscribers, $uuid))->delay($time);
-        //     $start = $end;
-        //     $end = $end + $limit;
-
-        //     $time->addSeconds(config('settings.jobDelayTime'));
-        // }
-        
-        // // $last = $no_of_members - 1;
-        // // $subscribers = array_slice($members, $end, $last);
-
-
     }
 
-    // public function validateList(UtilityService $utility)
-    // {
-    //     $members = $utility->getListMembers($this->uuid);
-
-    //     if(count($members) == 0)
-    //         return false;
-    //     else
-    //         return $members;
-    // }
 }
