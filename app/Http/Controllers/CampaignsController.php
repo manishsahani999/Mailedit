@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\{BinaryBrand, BinaryCampaigns};
 use Carbon\Carbon;
 use App\Services\UtilityService;
+use Toastr;
 
 class CampaignsController extends Controller
 {
@@ -29,6 +30,25 @@ class CampaignsController extends Controller
         
         return view('pages.campaigns.create', [
             'brand' => $brand,
+        ]);
+    }
+
+
+    /*
+    * Show the Campaign stats
+    *
+    */
+    public function stats($slug, $uuid)
+    {
+        // find brand
+        $brand = $this->utility->getBrand($slug);        
+
+        // find campaign
+        $campaign = $this->utility->getCampaign($slug, $uuid);
+
+        return view('pages.campaigns.stats', [
+           'brand'  => $brand,
+           'campaign' =>  $campaign
         ]);
     }
 
@@ -145,7 +165,7 @@ class CampaignsController extends Controller
         $campaign = $this->utility->getCampaign($slug, $uuid)->binarySubsList()->attach($request->lists);
 
         // Session Message
-        $request->session()->flash('success', 'List added successfully');
+        Toastr::success('List Added', 'Title', ["positionClass" => "toast-bottom-right"]);
 
         //        redirecting to show route
         return redirect()->route('campaign.show', [
@@ -169,7 +189,7 @@ class CampaignsController extends Controller
         $campaign = $this->utility->getCampaign($slug, $uuid)->binarySubsList()->detach($request->lists);
 
         // Session Message
-        $request->session()->flash('success', 'List removed successfully');
+        Toastr::success('List Removed', 'Title', ["positionClass" => "toast-bottom-right"]);
 
         //        redirecting to show route
         return redirect()->route('campaign.show', [

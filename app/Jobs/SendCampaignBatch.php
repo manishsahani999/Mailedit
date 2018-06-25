@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Services\{UtilityService, EmailService};
 use Log;
+use Carbon\Carbon;
 
 class SendCampaignBatch implements ShouldQueue
 {
@@ -35,14 +36,20 @@ class SendCampaignBatch implements ShouldQueue
      */
     public function handle(EmailService $emailService)
     {
-        $this->campaign->update(['status' => 'sending' ]);
+        $this->campaign->update([
+            'status' => 'sending',
+            'starts_at' => Carbon::now()
+        ]);
 
         foreach($this->subscribers as $subs)
         {
             $emailService->send($subs, $this->campaign);
         }
         
-        $this->campaign->update(['status' => 'sent']);
+        $this->campaign->update([
+            'status' => 'sent',
+            'ends_at' => Carbon::now()
+        ]);
         
     }
 }

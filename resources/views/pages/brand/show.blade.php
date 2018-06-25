@@ -77,11 +77,17 @@
                                                 n-lb-sent
                                             @endif">{{ $campaign->status }}</label>
                                     </div>
-                                    <div class="col-sm-1 offset-sm-1 pt-3">
+                                    <div class="col-sm-1 pt-3">
                                         <a href="{{ route('campaign.edit', [
                                                 'slug' => $brand->slug, 
                                                 'uuid' => $campaign->uuid
                                             ]) }}" class="btn n-lb-draft bt">Edit</a>
+                                    </div>
+                                    <div class="col-sm-1 pt-3 mr-1">
+                                        <a href="{{ route('campaign.stats', [
+                                                'slug' => $brand->slug, 
+                                                'uuid' => $campaign->uuid
+                                            ]) }}" class="btn btn-info bt">Stats</a>
                                     </div>
                                     <div class="col-sm-1 pt-3">
                                         <form action="{{ route('campaign.destroy', [

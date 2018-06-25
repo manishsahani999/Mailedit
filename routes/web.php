@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('brands/{slug}/campaign/{uuid}/edit', 'CampaignsController@edit')->name('campaign.edit');
     Route::put('brands/{slug}/campaign/{uuid}', 'CampaignsController@update')->name('campaign.update');
     Route::delete('brands/{slug}/campaign/{uuid}', 'CampaignsController@destroy')->name('campaign.destroy');
+    Route::get('brands/{slug}/campaign/{uuid}/stats', 'CampaignsController@stats')->name('campaign.stats');
 
 //    Scheduling a Camapign 
     Route::put('brands/{slug}/campaign/{uuid}/schedule', 'CampaignsController@storeSchedule')->name('campaign.schedule.store');

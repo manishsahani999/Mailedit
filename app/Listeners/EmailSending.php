@@ -5,6 +5,7 @@ namespace App\Listeners;
 use Illuminate\Mail\Events\MessageSending;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Log;
 
 class EmailSending
 {
