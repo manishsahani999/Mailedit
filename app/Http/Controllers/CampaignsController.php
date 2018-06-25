@@ -166,7 +166,7 @@ class CampaignsController extends Controller
         $campaign = $this->utility->getCampaign($slug, $uuid)->binarySubsList()->attach($request->lists);
 
         // Session Message
-        Toastr()->success('List Added', $campaign->name, ["positionClass" => "toast-bottom-right"]);
+        Toastr()->success('List Added', 'Campaign', ["positionClass" => "toast-bottom-right"]);
 
         //        redirecting to show route
         return redirect()->route('campaign.show', [
@@ -190,7 +190,7 @@ class CampaignsController extends Controller
         $campaign = $this->utility->getCampaign($slug, $uuid)->binarySubsList()->detach($request->lists);
 
         // Session Message
-        Toastr()->success('List Removed', $campaign->name, ["positionClass" => "toast-bottom-right"]);
+        Toastr()->success('List Removed', 'Campaign', ["positionClass" => "toast-bottom-right"]);
 
         //        redirecting to show route
         return redirect()->route('campaign.show', [

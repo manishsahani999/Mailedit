@@ -27,6 +27,7 @@ class EmailSending
      */
     public function handle(MessageSending $event)
     {
+        Log::info("Listern EmailSending");
         $message = $event->message; 
         $headers = $event->message->getHeaders();
         $uuid = $headers->get('X-Mailer-Click');
