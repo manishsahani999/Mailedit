@@ -27,12 +27,12 @@
                             <h4 class="mb-0 inline-pc">{{ $campaign->recipients_count }}</h4>
                         </div>
                         <div class="mb-2">
-                            <p class="inline-pc t-lg"><strong>Started at</strong></p>
-                            <h4 class="inline-pc">{{ (isset($campaign->starts_at)) ? $campaign->starts_at : 'Not started'  }}</h4>
+                            <p class="inline-pc t-lg"><strong>Ended at</strong></p>
+                            <h6 class="inline-pc">{{ (isset($campaign->starts_at)) ? $campaign->starts_at : 'Not Started'  }}</h6>
                         </div>
                         <div class="mb-2">
                             <p class="inline-pc t-lg"><strong>Ended at</strong></p>
-                            <h5 class="inline-pc">{{ (isset($campaign->ends_at)) ? $campaign->ends_at : 'Not ended yet'  }}</h5>
+                            <h6 class="inline-pc">{{ (isset($campaign->ends_at)) ? $campaign->ends_at : 'Not ended yet'  }}</h6>
                         </div>
                         <div class="mb-3">
                             
@@ -55,7 +55,7 @@
                         </div>
                     </div> 
                     <div class="row">
-                        <div class="col-sm-3 pt-5">
+                        <div class="col-sm-3 pt-5 pb-5">
                             <h4 class=" ml-4 mt-1">Click rate</h4>
                         </div>
                         <div class="col-sm-9">
@@ -64,7 +64,62 @@
                             <span class="r-slider-value">30 %</span>
                             </div>
                         </div>
-                    </div>  
+                    </div> 
+                    
+                    <span id="body-tab">Raw Data</span>
+                    <hr class="mt-0">
+                    <div class="n-table-wrap">
+                        <div class="n-table row">
+                            <div class="col-sm-1 n-col-1">
+                                <img class="n-col-icon" src="{{ asset('img/ppc.svg') }}" alt="">
+                            </div>
+                            <div class="col-sm-5 n-col-2 pt-3 ">
+                                <h5>
+                                    Emails delivered
+                                </h5>
+                            </div>
+                            <div class="col-sm-2 pt-2">
+                                <h2 class="t-l">{{ $campaign->emails->count() }}</h2>
+                            </div>
+                            <div class="col-sm-2 pt-2">
+                                <h3 class="ml-3 mb-0">8</h3>
+                                <span>No of Links</span>
+                            </div>
+                            <div class="col-sm-1 pt-3">
+                                <a href="{{ route('campaign.edit', [
+                                        'slug' => $brand->slug, 
+                                        'uuid' => $campaign->uuid
+                                    ]) }}" class="btn n-lb-draft bt">View All Links</a>
+                            </div>  
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="n-table-wrap">
+                        <div class="n-table row">
+                            <div class="col-sm-1 n-col-1">
+                                <img class="n-col-icon" src="{{ asset('img/ppc.svg') }}" alt="">
+                            </div>
+                            <div class="col-sm-5 n-col-2 pt-3 ">
+                                <h5>
+                                    Links Clicked
+                                </h5>
+                            </div>
+                            <div class="col-sm-2 pt-2">
+                                <h2 class="t-l">7877</h2>
+                            </div>
+                            <div class="col-sm-2 pt-2">
+                                <h3 class="ml-3 mb-0">8</h3>
+                                <span>No of Links</span>
+                            </div>
+                            <div class="col-sm-1 pt-3">
+                                <a href="{{ route('campaign.edit', [
+                                        'slug' => $brand->slug, 
+                                        'uuid' => $campaign->uuid
+                                    ]) }}" class="btn n-lb-draft bt">View All Links</a>
+                            </div>  
+                        </div>
+                        <hr>
+                    </div>
                 </div> 
                 </div>
             </div>

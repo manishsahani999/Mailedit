@@ -150,7 +150,7 @@ class EmailController extends Controller
     {
 
         $url = base64_decode(str_replace("$","/",$url));
-        $link = BinaryEmailLink::whereUrl($url)->first();
+        $link = BinaryEmailLink::where('binary_email_uuid', $uuid)->whereUrl($url)->first();
 
         if($link)
         {

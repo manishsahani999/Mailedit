@@ -81,6 +81,7 @@ class EmailService
         $email = $this->subscriber->emails()->create([
             'token' => bin2hex(random_bytes(32)),
             'binary_template_id' => 1,
+            'binary_campaign_id' => (isset($reference['id'])) ? $reference['id']: null,
             'scheduled_time' => Carbon::now(),
             'content' => json_encode($reference['html']),
             'status' => 'not_sent'

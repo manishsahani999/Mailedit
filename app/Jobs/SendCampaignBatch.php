@@ -38,7 +38,7 @@ class SendCampaignBatch implements ShouldQueue
     {
         $this->campaign->update([
             'status' => 'sending',
-            'starts_at' => Carbon::now()
+            'starts_at' => now()
         ]);
 
         foreach($this->subscribers as $subs)
@@ -48,7 +48,7 @@ class SendCampaignBatch implements ShouldQueue
         
         $this->campaign->update([
             'status' => 'sent',
-            'ends_at' => Carbon::now()
+            'ends_at' => now()
         ]);
         
     }
