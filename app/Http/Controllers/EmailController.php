@@ -154,14 +154,16 @@ class EmailController extends Controller
 
         if($link)
         {
-            return 1;
+            $link->clicks++;
+            $link->save();
+            return redirect($link->url);
         }
         else {
             $link = BinaryEmailLink::create([
                 'url' => $url,
                 'binary_email_uuid' => $uuid
             ]);
-            return $url;
+            return redirect($link->url);
         }
     }
 }
