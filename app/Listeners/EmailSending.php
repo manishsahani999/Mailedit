@@ -63,7 +63,7 @@ class EmailSending
                             $url = str_replace('&amp;', '&', $matches[2]);
                         }
 
-                        $temp = config('settings.app.frontend_host_url').'/email/'.$uuid.'/link/'.base64_encode($url);
+                        $temp = config('settings.app.frontend_host_url').'/email/'.$uuid.'/link/'.str_replace("/","$",base64_encode($url));
 
 
                         return $matches[1].$temp;     

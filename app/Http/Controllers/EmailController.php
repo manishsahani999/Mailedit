@@ -148,9 +148,11 @@ class EmailController extends Controller
     */
     public function linkTracker($uuid, $url)
     {
-        $link = BinaryEmailLink::whereUrl($url)->first();
-        $url = base64_decode($url);
-        return $url;
+        // $link = BinaryEmailLink::whereUrl($url)->first();
+
+        $url = str_replace("$","/",$url);
+
+        return base64_decode($url);
         if($link)
         {
             return 1;
