@@ -41,19 +41,16 @@ class EmailSending
         }
 
         if(isset($uuid) && !is_null($uuid)) {
-            Log::info("conditions set");
             if ($message->getContentType() === 'text/html' ||
                 ($message->getContentType() === 'multipart/alternative' && $message->getBody())
             ) {
                 $message->setBody($this->injectLinkTracker($message->getBody(), $uuid->getFieldBody()));
-                Log::info("url made");
             }
         }
     }
 
     public function injectLinkTracker($html, $uuid)
     {
-        Log::info("linktracker invoked");
         $html = preg_replace_callback("/(<a[^>]*href=['\"])([^'\"]*)/",
                 function($matches) use($uuid)
                 {
