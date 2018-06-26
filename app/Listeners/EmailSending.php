@@ -31,7 +31,6 @@ class EmailSending
         $message = $event->message; 
         $headers = $event->message->getHeaders();
         $uuid = $headers->get('X-Mailer-Click');
-        $trackLink = $headers->get('X-Mailer-Model');
 
         if(isset($uuid) && !is_null($uuid) && isset($trackLink) && !is_null($trackLink)) {
             if ($message->getContentType() === 'text/html' ||
@@ -67,23 +66,10 @@ class EmailSending
                             $url = str_replace('&amp;', '&', $matches[2]);
                         }
 
-                        Log::info('Match 2 = ',$matches[2]);
-                        Log::info('url = '.$url);
+                        $temp = config('settings.app.frontend_host_url').'/email/'.$uuid.'/link/'.str_replace("/","$",base64_encode($url));
 
 
-
-                        // $temp = config('settings.app.click_tracker').'/'.$trackLink.'/'.str_replace("/","$",base64_encode($url));
-
-                        // $temp = config('settings.app.frontend_host_url').route($trackLink,
-                        // [
-                        //     str_replace("/","$",base64_encode($url)),
-                        //     $uuid
-                        // ], false); 
-
-                        Log::info("url done");
-
-
-                        // return $matches[1].$temp;     
+                        return $matches[1].$temp;     
                     }
                 },
                 $html);
