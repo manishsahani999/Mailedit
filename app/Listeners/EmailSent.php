@@ -30,9 +30,7 @@ class EmailSent
     {
         Log::info("-------------EmailSent-------------");
         $headers = $event->message->getHeaders();
-        Log::info('Headers = '.$headers);
         $hash = $headers->get('X-Mailer-Click');
-        Log::info('Hash ='.$hash);
         if(isset($hash) && !is_null($hash)) {
             $email_uuid = $hash->getFieldBody();
 

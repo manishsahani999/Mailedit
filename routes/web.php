@@ -79,3 +79,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('templates/{id}/get', 'TemplateController@getContent')->name('template.get.content');
 
 });
+
+
+//  Tracking Routes
+
+    Route::get('email/{uuid}/link/{url}', 'EmailController@linkTracker')->name('email.link.track');
+    

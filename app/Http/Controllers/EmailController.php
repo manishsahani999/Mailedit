@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\{TestMail, DefaultMail};
 use Carbon\Carbon;
-use App\Models\{BinaryEmail, BinaryCampaigns};
+use App\Models\{BinaryEmail, BinaryCampaigns, BinaryEmailLink};
 use App\Jobs\SendEmail;
 use Session;
 
@@ -135,17 +135,30 @@ class EmailController extends Controller
      */
     public function jobsTest($uuid)
     {
-
         dispatch(new SendEmail($uuid));
         
         // Session Message
         Session::flash('success', 'Sending Campaign');
-        return redirect()->back();
+        return redirect()->back();        
+    }
 
-        // $list = $this->utility->getListMembers($uuid);
-        // $subscribers = array_slice($list, 0, 2);
-
-        // return $subscribers;
-        
+    /*
+    * takes email uuid and link url in base64_encoded form 
+    * @redirectes to url and increase the click counter
+    */
+    public function linkTracker($uuid, $url)
+    {
+        $link = BinaryEmailLink::whereUrl($url)->first();
+        $url = base64_decode($url);
+        return $url;
+        if($link)
+        {
+            return 1;
+        }
+        else {
+            $link = BinaryEmailLink::create([
+                url
+            ]);
+        }
     }
 }

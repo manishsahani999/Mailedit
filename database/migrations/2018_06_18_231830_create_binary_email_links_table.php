@@ -16,8 +16,8 @@ class CreateBinaryEmailLinksTable extends Migration
         Schema::create('binary_email_links', function (Blueprint $table) {
             $table->increments('id');
             $table->string('url');
-            $table->text('binary_email_id');
-            $table->integer('clicks')->default(1);
+            $table->text('binary_email_uuid');
+            $table->integer('clicks')->default(0);
             $table->timestamps(); 
             $table->softDeletes();
         });
