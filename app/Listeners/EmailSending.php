@@ -27,17 +27,67 @@ class EmailSending
      */
     public function handle(MessageSending $event)
     {
-        Log::info("Listern EmailSending");
+        Log::info("--------EmailSending--------");
         $message = $event->message; 
         $headers = $event->message->getHeaders();
         $uuid = $headers->get('X-Mailer-Click');
-        $trackLink = $headers->get('X-Mailer-TrackLink');
+        $trackLink = $headers->get('X-Mailer-Model');
+
         if(isset($uuid) && !is_null($uuid) && isset($trackLink) && !is_null($trackLink)) {
             if ($message->getContentType() === 'text/html' ||
                 ($message->getContentType() === 'multipart/alternative' && $message->getBody())
             ) {
-                $message->setBody(injectLinkTracker($message->getBody(), $uuid->getFieldBody(), $trackLink->getFieldBody()));
+                $message->setBody($this->injectLinkTracker($message->getBody(), $uuid->getFieldBody(), $trackLink->getFieldBody()));
             }
         }
+
+        if(isset($uuid) && !is_null($uuid)) {
+            Log::info("conditions set");
+            if ($message->getContentType() === 'text/html' ||
+                ($message->getContentType() === 'multipart/alternative' && $message->getBody())
+            ) {
+                $message->setBody($this->injectLinkTracker($message->getBody(), $uuid->getFieldBody()));
+                Log::info("url made");
+            }
+        }
+    }
+
+    public function injectLinkTracker($html, $uuid)
+    {
+        Log::info("linktracker invoked");
+        $html = preg_replace_callback("/(<a[^>]*href=['\"])([^'\"]*)/",
+                function($matches) use($uuid)
+                {
+                    if(strpos($matches[2], 'mailto:') !== false) {
+                        return $matches[0];
+                    } else {
+                        if (empty($matches[2])) {
+                            $url = app()->make('url')->to('/');
+                        } else {
+                            $url = str_replace('&amp;', '&', $matches[2]);
+                        }
+
+                        Log::info('Match 2 = ',$matches[2]);
+                        Log::info('url = '.$url);
+
+
+
+                        // $temp = config('settings.app.click_tracker').'/'.$trackLink.'/'.str_replace("/","$",base64_encode($url));
+
+                        // $temp = config('settings.app.frontend_host_url').route($trackLink,
+                        // [
+                        //     str_replace("/","$",base64_encode($url)),
+                        //     $uuid
+                        // ], false); 
+
+                        Log::info("url done");
+
+
+                        // return $matches[1].$temp;     
+                    }
+                },
+                $html);
+    
+        return $html;
     }
 }

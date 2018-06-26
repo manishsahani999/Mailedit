@@ -59,7 +59,7 @@
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <div class="form-group">
-                            <textarea name="html" id="summernote" class="textarea">{!! ($campaign->html) ? $campaign->html : '' !!}</textarea>
+                            <textarea name="html" id="summernote" class="textarea">{{ $campaign->html }}</textarea>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">

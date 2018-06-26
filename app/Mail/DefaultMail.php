@@ -7,6 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Models\{BinarySubscriber, BinaryEmail};
+use Log;
 
 class DefaultMail extends Mailable implements ShouldQueue
 {
@@ -27,12 +28,38 @@ class DefaultMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
+        Log::info("---------Default Mail---------");
         $email_data = json_decode($this->email->content, true);
 
+        Log::info('subscriber = '.$this->subscriber->uuid);
+
+        $links = [
+            'openTrackingLink'  => $this->getOpentrackingLink(),
+            'unsubscriberLink'  => $this->getUnsubscribeLink()
+        ];
+
+        $this->withSwiftMessage(function ($message) {
+            $headers = $message->getHeaders();
+            $headers->addTextHeader('X-Mailer-Click', $this->email->uuid);
+            Log::info($headers);
+        });
+            
+
         return $this->view('emails.test')
-        ->subject($this->email['subject'])
-        ->with([
-            'content' => $email_data
-        ]);
+                    ->subject($this->email['subject'])
+                    ->with([
+                        'content' => $email_data,
+                        'links'   => $links  
+                    ]);
+    }
+
+    public function getOpenTrackingLink()
+    {
+        return config('settings.app.frontend_host_url').'/email-open-tracking/'.$this->email->token;
+    }
+
+    public function getUnsubscribeLink()
+    {
+        return config('settings.app.frontend_host_url').'/unsubscribe/'.$this->subscriber->uuid;
     }
 }

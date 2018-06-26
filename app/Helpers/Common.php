@@ -1,5 +1,6 @@
 <?php
 
+
 if (!function_exists('generate_otp')) {
     /**
      * Generates a truly random 4 digit number to be used for Sms based OTPs.
@@ -64,6 +65,7 @@ if(!function_exists('injectLinkTracker')) {
                             str_replace("/","$",base64_encode($url)),
                             $uuid
                         ], false); 
+
 
                         return $matches[1].$temp;     
                     }
