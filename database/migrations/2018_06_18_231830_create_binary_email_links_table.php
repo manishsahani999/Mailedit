@@ -17,7 +17,7 @@ class CreateBinaryEmailLinksTable extends Migration
             $table->increments('id');
             $table->string('url');
             $table->text('binary_email_uuid');
-            $table->integer('clicks')->default(0);
+            $table->integer('clicks')->default(1);
             $table->timestamps(); 
             $table->softDeletes();
         });

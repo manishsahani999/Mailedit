@@ -148,19 +148,20 @@ class EmailController extends Controller
     */
     public function linkTracker($uuid, $url)
     {
-        // $link = BinaryEmailLink::whereUrl($url)->first();
 
-        $url = str_replace("$","/",$url);
+        $url = base64_decode(str_replace("$","/",$url));
+        $link = BinaryEmailLink::whereUrl($url)->first();
 
-        return base64_decode($url);
         if($link)
         {
             return 1;
         }
         else {
             $link = BinaryEmailLink::create([
-                url
+                'url' => $url,
+                'binary_email_uuid' => $uuid
             ]);
+            return $url;
         }
     }
 }
