@@ -82,7 +82,7 @@
                                 <h3 class="t-l mb-0">{{ $opened }}</h3>
                                 <span>Opened</span>
                             </div>
-                            <?php $sent = ($campaign->emails->where('status','sent') != null)? $campaign->emails->where('status','sent')->count() : 2 ; ?>
+                            <?php $sent = $campaign->emails->where('status','sent')->count(); ?>
                             <div class="col-sm-2 pt-2 text-center">
                                 <h3 class="mb-0">{{ $sent }}</h3>
                                 <span>Sent</span>
