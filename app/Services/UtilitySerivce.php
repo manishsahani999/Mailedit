@@ -119,9 +119,10 @@ class UtilityService
     }
 
     /*
+    * require campaign uuid
     * @return links of every unique email 
     */
-    public function getLinks($uuid)
+    public function getAllLinks($uuid)
     {
         $all_links = [];
         $campaign = BinaryCampaigns::whereUuid($uuid)->first();
@@ -136,28 +137,54 @@ class UtilityService
                 {
                     array_push($all_links, $link);
                 }   
-            }
-
-            return $all_links;
+            }          
             
-        }        
+        } 
+
+        return $all_links;
+            
+    }
+
+    /*
+    * requires campaign $uuid
+    * returns array of links name, all links are unique
+    */
+    public function getLinks($uuid)
+    {
+        $all_links = [];
+        $campaign = BinaryCampaigns::whereUuid($uuid)->first();
+        $emails = $campaign->emails()->get();
+
+        foreach($emails as $email)
+        {
+            $links = BinaryEmailLink::where('binary_email_uuid', $email->uuid)->get();
+            if($links->count() != 0) {
+                foreach($links as $key => $link)
+                {
+                    array_push($all_links, $link->url);
+                }
+            }
+        }
+
+        $all_links = array_unique($all_links);
+
+        return $all_links;
+
     }
 
     public function getClickCount($uuid)
     {
         
         $clicked = 0;
-        $links = $this->getLinks($uuid, 'all');
+        $all_links = $this->getAllLinks($uuid);
 
-        if(count($links) == 0)
+        if(count($all_links) != 0)
         {
-            return 0;
-        }
-
-        foreach($links as $link)
-        {
-            $clicked += $link->clicks;
-        }
+            foreach($all_links as $link)
+            {
+                $clicked += $link->clicks;
+            }
+        } 
         return $clicked;
     }
 

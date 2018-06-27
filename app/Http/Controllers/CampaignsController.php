@@ -46,14 +46,16 @@ class CampaignsController extends Controller
         // find campaign
         $campaign = $this->utility->getCampaign($slug, $uuid);
 
+        // Total count of all links
         $clicked = $this->utility->getClickCount($uuid);
         
-        $links = $this->utility->getLinks($uuid);    
+        // links with 
+        $links = $this->utility->getLinks($uuid);  
 
         return view('pages.campaigns.stats', [
            'brand'  => $brand,
            'campaign' =>  $campaign,
-           'clicked'  => ($clicked)? $clicked :0,
+           'clicked'  => $clicked ,
            'links'  => ($links)? $links: null
         ]);
     }

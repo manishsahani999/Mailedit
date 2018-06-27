@@ -31,13 +31,11 @@ class DefaultMail extends Mailable implements ShouldQueue
         Log::info("---------Default Mail---------");
         $email_data = json_decode($this->email->content, true);
 
-        Log::info('subscriber = '.$this->subscriber->uuid);
 
         $links = [
             'openTrackingLink'  => $this->getOpentrackingLink(),
             'unsubscriberLink'  => $this->getUnsubscribeLink()
         ];
-            Log::info($links['openTrackingLink']);
 
         $this->withSwiftMessage(function ($message) {
             $headers = $message->getHeaders();

@@ -125,13 +125,13 @@
                                         <i class="fas fa-link"></i>
                                     </div>
                                     <div class="col-sm-3">
-                                        <span>{{ (strlen($link->url) > 45 ) ? substr($link->url, 0, 45) : $link->url }}</span>
-                                        @if (strlen($link->url) > 45)
+                                        <span>{{ (strlen($link) > 40 ) ? substr($link, 0, 40) : $link }}</span>
+                                        @if (strlen($link) > 40)
                                             <span>........</span><span class="n-lb n-lb-draft">more</span>
                                         @endif
                                     </div>
                                     <div class="col-sm-1 offset-sm-1 pt-3 text-center">
-                                        <a target="_blank" href="{{ $link->url }}"><i class="fas fa-external-link-alt"></i></a>
+                                        <a target="_blank" href="{{ $link }}"><i class="fas fa-external-link-alt"></i></a>
                                     </div>
                                     <div class="col-sm-1 offset-sm-1 text-center">
                                         <h4 class="mb-0">8</h4>
@@ -146,7 +146,7 @@
                             @endforeach
                         </div>
                         @endif
-                        <hr>
+                        <hr> 
                     </div>
                 </div> 
                 </div>
