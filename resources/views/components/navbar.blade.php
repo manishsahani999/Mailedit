@@ -22,7 +22,7 @@
                 </li>
 
             @else
-                <li class="nav-item active">
+                <li class="nav-item is-active">
                     <a class="nav-link" href="{{ url('/home') }}">
                         Home
                     </a>

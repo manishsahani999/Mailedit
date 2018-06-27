@@ -317,7 +317,21 @@ input::-moz-focus-outer {
 }
 
 
+/*---------------------------
+        Paginatiom
+---------------------------*/
+ul.pagination {
+    margin: 1em auto;
+}
 
+li.page-item {
+    width: 4em;
+    text-align: center; 
+}
+
+#section-image {
+    width: 10em;
+}
 
 @media only screen and (max-width: 780px) {
     .inline-mobile {

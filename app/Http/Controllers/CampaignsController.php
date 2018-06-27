@@ -18,6 +18,64 @@ class CampaignsController extends Controller
         $this->utility = $utility;
     }
 
+
+    public function recentCampaign($slug)
+    {
+         // find the brand
+        $brand = $this->utility->getBrand($slug);
+
+        // get recent Campaigns
+        $campaigns = $this->utility->getRecentCampaigns($slug);
+
+        return view('pages.brand.show', [
+            'brand' => $brand,
+            'campaigns' => $campaigns
+        ]);  
+    }
+
+    public function ongoingCampaign($slug)
+    {
+         // find the brand
+        $brand = $this->utility->getBrand($slug);
+
+        // get ongoing Campaigns
+        $campaigns = $this->utility->getOngoingCampaigns($slug);
+
+        return view('pages.brand.show', [
+            'brand' => $brand,
+            'campaigns' => $campaigns
+        ]);  
+    }
+
+    public function draftCampaign($slug)
+    {
+         // find the brand
+        $brand = $this->utility->getBrand($slug);
+
+        // get drafted Campaigns
+        $campaigns = $this->utility->getDraftCampaigns($slug);
+
+        return view('pages.brand.show', [
+            'brand' => $brand,
+            'campaigns' => $campaigns
+        ]);  
+    }
+
+    public function completedCampaign($slug)
+    {
+         // find the brand
+        $brand = $this->utility->getBrand($slug);
+
+        // get drafted Campaigns
+        $campaigns = $this->utility->getCompletedCampaigns($slug);
+
+        return view('pages.brand.show', [
+            'brand' => $brand,
+            'campaigns' => $campaigns
+        ]);  
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -32,7 +90,6 @@ class CampaignsController extends Controller
             'brand' => $brand,
         ]);
     }
-
 
     /*
     * Show the Campaign stats

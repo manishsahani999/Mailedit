@@ -15,7 +15,7 @@
     font-family: 'Nanum Gothic', sans-serif;    
 }
 
-.active, .is-active{
+.is-active{
     border-bottom: 3px solid #64b5f6;   
 }
 

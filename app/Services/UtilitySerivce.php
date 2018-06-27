@@ -54,11 +54,43 @@ class UtilityService
     }
 
     /*
-    * Find the Latest Campaign
+    * Find the Latest Campaign paginated
     */
     public function getLatestCampaigns($slug)
     {
-        return $this->getBrand($slug)->binaryCampaign()->latest()->get();
+        return $this->getBrand($slug)->binaryCampaign()->latest()->paginate(5);
+    }
+
+     /*
+    * Find the Latest Campaign
+    */
+    public function getRecentCampaigns($slug)
+    {
+        return $this->getBrand($slug)->binaryCampaign()->latest()->paginate(5);
+    }
+    
+    /*
+    * Find the Latest Campaign
+    */
+    public function getOngoingCampaigns($slug)
+    {
+        return $this->getBrand($slug)->binaryCampaign()->whereStatus('sending')->latest()->paginate(5);
+    }
+
+     /*
+    * Find the Drafted Campaigns
+    */
+    public function getDraftCampaigns($slug)
+    {
+        return $this->getBrand($slug)->binaryCampaign()->whereStatus('draft')->latest()->paginate(5);
+    }
+
+     /*
+    * Find Completed Campaigns
+    */
+    public function getCompletedCampaigns($slug)
+    {
+        return $this->getBrand($slug)->binaryCampaign()->whereStatus('sent')->latest()->paginate(5);
     }
 
     /*

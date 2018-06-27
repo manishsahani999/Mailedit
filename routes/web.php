@@ -43,6 +43,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('brands/{slug}/campaign/{uuid}', 'CampaignsController@update')->name('campaign.update');
     Route::delete('brands/{slug}/campaign/{uuid}', 'CampaignsController@destroy')->name('campaign.destroy');
     Route::get('brands/{slug}/campaign/{uuid}/stats', 'CampaignsController@stats')->name('campaign.stats');
+    Route::get('brands/{slug}/campaign/recent', 'CampaignsController@recentCampaign')->name('campaign.recent');
+    Route::get('brands/{slug}/campaign/ongoing', 'CampaignsController@ongoingCampaign')->name('campaign.ongoing');
+    Route::get('brands/{slug}/campaign/draft', 'CampaignsController@draftCampaign')->name('campaign.draft');
+    Route::get('brands/{slug}/campaign/completed', 'CampaignsController@completedCampaign')->name('campaign.completed');
 
 //    Scheduling a Camapign 
     Route::put('brands/{slug}/campaign/{uuid}/schedule', 'CampaignsController@storeSchedule')->name('campaign.schedule.store');
