@@ -181,6 +181,6 @@ class EmailController extends Controller
             Log::info("opened");
         }
 
-        return redirect(asset('img/send.svg'));
+        return redirect(asset('img/trans.png'));
     }
 }
