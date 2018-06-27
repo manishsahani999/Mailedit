@@ -79,15 +79,16 @@
                                 </h5>
                             </div>
                             <div class="col-sm-2 pt-2 text-center">
-                                <h3 class="t-l mb-0">1</h3>
+                                <h3 class="t-l mb-0">{{ $opened }}</h3>
                                 <span>Opened</span>
                             </div>
+                            <?php $sent = $campaign->emails->where('status','sent')->count(); ?>
                             <div class="col-sm-2 pt-2 text-center">
-                                <h3 class="mb-0">{{ $campaign->emails->where('status','sent')->count() }}</h3>
+                                <h3 class="mb-0">{{ $sent }}</h3>
                                 <span>Sent</span>
                             </div>
                             <div class="col-sm-1 pt-3">
-                                <a id=""  class="btn n-lb-draft bt">View All Links</a>
+                                <a id=""  class="btn n-lb-draft bt">View Something</a>
                             </div>  
                         </div>
                         <hr>
@@ -107,7 +108,7 @@
                                 <span>Clicked</span>
                             </div>
                             <div class="col-sm-2 pt-2 text-center">
-                                <h3 class="ml-3 mb-0">8</h3>
+                                <h3 class="mb-0">{{ $sent*count($links) }}</h3>
                                 <span>Total Links</span>
                             </div>
                             <div class="col-sm-2 pt-3">
@@ -118,7 +119,7 @@
                         <hr id="n-table-hr" class="d-none">
                         <div class="n-table-has-content d-none pt-1 pl-5" id="n-table-row-extended">
                             <h5 class="mb-1">Email links</h5>    
-                            <hr class="mt-0">
+                            <hr class="mt-0 mr-5">
                             @foreach ($links as $link)
                                 <div class="row">
                                     <div class="col-sm-1 pt-3 text-center">
@@ -142,7 +143,7 @@
                                         <span>Percentage</span>
                                     </div>
                                 </div>
-                                <hr>
+                                <hr class="mb-5 mr-5">
                             @endforeach
                         </div>
                         @endif

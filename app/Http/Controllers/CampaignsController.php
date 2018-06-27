@@ -50,13 +50,15 @@ class CampaignsController extends Controller
         $clicked = $this->utility->getClickCount($uuid);
         
         // links with 
-        $links = $this->utility->getLinks($uuid);  
-
+        $links = $this->utility->getLinks($uuid);
+        
+        $opened = $this->utility->getOpenedEmailCount($uuid);
         return view('pages.campaigns.stats', [
-           'brand'  => $brand,
-           'campaign' =>  $campaign,
+           'brand'    => $brand,
+           'campaign' => $campaign,
            'clicked'  => $clicked ,
-           'links'  => ($links)? $links: null
+           'opened'   => $opened,
+           'links'    => ($links)? $links: null
         ]);
     }
 

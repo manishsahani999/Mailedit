@@ -119,14 +119,21 @@ class UtilityService
     }
 
     /*
+    * get all emails of a campaiogn
+    */
+    public function getAllEmails($uuid)
+    {
+        return BinaryCampaigns::whereUuid($uuid)->first()->emails()->get();
+    }
+
+    /*
     * require campaign uuid
     * @return links of every unique email 
     */
     public function getAllLinks($uuid)
     {
         $all_links = [];
-        $campaign = BinaryCampaigns::whereUuid($uuid)->first();
-        $emails = $campaign->emails()->get();
+        $emails= $this->getAllEmails($uuid);
 
         foreach($emails as $email)
         {
@@ -152,8 +159,7 @@ class UtilityService
     public function getLinks($uuid)
     {
         $all_links = [];
-        $campaign = BinaryCampaigns::whereUuid($uuid)->first();
-        $emails = $campaign->emails()->get();
+        $emails= $this->getAllEmails($uuid);
 
         foreach($emails as $email)
         {
@@ -191,8 +197,18 @@ class UtilityService
     
 
     /*
-    * return all list linked to a campaign
+    * return all opened count
     */
+    public function getOpenedEmailCount($uuid)
+    {
+        $opened = 0;
+        $emails= $this->getAllEmails($uuid);
+
+        foreach ($emails as $email) {
+            $opened += $email->opened;
+        }
+        return $opened;
+    }
 
     
 }
