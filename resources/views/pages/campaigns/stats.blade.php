@@ -71,25 +71,23 @@
                     <div class="n-table-wrap">
                         <div class="n-table row">
                             <div class="col-sm-1 n-col-1">
-                                <img class="n-col-icon" src="{{ asset('img/ppc.svg') }}" alt="">
+                                <img class="n-col-icon" src="{{ asset('img/trolley.svg') }}" alt="">
                             </div>
-                            <div class="col-sm-5 n-col-2 pt-3 ">
+                            <div class="col-sm-4 n-col-2 pt-3 ">
                                 <h5>
-                                    Emails delivered
+                                    Emails Opened
                                 </h5>
                             </div>
-                            <div class="col-sm-2 pt-2">
-                                <h2 class="t-l">{{ $campaign->emails->count() }}</h2>
+                            <div class="col-sm-2 pt-2 text-center">
+                                <h3 class="t-l mb-0">1</h3>
+                                <span>Opened</span>
                             </div>
-                            <div class="col-sm-2 pt-2">
-                                <h3 class="ml-3 mb-0">8</h3>
-                                <span>No of Links</span>
+                            <div class="col-sm-2 pt-2 text-center">
+                                <h3 class="mb-0">{{ $campaign->emails->where('status','sent')->count() }}</h3>
+                                <span>Sent</span>
                             </div>
                             <div class="col-sm-1 pt-3">
-                                <a href="{{ route('campaign.edit', [
-                                        'slug' => $brand->slug, 
-                                        'uuid' => $campaign->uuid
-                                    ]) }}" class="btn n-lb-draft bt">View All Links</a>
+                                <a id=""  class="btn n-lb-draft bt">View All Links</a>
                             </div>  
                         </div>
                         <hr>
@@ -99,25 +97,55 @@
                             <div class="col-sm-1 n-col-1">
                                 <img class="n-col-icon" src="{{ asset('img/ppc.svg') }}" alt="">
                             </div>
-                            <div class="col-sm-5 n-col-2 pt-3 ">
+                            <div class="col-sm-4 n-col-2 pt-3 ">
                                 <h5>
                                     Links Clicked
                                 </h5>
                             </div>
-                            <div class="col-sm-2 pt-2">
-                                <h2 class="t-l">7877</h2>
+                            <div class="col-sm-2 pt-2 text-center">
+                                <h2 class="mb-0">{{ $clicked }}</h2>
+                                <span>Clicked</span>
                             </div>
-                            <div class="col-sm-2 pt-2">
+                            <div class="col-sm-2 pt-2 text-center">
                                 <h3 class="ml-3 mb-0">8</h3>
-                                <span>No of Links</span>
+                                <span>Total Links</span>
                             </div>
-                            <div class="col-sm-1 pt-3">
-                                <a href="{{ route('campaign.edit', [
-                                        'slug' => $brand->slug, 
-                                        'uuid' => $campaign->uuid
-                                    ]) }}" class="btn n-lb-draft bt">View All Links</a>
+                            <div class="col-sm-2 pt-3">
+                                <a class="btn n-lb-draft bt" id="n-table-row-toggle">View Detailed Analysis</a>
                             </div>  
                         </div>
+                        @if ($links)
+                        <hr id="n-table-hr" class="d-none">
+                        <div class="n-table-has-content d-none pt-1 pl-5" id="n-table-row-extended">
+                            <h5 class="mb-1">Email links</h5>    
+                            <hr class="mt-0">
+                            @foreach ($links as $link)
+                                <div class="row">
+                                    <div class="col-sm-1 pt-3 text-center">
+                                        <i class="fas fa-link"></i>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <span>{{ (strlen($link->url) > 45 ) ? substr($link->url, 0, 45) : $link->url }}</span>
+                                        @if (strlen($link->url) > 45)
+                                            <span>........</span><span class="n-lb n-lb-draft">more</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-sm-1 offset-sm-1 pt-3 text-center">
+                                        <a target="_blank" href="{{ $link->url }}"><i class="fas fa-external-link-alt"></i></a>
+                                    </div>
+                                    <div class="col-sm-1 offset-sm-1 text-center">
+                                        <h4 class="mb-0">8</h4>
+                                        <span>Clicked</span>
+                                    </div>
+                                    <div class="col-sm-1 offset-sm-1 text-center">
+                                        <h4 class="mb-0">8 <span class="t-lg">%</span></h4>
+                                        <span>Percentage</span>
+                                    </div>
+                                </div>
+                                <hr>
+                            @endforeach
+                        </div>
+                        @endif
                         <hr>
                     </div>
                 </div> 
@@ -125,4 +153,14 @@
             </div>
         </div>
     </div>
+@endsection @section('scripts')
+    <script>
+    $(document).ready(function(){
+        $("#n-table-row-toggle").click(function(){
+            $("#n-table-row-toggle").toggleClass("n-btn");
+            $("#n-table-hr").toggleClass("d-none");
+            $(".n-table-has-content").toggleClass("d-none", 4000, "easeInQuad");
+        });
+    });
+</script>
 @endsection

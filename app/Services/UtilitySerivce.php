@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Services;
-use App\Models\BinaryCampaigns;
+use App\Models\{BinaryCampaigns, BinaryEmailLink};
+use Log;
 
 
 class UtilityService
@@ -112,5 +113,59 @@ class UtilityService
         return auth()->user()->template()->whereId($id)->first();
     }
 
+    public function getEmailLink($uuid)
+    {
+        return BinaryEmailLink::where('binary_email_uuid', $uuid)->get();
+    }
+
+    /*
+    * @return links of every unique email 
+    */
+    public function getLinks($uuid)
+    {
+        $all_links = [];
+        $campaign = BinaryCampaigns::whereUuid($uuid)->first();
+        $emails = $campaign->emails()->get();
+
+        foreach($emails as $email)
+        {
+            $links = BinaryEmailLink::where('binary_email_uuid', $email->uuid)->get();            
+
+            if($links->count() != 0){
+                foreach($links as $link)
+                {
+                    array_push($all_links, $link);
+                }   
+            }
+
+            return $all_links;
+            
+        }        
+    }
+
+    public function getClickCount($uuid)
+    {
         
+        $clicked = 0;
+        $links = $this->getLinks($uuid, 'all');
+
+        if(count($links) == 0)
+        {
+            return 0;
+        }
+
+        foreach($links as $link)
+        {
+            $clicked += $link->clicks;
+        }
+        return $clicked;
+    }
+
+    
+
+    /*
+    * return all list linked to a campaign
+    */
+
+    
 }

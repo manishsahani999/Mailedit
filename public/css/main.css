@@ -202,6 +202,14 @@
     border-bottom: 2px solid #bdb7b736;
 }
 
+.bt-gray {
+    border-top: 2px solid #bdb7b736;
+}
+
+.b-gray {
+    border: 2px solid #bdb7b736;
+} 
+
 .n-nav-item {
     padding: 0;
 }
@@ -212,6 +220,11 @@
 
 #test-send-icon {
     width: 7em;
+}
+
+.n-btn {
+    color: #ffffff !important;
+    background-color: #21AFF1;
 }
 
 /*-----------------
@@ -302,11 +315,6 @@ input::-moz-focus-inner,
 input::-moz-focus-outer {
   border: 0;
 }
-
-
-
-
-
 
 
 

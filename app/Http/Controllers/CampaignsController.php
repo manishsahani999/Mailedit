@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCampaign;
 use Illuminate\Http\Request;
-use App\Models\{BinaryBrand, BinaryCampaigns};
+use App\Models\{BinaryBrand, BinaryCampaigns, BinaryEmailLink};
 use Carbon\Carbon;
 use App\Services\UtilityService;
+use Log;
 
 class CampaignsController extends Controller
 {
@@ -45,9 +46,15 @@ class CampaignsController extends Controller
         // find campaign
         $campaign = $this->utility->getCampaign($slug, $uuid);
 
+        $clicked = $this->utility->getClickCount($uuid);
+        
+        $links = $this->utility->getLinks($uuid);    
+
         return view('pages.campaigns.stats', [
            'brand'  => $brand,
-           'campaign' =>  $campaign
+           'campaign' =>  $campaign,
+           'clicked'  => ($clicked)? $clicked :0,
+           'links'  => ($links)? $links: null
         ]);
     }
 

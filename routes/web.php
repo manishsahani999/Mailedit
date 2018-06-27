@@ -84,4 +84,5 @@ Route::group(['middleware' => ['auth']], function () {
 //  Tracking Routes
 
     Route::get('email/{uuid}/link/{url}', 'EmailController@linkTracker')->name('email.link.track');
+    Route::get('email-open-tracking/{uuid}', 'EmailController@openTracking')->name('email.open.tracking');
     

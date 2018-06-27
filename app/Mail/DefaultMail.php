@@ -37,11 +37,11 @@ class DefaultMail extends Mailable implements ShouldQueue
             'openTrackingLink'  => $this->getOpentrackingLink(),
             'unsubscriberLink'  => $this->getUnsubscribeLink()
         ];
+            Log::info($links['openTrackingLink']);
 
         $this->withSwiftMessage(function ($message) {
             $headers = $message->getHeaders();
             $headers->addTextHeader('X-Mailer-Click', $this->email->uuid);
-            Log::info($headers);
         });
             
 
@@ -55,7 +55,7 @@ class DefaultMail extends Mailable implements ShouldQueue
 
     public function getOpenTrackingLink()
     {
-        return config('settings.app.frontend_host_url').'/email-open-tracking/'.$this->email->token;
+        return config('settings.app.frontend_host_url').'/email-open-tracking/'.$this->email->uuid;
     }
 
     public function getUnsubscribeLink()

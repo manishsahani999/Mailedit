@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Models\{BinaryEmail, BinaryCampaigns, BinaryEmailLink};
 use App\Jobs\SendEmail;
 use Session;
+use Log;
 
 class EmailController extends Controller
 {
@@ -152,6 +153,7 @@ class EmailController extends Controller
         $url = base64_decode(str_replace("$","/",$url));
         $link = BinaryEmailLink::where('binary_email_uuid', $uuid)->whereUrl($url)->first();
 
+
         if($link)
         {
             $link->clicks++;
@@ -165,5 +167,20 @@ class EmailController extends Controller
             ]);
             return redirect($link->url);
         }
+    }
+
+    public function openTracking($uuid)
+    {
+        $email = BinaryEmail::whereUuid($uuid)->first();
+        Log::info('email = '.$email);
+
+        if($email)
+        {
+            $email->opened = true;
+            $email->save();
+            Log::info("opened");
+        }
+
+        return redirect(asset('img/send.svg'));
     }
 }
