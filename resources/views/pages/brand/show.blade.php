@@ -49,12 +49,11 @@
                                     <div class="col-sm-1 n-col-1">
                                         <img class="n-col-icon" src="{{ asset('img/paper-plane.svg') }}" alt="">
                                     </div>
-                                    <div class="col-sm-5 n-col-2">
+                                    <div class="col-sm-4 n-col-2">
                                         <h5 class="mb-0">
                                             <a href="{{ route('campaign.show', [
                                                 'slug' => $brand->slug, 'uuid' => $campaign->uuid
                                                 ]) }}">{{ $campaign->name }}</a>
-                                            <!-- <img id="n-draft" src="{{ asset('img/draft.svg') }}" alt="">     -->
                                         </h5>
                                         <span>{{ $campaign->status }}</span>
                                         <div>
@@ -77,7 +76,12 @@
                                                 n-lb-sent
                                             @endif">{{ $campaign->status }}</label>
                                     </div>
-                                    <div class="col-sm-1 pt-3">
+                                    <div class="col-sm-1 pt-3 mr-1">
+                                        <a href="{{ route('campaign.show', [
+                                                'slug' => $brand->slug, 'uuid' => $campaign->uuid
+                                                ]) }}" class="btn btn-primary bt">View</a>
+                                    </div>
+                                    <div class="col-sm-1 pt-3 ml-1">
                                         <a href="{{ route('campaign.edit', [
                                                 'slug' => $brand->slug, 
                                                 'uuid' => $campaign->uuid

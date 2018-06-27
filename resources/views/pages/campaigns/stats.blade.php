@@ -85,8 +85,6 @@
                             <?php
                                 if (!empty($campaign->emails->where('status','sent'))) {
                                    $sent = count($campaign->emails->where('status','sent'));
-                                   echo $sent;
-                                   echo empty($campaign->emails->where('status','sent'));
                                 }
                                 else {
                                     $sent = 0;
