@@ -8,7 +8,7 @@
             <div class="right-pc">
                 <a href="{{ route('campaign.create', $brand->slug) }}" class="btn btn-secondary bt">Create Campaigns</a>
             </div>
-            <div class="mt-1">{{Route::currentRouteName()}}
+            <div class="mt-1">
                 <span>Created {{ $brand->created_at->diffForHumans() }} by {{ Auth::user()->name }}.</span>
             </div>
             @include('components.sessions')
