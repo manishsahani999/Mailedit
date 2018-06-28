@@ -25,8 +25,8 @@ class StoreSubs extends FormRequest
     {
         return [
             'first_name'    => 'required',
-            'last_name'     => 'required',
-            'email'         => 'required',
+            'last_name'     => 'required', 
+            'email'         => 'required|unique:binary_subscribers',
             'phone'         => 'required'
         ];
     }

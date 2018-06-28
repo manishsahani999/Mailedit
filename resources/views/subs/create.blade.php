@@ -36,15 +36,7 @@
                     </div>
                 </div>
             </form>
-            @if ($errors->any())
-                <div class="has-text-danger login-errors" style="margin-left: 0;">
-                    <ul style="list-style-type: none">
-                        @foreach ($errors->all() as $error)
-                            <li style="margin-left: -1.5em">{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            @include('components.errors')
         </div>
     </div>
 @endsection
