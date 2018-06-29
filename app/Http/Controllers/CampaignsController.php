@@ -6,7 +6,7 @@ use App\Http\Requests\StoreCampaign;
 use Illuminate\Http\Request;
 use App\Models\{BinaryBrand, BinaryCampaigns, BinaryEmailLink};
 use Carbon\Carbon;
-use App\Jobs\SendEmail;
+use App\Jobs\{SendEmail, ScheduleCampaign};
 use App\Services\UtilityService;
 use Log;
 
@@ -357,6 +357,8 @@ class CampaignsController extends Controller
         
         //  Set date and time
         $time = Carbon::parse($request->date.$request->time);
+
+        dispatch(new ScheduleCampaign($uuid))->delay($time);
 
         // Updating the Campaign
         $campaign->update(['status' => 'scheduled', 'starts_at' => $time]);
