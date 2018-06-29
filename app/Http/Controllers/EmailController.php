@@ -176,9 +176,10 @@ class EmailController extends Controller
 
         if($email)
         {
-            $email->opened = true;
-            $email->save();
-            Log::info("opened");
+            $email->update([
+                'opened' => true,
+                'opened_at' => now()
+            ]);
         }
 
         return redirect(asset('img/trans.png'));
