@@ -9,7 +9,7 @@
                 $clicked_rate = 0;
             }
             else {
-                $clicked_rate = (int) ( $clicked / $total_clicked )*100;
+                $clicked_rate = ( $clicked / $total_clicked )*100;
             }
     ?>
     <div class="wrap">
@@ -72,7 +72,7 @@
                         <div class="col-sm-9">
                             <div class="range-slider">
                             <input class="r-slider-input" type="range" value="{{ $clicked_rate }}" min="0" max="100" disabled>
-                            <span class="r-slider-value">{{ $clicked_rate }} %</span>
+                            <span class="r-slider-value">{{ (int)$clicked_rate }} %</span>
                             </div>
                         </div>
                     </div> 
