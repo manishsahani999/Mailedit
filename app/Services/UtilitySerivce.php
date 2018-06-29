@@ -140,8 +140,12 @@ class UtilityService
     /*
     * Find template 
     */
-    public function getTemplate($id)
+    public function getTemplate($id, $option = null)
     {
+        if($option == 'uuid')
+        {
+            return auth()->user()->template()->whereUuid($id)->first();
+        }
         return auth()->user()->template()->whereId($id)->first();
     }
 

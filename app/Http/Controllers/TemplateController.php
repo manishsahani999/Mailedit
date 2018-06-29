@@ -51,7 +51,7 @@ class TemplateController extends Controller
     {
         $template = $this->create->createUserTemplate($request->all());
 
-        return redirect()->route('template.show', $template->uuid);
+        return redirect()->route('template.show', $template->id);
     }
 
     /**
@@ -60,9 +60,13 @@ class TemplateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
-        //
+        $template = $this->utility->getTemplate($uuid, 'uuid');
+
+        return view('pages.template.show', [
+            'template' => $template
+        ]);
     }
 
     /**
@@ -71,9 +75,13 @@ class TemplateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($uuid)
     {
-        //
+        $template = $this->utility->getTemplate($uuid, 'uuid');
+
+        return view('pages.template.edit', [
+            'template' => $template
+        ]);
     }
 
     /**
@@ -83,9 +91,11 @@ class TemplateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $uuid)
     {
-        //
+        $template = $this->utility->getTemplate($uuid, 'uuid')->update($request->all());
+
+        return redirect()->route('template.index');
     }
 
     /**
@@ -94,9 +104,10 @@ class TemplateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($uuid)
     {
-        //
+        $this->utility->getTemplate($uuid, 'uuid')->delete();
+        return redirect()->back();
     }
 
     /*

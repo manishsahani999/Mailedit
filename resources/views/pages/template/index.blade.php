@@ -62,11 +62,17 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-sm-3 offset-sm-3 pt-3">
+                                <div class="col-sm-1 offset-sm-3 pt-3">
                                     <a href="{{ route('template.edit', [
                                             'uuid' => $template->uuid 
                                         ]) }}" class="btn n-lb-draft bt">Edit</a>
-                                    <a href="" class="btn n-lb-cancel bt">Delete</a>
+                                </div>
+                                <div class="col-sm-1 pt-3">
+                                    <form action="{{ route('template.destroy', $template->uuid) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn n-lb-cancel bt" type="submit">Delete</button>
+                                    </form>
                                 </div>
                         </div>
                         <hr>
