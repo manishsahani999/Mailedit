@@ -128,20 +128,7 @@ class EmailController extends Controller
         ]);
     }
 
-    /**
-     * Testing the jobs
-     *
-     *
-     * 
-     */
-    public function jobsTest($uuid)
-    {
-        dispatch(new SendEmail($uuid));
-        
-        // Session Message
-        Session::flash('success', 'Sending Campaign');
-        return redirect()->back();        
-    }
+    
 
     /*
     * takes email uuid and link url in base64_encoded form 

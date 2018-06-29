@@ -27,7 +27,7 @@
             @if(count($campaign->binarySubsList) == 0)
                 <button class="btn btn-info bt" disabled>Send now</button>
             @else
-            <form action="{{ route('email.send', $campaign->uuid) }}" method="get">
+            <form action="{{ route('campaign.send', $campaign->uuid) }}" method="get">
             @csrf
                     <button class="btn btn-info bt">Send now</button>
             </form>

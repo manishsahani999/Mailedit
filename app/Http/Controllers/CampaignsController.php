@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCampaign;
 use Illuminate\Http\Request;
 use App\Models\{BinaryBrand, BinaryCampaigns, BinaryEmailLink};
 use Carbon\Carbon;
+use App\Jobs\SendEmail;
 use App\Services\UtilityService;
 use Log;
 
@@ -353,12 +354,12 @@ class CampaignsController extends Controller
 
         // find campaign
         $campaign = $this->utility->getCampaign($slug, $uuid);
-
-        // starts at
-        $campaign_starts_at = $request->date.' '.$request->time;
+        
+        //  Set date and time
+        $time = Carbon::parse($request->date.$request->time);
 
         // Updating the Campaign
-        $campaign->update(['status' => 'scheduled', 'starts_at' => $campaign_starts_at]);
+        $campaign->update(['status' => 'scheduled', 'starts_at' => $time]);
 
         // Session message
         Toastr()->info('Campaign Scheduled', 'Campaign', ["positionClass" => "toast-bottom-right"]);        
@@ -368,5 +369,21 @@ class CampaignsController extends Controller
             'slug' => $slug,
             'uuid' => $uuid
         ]);
+    }
+
+    /**
+     * 
+     * Sending the campaign
+     *
+     * 
+     */
+    public function sendCampaign($uuid)
+    {
+        dispatch(new SendEmail($uuid));
+        
+        // Session message
+        Toastr()->info('yo whoo', 'Sending Campaign', ["positionClass" => "toast-bottom-right"]);
+
+        return redirect()->back();
     }
 }

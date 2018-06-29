@@ -21,8 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::group(['middleware' => ['auth']], function () {
 //    brand routes
     Route::get('brands/', 'BrandController@index')->name('brand.index');
@@ -47,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('brands/{slug}/campaign/ongoing', 'CampaignsController@ongoingCampaign')->name('campaign.ongoing');
     Route::get('brands/{slug}/campaign/draft', 'CampaignsController@draftCampaign')->name('campaign.draft');
     Route::get('brands/{slug}/campaign/completed', 'CampaignsController@completedCampaign')->name('campaign.completed');
+    Route::get('campaign/{uuid}/email-sending', 'CampaignsController@sendCampaign')->name('campaign.send');
 
 //    Scheduling a Camapign 
     Route::put('brands/{slug}/campaign/{uuid}/schedule', 'CampaignsController@storeSchedule')->name('campaign.schedule.store');
@@ -72,7 +71,6 @@ Route::group(['middleware' => ['auth']], function () {
 //    Email Routes
     Route::get('emails', 'EmailController@index')->name('email.index');
     Route::post('brands/{slug}/campaign/{uuid}/email-testing', 'EmailController@test')->name('email.test');
-    Route::get('campaign/{uuid}/email-sending', 'EmailController@jobsTest')->name('email.send');
     
 //    Email Templates Route
     Route::get('templates', 'TemplateController@index')->name('template.index');
