@@ -31,6 +31,7 @@
                     <div class="is-inline">
                         <span class="badge badge-primary">{{ $email->subject}}</span>
                         <span class="badge badge-success">{{ $email->status }}</span>
+                        <span class="badge badge-success">opend at: {{ $email->opened_on }}</span>
                     </div>
                 </h5>
                 </div>

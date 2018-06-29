@@ -178,7 +178,7 @@ class EmailController extends Controller
         {
             $email->update([
                 'opened' => true,
-                'opened_at' => now()
+                'opened_on' => now()
             ]);
         }
 
