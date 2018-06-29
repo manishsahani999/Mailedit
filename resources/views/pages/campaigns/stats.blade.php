@@ -1,6 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+    <?php
+            $sent = count($campaign->emails->where('status','sent'));
+            $opened_rate = ($opened / $sent)*100;
+            $total_clicked = $sent*count($links);
+            if ($total_clicked == 0) {
+                $clicked_rate = 0;
+            }
+            else {
+                $clicked_rate = (int) ( $clicked / $total_clicked )*100;
+            }
+    ?>
     <div class="wrap">
         <div class="home-header">
             <h2 class="inline-pc">{{ ucwords($brand->brand_name) }}</h2>
@@ -49,8 +60,8 @@
                         </div>
                         <div class="col-sm-9">
                             <div class="range-slider">
-                            <input class="r-slider-input" type="range" value="60" min="0" max="100" disabled>
-                            <span class="r-slider-value">60 %</span>
+                            <input class="r-slider-input" type="range" value="{{ $opened_rate }}" min="0" max="100" disabled>
+                            <span class="r-slider-value">{{ (int)$opened_rate }} %</span>
                             </div>
                         </div>
                     </div> 
@@ -60,8 +71,8 @@
                         </div>
                         <div class="col-sm-9">
                             <div class="range-slider">
-                            <input class="r-slider-input" type="range" value="30" min="0" max="100" disabled>
-                            <span class="r-slider-value">30 %</span>
+                            <input class="r-slider-input" type="range" value="{{ $clicked_rate }}" min="0" max="100" disabled>
+                            <span class="r-slider-value">{{ $clicked_rate }} %</span>
                             </div>
                         </div>
                     </div> 
@@ -82,14 +93,7 @@
                                 <h3 class="t-l mb-0">{{ $opened }}</h3>
                                 <span>Opened</span>
                             </div>
-                            <?php
-                                if (!empty($campaign->emails->where('status','sent'))) {
-                                   $sent = count($campaign->emails->where('status','sent'));
-                                }
-                                else {
-                                    $sent = 0;
-                                }
-                            ?>
+                            
                             <div class="col-sm-2 pt-2 text-center">
                                 <h3 class="mb-0">{{ $sent }}</h3>
                                 <span>Sent</span>
@@ -115,7 +119,7 @@
                                 <span>Clicked</span>
                             </div>
                             <div class="col-sm-2 pt-2 text-center">
-                                <h3 class="mb-0">{{ $sent*count($links) }}</h3>
+                                <h3 class="mb-0">{{ $total_clicked }}</h3>
                                 <span>Total Links</span>
                             </div>
                             <div class="col-sm-2 pt-3">
