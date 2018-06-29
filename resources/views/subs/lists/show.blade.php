@@ -11,7 +11,9 @@
     </div>
     <div class="home-body">
         <div class="row">
-            <div class="col-sm-3"></div>
+            <div class="col-sm-3 pr-2">
+                
+            </div>
             <div class="col">
                 <span id="body-tab">Members</span>
                 <hr class="mt-0 mb-0">
