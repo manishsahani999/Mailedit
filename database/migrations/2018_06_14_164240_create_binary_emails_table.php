@@ -30,6 +30,7 @@ class CreateBinaryEmailsTable extends Migration
             $table->longText('meta')->nullable();
             $table->timestamp('scheduled_time')->nullable();
             $table->timestamp('sent_on')->nullable();
+            $table->timestamp('opened_on')->nullable();
             $table->enum('status', ['not_sent' , 'queued' , 'sent', 'delivered', 'hard_bounced', 'soft_bounced']);
             $table->boolean('opened')->default(false);
             $table->integer('clicks')->default(0);
