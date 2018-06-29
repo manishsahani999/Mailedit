@@ -180,6 +180,10 @@
     color: #f8f8f8;
 }
 
+.n-lb-open {
+    background-color: #ECF1F4;
+}
+
 .template-card-wrap {
     height: 8em;
     border: solid 1px #d0d0d0;
@@ -332,6 +336,12 @@ li.page-item {
 #section-image {
     width: 10em;
 }
+
+#message-open-icon {
+    width: 2em;
+}
+
+
 
 @media only screen and (max-width: 780px) {
     .inline-mobile {
