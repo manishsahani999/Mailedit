@@ -43,7 +43,7 @@ class DefaultMail extends Mailable implements ShouldQueue
         });
             
 
-        return $this->view('emails.test')
+        return $this->subject("Subject")->view('emails.test')
                     ->subject($this->email['subject'])
                     ->with([
                         'content' => $email_data,

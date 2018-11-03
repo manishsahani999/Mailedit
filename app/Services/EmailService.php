@@ -84,7 +84,8 @@ class EmailService
             'binary_campaign_id' => (isset($reference['id'])) ? $reference['id']: null,
             'scheduled_time' => Carbon::now(),
             'content' => json_encode($reference['html']),
-            'status' => 'not_sent'
+            'status' => 'not_sent',
+            'subject' => (isset($reference['subject'])) ? $reference['subject']: 'Default Subject',
         ]);
 
         return $this->emailObj = $email;
@@ -96,6 +97,7 @@ class EmailService
             $this->getSubscriber($subscriber);
             $this->getEmail($data);
             
+            dump($data);
 
             Mail::to($this->subscriber->email)
                 ->send(new DefaultMail($this->subscriber,  $this->emailObj));
