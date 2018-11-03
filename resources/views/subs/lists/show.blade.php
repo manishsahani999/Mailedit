@@ -7,6 +7,7 @@
         <h2 class="inline-pc">Lists / {{ ucwords($list->name) }}</h2>
         <div class="is-right">
             <a href="{{ route('subs.create', $list->uuid) }}" class="btn btn-dark">Add Subscriber</a>
+            <a href="{{ route('subs.list.upload', $list->uuid) }}" class="btn btn-dark">Upload List</a>
         </div>
     </div>
     <div class="home-body">

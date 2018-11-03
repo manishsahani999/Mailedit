@@ -59,6 +59,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('subscribers', 'SubsListController@store')->name('subs.list.store');
     Route::get('subscribers/{uuid}', 'SubsListController@show')->name('subs.list.show');
     Route::get('subscribers/{uuid}/edit', 'SubsListController@edit')->name('subs.list.edit');
+    Route::get('subscribers/{uuid}/upload', 'SubsLIstController@upload')->name('subs.list.upload');
+    Route::post('subscribers/{uuid}/import', 'SubsLIstController@import')->name('subs.list.import');
     Route::put('subscribers/{uuid}', 'SubsListController@update')->name('subs.list.update');
     Route::delete('subscribers/{uuid}', 'SubsListController@destroy')->name('subs.list.destroy');
 

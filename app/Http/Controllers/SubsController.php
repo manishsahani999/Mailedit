@@ -108,7 +108,9 @@ class SubsController extends Controller
      */
     public function destroy($uuid, $email)
     {
-        $subs = $this->utility->getList($uuid)->binarySubs()->whereEmail($email)->first()->delete();
+        $list = $this->utility->getList($uuid);
+        $sub = $list->binarySubs()->whereEmail($email)->firstOrFail();
+        $list->binarySubs()->detach($sub->id); 
 
         return redirect()->route('subs.list.show', $uuid);
 

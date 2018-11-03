@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSubsList;
 use Illuminate\Http\Request;
 use App\Services\UtilityService;
+use App\Http\Requests\StoreExcel;
+use App\Models\BinarySubscriber;
+use App\Jobs\UploadList;
+use Excel;
+use File;
 
 class SubsListController extends Controller
 {
@@ -109,5 +114,37 @@ class SubsListController extends Controller
 
 //        return to index page
         return redirect()->route('subs.list.index');
+    }
+
+    public function upload($uuid)
+    {
+        $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->firstOrFail();
+        
+        return view('subs.lists.upload', [
+            'list' => $list
+        ]);
+    }
+
+    public function import(StoreExcel $request, $uuid)
+    {
+        $list = auth()->user()->binarySubsList()->where('uuid', $uuid)->firstOrFail();
+        
+        $extension = File::extension($request->file->getClientOriginalName());
+
+        if ($extension == "xlsx" || $extension == "csv" || $extension == "xls") {
+            // Resolving path 
+            $path = $request->file('file')->getRealPath();
+            
+            $data = Excel::load($path, function($reader) {})->get();
+            
+            dispatch(new UploadList($list, $data));
+
+            Toastr()->success('Upload Succesfully Importing', $list->name, ["positionClass" => "toast-bottom-right"]);
+            return redirect()->route('subs.list.index');
+        }
+        else {
+            Toastr()->success('List type should be xlsx, csv, xls', ["positionClass" => "toast-bottom-right"]);
+            return redirect()->back();
+        }
     }
 }
