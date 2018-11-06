@@ -95,4 +95,4 @@ Route::group(['middleware' => ['auth']], function () {
     /**
      * @uuid Brand
      */
-    Route::get('default/brand/mailing-list', 'BrandController@join');
+    Route::post('default/brand/mailing-list', 'BrandController@join')->name('subs.join');
