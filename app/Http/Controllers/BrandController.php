@@ -157,7 +157,7 @@ class BrandController extends Controller
     }
 
 
-    public function join(Request $request, $data)
+    public function join(Request $request)
     {
         return $request->all();
         if ($request->has('slug'))
