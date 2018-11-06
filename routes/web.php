@@ -95,4 +95,4 @@ Route::group(['middleware' => ['auth']], function () {
     /**
      * @uuid Brand
      */
-    Route::get('/default/brand/mailing-list/{slug}/{query}', 'BrandController@join');
+    Route::get('/default/brand/mailing-list/{data}', 'BrandController@join');

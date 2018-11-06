@@ -157,13 +157,13 @@ class BrandController extends Controller
     }
 
 
-    public function join($slug, $query)
+    public function join(Request $request, $data)
     {
-        $brand = $this->utility->getBrandPublic($slug);
-        return $_GET;
-        if ($brand->defaultList && ( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['email']) )) {
-            
-            $email = $_GET['email'];
+        if ($request->has('slug'))
+        $brand = $this->utility->getBrandPublic($request->slug);
+
+        if ($brand->defaultList && $request->has('email')) {
+            $email = $request->email;
 
             $sub = $brand->defaultList->binarySubs()->firstOrcreate([
                 'email' => $email
@@ -173,6 +173,9 @@ class BrandController extends Controller
                 ->send(new SubMail($email));
 
             return response()->json('Subscriber!');
+        }
+        else {
+            return 'not found';
         }
     }
 }
