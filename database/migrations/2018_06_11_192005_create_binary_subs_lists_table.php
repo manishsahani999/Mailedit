@@ -15,9 +15,10 @@ class CreateBinarySubsListsTable extends Migration
     {
         Schema::create('binary_subs_lists', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('Default Name');
+            $table->string('name')->default('Default List');
             $table->uuid('uuid')->unique();
             $table->integer('user_id')->unsigned();
+            $table->integer('binary_brand_id')->unsigned();
             $table->softDeletes();
             $table->timestamps();
         });

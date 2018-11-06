@@ -6,6 +6,7 @@ use App\Http\Requests\StoreBrand;
 use Illuminate\Http\Request;
 use App\Models\BinaryBrand;
 use App\Services\UtilityService;
+use App\Mail\SubMail;
 use Session;
 
 class BrandController extends Controller
@@ -61,6 +62,10 @@ class BrandController extends Controller
 
         // Creating new Brand
         $new = auth()->user()->binaryBrand()->create($data);
+
+        $new->defaultList()->create([
+            'user_id' => auth()->user()->id
+        ]);
 
         // Session Message
         Toastr()->success('Created Succesfully', $data['brand_name'], ["positionClass" => "toast-bottom-right"]);        
@@ -149,5 +154,24 @@ class BrandController extends Controller
         Toastr()->error('Deleted Successfully', 'Brand', ["positionClass" => "toast-bottom-right"]);        
 
         return redirect()->route('brand.index');
+    }
+
+
+    public function join($slug, $query)
+    {
+        $brand = $this->utility->getBrandPublic($slug);
+        if ($brand->defaultList && ( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['email']) )) {
+            
+            $email = $_GET['email'];
+
+            $sub = $brand->defaultList->binarySubs()->firstOrcreate([
+                'email' => $email
+            ]);
+
+            \Mail::to($email)
+                ->send(new SubMail($email));
+
+            return response()->json('Subscriber!');
+        }
     }
 }

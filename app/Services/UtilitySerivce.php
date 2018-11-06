@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Services;
-use App\Models\{BinaryCampaigns, BinaryEmailLink};
+use App\Models\{BinaryBrand, BinaryCampaigns, BinaryEmailLink};
 use Log;
 
 
@@ -13,6 +13,11 @@ class UtilityService
     public function getBrand($slug)
     {
         return auth()->user()->binaryBrand()->where('slug', $slug)->first();
+    }
+
+    public function getBrandPublic($slug)
+    {
+        return BinaryBrand::whereSlug($slug)->firstOrFail();
     }
 
     /*

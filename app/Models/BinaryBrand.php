@@ -34,4 +34,9 @@ class BinaryBrand extends Model
     public function binaryCampaign() {
         return $this->hasMany('App\Models\BinaryCampaigns');
     }
+
+    public function defaultList()
+    {
+        return $this->hasOne('App\Models\BinarySubsList');
+    }
 }

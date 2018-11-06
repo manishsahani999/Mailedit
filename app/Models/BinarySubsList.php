@@ -13,7 +13,7 @@ class BinarySubsList extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name', 'uuid',
+        'name', 'uuid', 'user_id', 'binary_brand_id'
     ];
     
     /**
@@ -45,5 +45,15 @@ class BinarySubsList extends Model
      */
     public function binaryCampaign() {
         return $this->belongsToMany('App\Models\BinaryCampaigns');
+    }
+
+    /**
+     *
+     * This belongs to One Brand
+     *
+     * @return this
+     */
+    public function brand() {
+        return $this->belongsToMany('App\Models\BinaryBrand', 'binary_brand_id');
     }
 }
