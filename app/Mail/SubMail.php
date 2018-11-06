@@ -30,6 +30,6 @@ class SubMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.subs');
+        return $this->subject('Thankyou for subscribing to our monthly newsletter')->view('emails.subs');
     }
 }
