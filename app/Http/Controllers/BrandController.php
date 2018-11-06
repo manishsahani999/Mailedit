@@ -160,22 +160,24 @@ class BrandController extends Controller
     public function join(Request $request, $data)
     {
         if ($request->has('slug'))
-        $brand = $this->utility->getBrandPublic($request->slug);
+        {
+            $brand = $this->utility->getBrandPublic($request->slug);
 
-        if ($brand->defaultList && $request->has('email')) {
-            $email = $request->email;
+            if ($brand->defaultList && $request->has('email')) {
+                $email = $request->email;
 
-            $sub = $brand->defaultList->binarySubs()->firstOrcreate([
-                'email' => $email
-            ]);
+                $sub = $brand->defaultList->binarySubs()->firstOrcreate([
+                    'email' => $email
+                ]);
 
-            \Mail::to($email)
-                ->send(new SubMail($email));
+                \Mail::to($email)
+                    ->send(new SubMail($email));
 
-            return response()->json('Subscriber!');
+                return response()->json('Subscriber!');
+            }
         }
         else {
-            return 'not found';
-        }
+                return response()->json('Slug not provided');
+            }
     }
 }
