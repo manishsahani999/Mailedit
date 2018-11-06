@@ -159,6 +159,7 @@ class BrandController extends Controller
 
     public function join(Request $request, $data)
     {
+        return $request->all();
         if ($request->has('slug'))
         {
             $brand = $this->utility->getBrandPublic($request->slug);
