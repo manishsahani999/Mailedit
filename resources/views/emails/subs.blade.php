@@ -4,7 +4,7 @@
 <head></head>
 
 <body>
-    Dear Marketer, <br> Thanks for subscribing to our monthly newsletter. <br> As promised, here you will get:
+    Dear Marketer, <br> <br> Thanks for subscribing to our monthly newsletter. <br> As promised, here you will get:
     <ul>
         <li>Sample plans across Social Media, Inbound, Demand Generation and Offline Media</li>
         <li>Best practices followed by industry leaders</li>
