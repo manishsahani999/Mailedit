@@ -97,7 +97,6 @@ class EmailService
             $this->getSubscriber($subscriber);
             $this->getEmail($data);
             
-            dump($data);
 
             Mail::to($this->subscriber->email)
                 ->send(new DefaultMail($this->subscriber,  $this->emailObj));

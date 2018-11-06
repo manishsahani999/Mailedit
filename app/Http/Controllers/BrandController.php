@@ -160,6 +160,7 @@ class BrandController extends Controller
     public function join($slug, $query)
     {
         $brand = $this->utility->getBrandPublic($slug);
+        return $_GET;
         if ($brand->defaultList && ( $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['email']) )) {
             
             $email = $_GET['email'];
