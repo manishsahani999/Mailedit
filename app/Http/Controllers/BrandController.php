@@ -162,11 +162,12 @@ class BrandController extends Controller
         if ($request->has('slug'))
         {
             $brand = $this->utility->getBrandPublic($request->slug);
-
+        
             if ($brand->defaultList && $request->has('email')) {
+                
                 $email = $request->email;
 
-                $sub = $brand->defaultList->binarySubs()->firstOrcreate([
+                $sub = $brand->defaultList->binarySubs()->firstOrCreate([
                     'email' => $email
                 ]);
 
