@@ -20,7 +20,7 @@
 
     Also, we love to hear from our readers. So, if there is anything specific that you want us to cover, do drop us an e-mail.
 
-    <br> <br> Best regards, <br> MarketingVedas
+    <br> <br> Best Regards, <br> MarketingVedas
 </body>
 
 </html>
