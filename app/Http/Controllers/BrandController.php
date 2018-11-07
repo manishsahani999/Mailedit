@@ -64,7 +64,8 @@ class BrandController extends Controller
         $new = auth()->user()->binaryBrand()->create($data);
 
         $new->defaultList()->create([
-            'user_id' => auth()->user()->id
+            'user_id' => auth()->user()->id,
+            'name' => $data['brand_name'].' default list'
         ]);
 
         // Session Message
