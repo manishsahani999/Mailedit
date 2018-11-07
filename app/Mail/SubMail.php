@@ -30,6 +30,6 @@ class SubMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->from('digital@marketingvedas.com')->subject('Thank You for subscribing to our monthly newsletter')->view('emails.subs');
+        return $this->subject('Thank You for subscribing to our monthly newsletter')->view('emails.subs');
     }
 }
