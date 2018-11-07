@@ -14,8 +14,8 @@
     While you are excitedly waiting for your first newsletter, check out some of our articles to get started:
 
     <ul>
-        <li>How has the buying process evolved over time and what it means for your business</li>
-        <li>How to create a unique value proposition</li>
+        <li><a href="https://www.marketingvedas.com/evolution-of-b2b-buying-process/">How has the buying process evolved over time and what it means for your business</a></li>
+        <li><a href="https://www.marketingvedas.com/unique-value-proposition/">How to create a unique value proposition</a></li>
     </ul>
 
     Also, we love to hear from our readers. So, if there is anything specific that you want us to cover, do drop us an e-mail.

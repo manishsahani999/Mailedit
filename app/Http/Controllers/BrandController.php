@@ -167,10 +167,12 @@ class BrandController extends Controller
                 
                 $email = $request->email;
 
-                $sub = $brand->defaultList->binarySubs()->firstOrCreate([
-                    'email' => $email
-                ]);
-
+                $sub = $brand->defaultList->binarySubs()->whereEmail($email)->first();
+                if(!$sub)
+                    $brand->defaultList->binarySubs()->create([
+                        'email' => $email
+                    ]);
+                
                 \Mail::to($email)
                     ->send(new SubMail($email));
 
