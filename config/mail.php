@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'email-smtp.us-east-1.amazonaws.com'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'digital@marketingdrops.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'digital@marketingvedas.com'),
         'name' => env('MAIL_FROM_NAME', 'Mailedit'),
     ],
 
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME', 'AKIAIRPUC7H5GF4Y3MJQ'),
+    'username' => env('MAIL_USERNAME', 'digital@marketingvedas.com'),
 
-    'password' => env('MAIL_PASSWORD', 'Ah8Nret26m3TcHX2mL6UdD1MCj1PvpNu3nv41ES/ZaFT'),
+    'password' => env('MAIL_PASSWORD', 'Superfunguy$321'),
 
     /*
     |--------------------------------------------------------------------------
