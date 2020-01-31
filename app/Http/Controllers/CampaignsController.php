@@ -164,11 +164,11 @@ class CampaignsController extends Controller
         $templates = $this->utility->getAllUserTemplates();
 
         // redirecting
-        return view('pages.campaigns.content', [
+        return view('pages.campaigns.design', [
             'brand'     => $brand,
             'campaign'  => $campaign,
             'templates' => $templates
-        ]);
+        ]); 
     }
 
     public function contentStore(Request $request, $slug, $uuid)
@@ -184,16 +184,7 @@ class CampaignsController extends Controller
 
         Toastr()->info('Campaign Designed', $this->utility->getCampaign($slug, $uuid)->name, ["positionClass" => "toast-bottom-right"]);
         
-        // redirecting to show route
-        if ($request->has('draft')) {
-            return redirect()->route('brand.show', $brand->slug);
-        }
-        else {
-            return redirect()->route('campaign.show', [
-                'slug' => $slug,
-                'uuid' => $uuid
-            ]);
-        }        
+        return 1; 
     }
 
     /**

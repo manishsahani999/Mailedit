@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('brands/{slug}/new-campaign', 'CampaignsController@store')->name('campaign.store');
     Route::get('brands/{slug}/campaign/{uuid}/schedule', 'CampaignsController@show')->name('campaign.show');
     Route::get('brands/{slug}/campaign/{uuid}/content', 'CampaignsController@content')->name('campaign.content.create');
-    Route::put('brands/{slug}/campaign/{uuid}/content', 'CampaignsController@contentStore')->name('campaign.content.store');
+    Route::post('brands/{slug}/campaign/{uuid}/update-content', 'CampaignsController@contentStore')->name('campaign.content.update_content');
     Route::get('brands/{slug}/campaign/{uuid}/edit', 'CampaignsController@edit')->name('campaign.edit');
     Route::put('brands/{slug}/campaign/{uuid}', 'CampaignsController@update')->name('campaign.update');
     Route::delete('brands/{slug}/campaign/{uuid}', 'CampaignsController@destroy')->name('campaign.destroy');
