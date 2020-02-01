@@ -1,63 +1,62 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="wrap">
-    <div class="home-header"> 
-        <h2 class="inline-pc">Brands</h4>
-        <div class="right-pc">
-            <a href="{{ route('brand.create') }}" class="btn btn-secondary bt">Create Brand</a>
-        </div>
-        <div class="mt-1">
-            <span>You can send campaigns by creating a brand.</span>
-        </div>
-        @include('components/sessions')
-    </div>
 
-    <div class="home-body">
-        <hr>
-        <h5 class="ml-2">All Brands</h5>
-        
-        <div class="body-table">
-            <table class="table">
-            <thead>
-            <tr class="text-center">
-                <th scope="col">S no.</th>
-                <th scope="col">Brand Name</th>
-                <th scope="col">Created</th>
-                <th scope="col">Campaigns</th>
-                <th scope="col">Sent</th>
-                <th scope="col">View</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($brands as $brand)
-                <tr class="text-center">
-                    <th>{{ $loop->index+1 }}</th>
-                    <td><a href="{{ route('brand.show', $brand->slug) }}">{{ $brand->brand_name }}</a></td>
-                    <td>{{ $brand->created_at->diffForHumans() }}</td>
-                    <td>{{ count($brand->binaryCampaign()->get()) }}</td>
-                    <td>{{ count($brand->binaryCampaign()->whereStatus('sent')->get()) }}</td>
-                    <td>
-                        <a href="{{ route('brand.show', $brand->slug) }}" class="btn btn-secondary bt">View</a>
-                    </td>
-                    <td>
-                        <a href="{{ route('brand.edit', $brand->slug) }}" class="btn btn-warning bt">Edit</a>
-                    </td>
-                    <td>
-                        <form action="{{ route('brand.destroy', $brand->slug) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger bt">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+<section class="cover space--md pb-4 border--bottom">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <h3 class="mb-0" style="font-size: 3rem;">All Brands</h3>
+                <h3 class="type--fade">You can send campaigns by creating a brand.</h3>
+                <a class="btn btn-secondary btn-dark type--uppercase" href="{{ route('brand.create') }}">
+                    <span class="btn__text text-white">Create New Brand</span>
+                </a>
+            </div>
         </div>
-        
     </div>
-</div>
+</section>
+<section>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <ul class="accordion accordion-2 accordion--oneopen">
+                    @foreach ($brands as $item)
+                    <li>
+                        <div class="accordion__title">
+                            <span class="h5">{{$item->brand_name}}
+                                <small class="type--fade">
+                                    Created <strong>{{ $item->created_at->diffForHumans() }}</strong>
+                                </small>
+                            </span>
+                        </div>
+                        <div class="accordion__content">
+                            <div class="text-right d-block">
+                                <a class="btn btn--sm type--uppercase" href="{{ route('brand.show', $item->slug) }}">
+                                    <span class="btn__text">
+                                        View
+                                    </span>
+                                </a>
+                                <a class="btn btn--sm type--uppercase" href="{{ route('brand.edit', $item->slug) }}">
+                                    <span class="btn__text">
+                                        Edit
+                                    </span>
+                                </a>
+                                <a class="btn btn--sm type--uppercase" href="" onclick="event.preventDefault();
+                                        document.getElementById('delete-form--{{ $item->id }}').submit();">
+                                    <span class="btn__text">
+                                        Delete
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <form id="delete-form--{{$item->id}}" class="" action="{{ route('brand.destroy', $item->slug) }}" method="post">
+                        @csrf @method('DELETE')
+                    </form>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection

@@ -17,11 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+
 //    brand routes
     Route::get('brands/', 'BrandController@index')->name('brand.index');
     Route::get('brands/new-brand', 'BrandController@create')->name('brand.create');

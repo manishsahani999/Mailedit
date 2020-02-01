@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\BinaryCampaigns;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $brands = auth()->user()->binaryBrand()->latest()->first();
+        $campaign = $brands->binaryCampaign()->latest()->first();
+
+        return view('home', ["brand" => $brands, "campaign" => $campaign]);
     }
 }

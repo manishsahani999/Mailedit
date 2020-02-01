@@ -1,18 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="wrap">
-        <div class="home-header">
-            <h2 class="inline-pc">{{ ucwords($brand->brand_name) }}</h2>
-            <h4 class="inline-pc">/ All Campaigns</h4>
-            <div class="right-pc">
-                <a href="{{ route('campaign.create', $brand->slug) }}" class="btn btn-secondary bt">Create Campaigns</a>
+
+<section class="cover space--md pb-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <h3 class="mb-0" style="font-size: 3rem;">{{ ucwords($brand->brand_name) }} <span class="type--fade" style="font-size: 2.1rem;">/ All Campaigns</span></h3>
+                <h5 class="type--fade">Created {{ $brand->created_at->diffForHumans() }} by {{ Auth::user()->name }}.</h5>
+                <a class="btn btn-secondary btn-dark type--uppercase" href="{{ route('campaign.create', $brand->slug) }}"">
+                    <span class="btn__text text-white">Create New Campaign</span>
+                </a>
             </div>
-            <div class="mt-1">
-                <span>Created {{ $brand->created_at->diffForHumans() }} by {{ Auth::user()->name }}.</span>
-            </div>
-            @include('components.sessions')
         </div>
+    </div>
+</section>
+
+
+    <div class="wrap">
+
         <div class="home-body">
             <div class="row">
                 <div class="col-sm-3">
