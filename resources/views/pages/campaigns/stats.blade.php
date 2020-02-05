@@ -173,7 +173,7 @@ if ($total_clicked == 0) {
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <h3 class="mb-0" style="font-size: 3rem;">Update {{ $campaign->name }}</h3>
+                <h3 class="mb-0" style="font-size: 3rem;"> {{ $campaign->name }} / Stats</h3>
                 <h3 class="type--fade">You can send campaigns by creating a brand.</h3>
                 <!-- <a class="" href="{{ route('brand.create') }}">
                     <span class="btn__text text-white">Create New Brand</span>

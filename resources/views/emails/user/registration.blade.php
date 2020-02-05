@@ -9,13 +9,13 @@ We are grateful to have you on board.
 <br><br>
 
 
-@component('mail::button', ['url' => 'https://messmerising.com/home'])
+@component('mail::button', ['url' => 'https://email.grorapid.com/dashboard'])
 Login to Dashboard
 @endcomponent
 
 
 Thanks,<br>
-Mailedit Team
+Grorapid Team
 @endcomponent
 
 @endcomponent
