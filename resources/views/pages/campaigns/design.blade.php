@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Mailedit Designer</title>
+    <title>{{ $campaign->name }} | Mailedit Designer</title>
     <link rel="stylesheet" href="//unpkg.com/grapesjs@0.10.7/dist/css/grapes.min.css">
     <link rel="stylesheet" href="{{ asset('css/editor/material.css')}}">
     <link rel="stylesheet" href="{{ asset('css/editor/tooltip.css')}}">
@@ -247,11 +247,11 @@
                             console.log(error);
                         }
                         if (data == 1) 
-                        window.location.replace(`{{ route('campaign.store.info', [$brand->slug, $campaign->uuid]) }}`);
+                            window.location.replace(`{{ route('campaign.store.info', [$brand->slug, $campaign->uuid]) }}`);
+                        if (data == 2)
+                            window.location.replace(`{{ route('campaign.show', [$brand->slug, $campaign->uuid]) }}`);
                     }
                 });
-
-                console.log(url);
             }
         });
         pnm.addButton('options', {

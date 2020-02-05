@@ -45,8 +45,15 @@ class CampaignsController extends Controller
      */
     public function store(Request $request, $slug)
     {
+        //  brand
+        $brand = $this->utility->getBrand($slug);
+        
         // find campaign
-        $campaign = $this->utility->getBrand($slug)->binaryCampaign()->create();
+        $campaign = $this->utility->getBrand($slug)->binaryCampaign()->create([
+            'from_name' => $brand->from_name,
+            'from_email' => $brand->from_email,
+            'reply_to' => $brand->reply_to,
+        ]);
 
         if ($request->has('preset_template')) {
             $preset = PresetTemplate::find($request->preset_template);
@@ -143,9 +150,51 @@ class CampaignsController extends Controller
 
         $campaign->update(['html' => $request->html]);
 
+        if ($campaign->name) return 2;
         return 1;
     }
-    
+
+    /**
+     * 
+     * Schedule Page
+     * 
+     */
+    public function schedulePage($slug, $uuid)
+    {
+        // find brand
+        $brand = $this->utility->getBrand($slug);        
+
+        // find campaign
+        $campaign = $this->utility->getCampaign($slug, $uuid);
+
+        return view('pages.campaigns.schedule', [
+            'brand' => $brand,
+            'campaign' => $campaign
+        ]);
+    }
+
+    /**
+     * 
+     * Sending the campaign
+     *
+     * 
+     */
+    public function sendCampaign($uuid)
+    {
+        dispatch(new SendEmail($uuid));
+
+        return redirect()->back();
+    }
+
+    /**
+     * 
+     * Schedule Update
+     * 
+     */
+    public function scheduleUpdate(Request $request, $slug, $uuid)
+    {
+        return $request->all();
+    }
 
 
     public function recentCampaign($slug)
@@ -386,9 +435,7 @@ class CampaignsController extends Controller
     public function destroy($slug, $uuid)
     {
         // find the list and deleting
-        $list = $this->utility->getCampaign($slug ,$uuid)->delete();
-
-        Toastr()->error('Campaign Deleted', 'Campaign', ["positionClass" => "toast-bottom-right"]);
+        $this->utility->getCampaign($slug ,$uuid)->delete();
 
         // return to index page
         return redirect()->route('brand.show', $slug);
@@ -426,19 +473,5 @@ class CampaignsController extends Controller
         ]);
     }
 
-    /**
-     * 
-     * Sending the campaign
-     *
-     * 
-     */
-    public function sendCampaign($uuid)
-    {
-        dispatch(new SendEmail($uuid));
-        
-        // Session message
-        Toastr()->info('yo whoo', 'Sending Campaign', ["positionClass" => "toast-bottom-right"]);
-
-        return redirect()->back();
-    }
+    
 }

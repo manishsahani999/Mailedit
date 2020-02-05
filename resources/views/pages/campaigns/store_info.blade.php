@@ -25,19 +25,19 @@
                 <div class="col-md-6">
                     <div class="">
                         <div class="form-group">
-                            <input type="text" name="name" value="{{ old('name') }}" class="form-control form-control-lg" required placeholder="Name">
+                            <input type="text" name="name" value="{{ $campaign->name ? $campaign->name : '' }}" class="form-control form-control-lg" required placeholder="Name">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="subject" value="{{ old('subject') }}" class="form-control form-control-lg" required placeholder="Subject">
+                            <input type="text" name="subject" value="{{ $campaign->subject ? $campaign->subject : '' }}" class="form-control form-control-lg" required placeholder="Subject">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control  form-control-lg" value="{{ old('from_name') ? old('from_name') : $brand->from_name }}" name="from_name" required placeholder="From Name">
+                            <input type="text" class="form-control  form-control-lg" value="{{ $campaign->from_name ? $campaign->from_name : '' }}" name="from_name" required placeholder="From Name">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-lg" value="{{ old('from_email') ? old('from_email') : $brand->from_email }}" name="from_email" required placeholder="From Email">
+                            <input type="text" class="form-control form-control-lg" value="{{ $campaign->from_email ? $campaign->from_email : '' }}" name="from_email" required placeholder="From Email">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-lg" value="{{ old('reply_to') ? old('reply_to') : $brand->reply_to }}" name="reply_to" required placeholder="Reply to">
+                            <input type="text" class="form-control form-control-lg" value="{{ $campaign->reply_to ? $campaign->reply_to : '' }}" name="reply_to" required placeholder="Reply to">
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control form-control-lg" name="allowed_files" value="{{ old('allowed_files') }}" placeholder="Allowed Files">

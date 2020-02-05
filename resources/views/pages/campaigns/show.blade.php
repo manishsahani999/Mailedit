@@ -12,9 +12,6 @@
             <div class="col-md-10">
                 <h3 class="mb-0" style="font-size: 3rem;">{{ucwords($campaign->name) }}</h3>
                 <h3 class="type--fade">You can send campaigns by creating a brand.</h3>
-                <!-- <a class="" href="{{ route('brand.create') }}">
-                    <span class="btn__text text-white">Create New Brand</span>
-                </a> -->
             </div>
         </div>
     </div>
@@ -23,7 +20,65 @@
 <section class="cover space--md pb-4">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-3">
+            <div class="col-md-6">
+                <h4 class="mb-3">Test Send this Campaign</h4>
+                <form action="{{ route('email.test', [
+                                    'slug' => $brand->slug,
+                                    'uuid' => $campaign->uuid
+                            ]) }}" method="post" style="margin-top: 0 !important;">
+                    @csrf
+                    <div class="form-group" class="mt-2">
+                        <input type="text" name="test_email" class="form-control form-control-lg" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-secondary btn-dark type--uppercase">Send this newsletter</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2 text-center">
+                <div>
+                    <a style="width:100%" class="mt-1 btn type--uppercase" href="{{ route('campaign.design.page', [$brand->slug, $campaign->uuid]) }}">
+                        <span class="btn__text">
+                            Edit Design
+                        </span>
+                    </a>
+                </div>
+                <div>
+                    <a style="width:100%" class="mt-1 btn type--uppercase" href="{{ route('campaign.store.info', [$brand->slug, $campaign->uuid]) }}">
+                        <span class="btn__text">
+                            Edit info
+                        </span>
+                    </a>
+                </div>
+                <div>
+                    <a style="width:100%" disabled class="mt-1 btn type--uppercase" href="{{ route('campaign.schedule.page', [$brand->slug, $campaign->uuid]) }}">
+                        <span class="btn__text">
+                            Schedule
+                        </span>
+                    </a>
+                </div>
+                @if(count($campaign->binarySubsList) == 0)
+                <button class="btn type--uppercase" style="width: 100%;" disabled>
+                    <span class="btn__text">Send now</span>
+                </button>
+                @else
+                <form class="mt-0" action="{{ route('campaign.send', $campaign->uuid) }}" method="get">
+                    @csrf
+                    <button class="mt-1 btn btn--primary type--uppercase" style="width: 100%;">
+                        <span class="btn__text">Send now</span>
+                    </button>
+                </form>
+                @endif
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cover space--md pb-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
                 <span class="h4 mb-4">Campaign List</span>
                 <form action="{{ route('campaign.remove.lists', [
                                             'slug' => $brand->slug,
@@ -40,18 +95,18 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-secondary btn-dark type--uppercase">Remove list</button>
+                        <button type="submit" class="btn type--uppercase">Remove list</button>
                     </div>
                 </form>
             </div>
-            @php 
-                $selected_list = [];
-                foreach($campaign->binarySubsList as $list) 
-                {
-                    array_push($selected_list, $list->id);
-                }
+            @php
+            $selected_list = [];
+            foreach($campaign->binarySubsList as $list)
+            {
+            array_push($selected_list, $list->id);
+            }
             @endphp
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <span class="h4 mb-4">All list</span>
                 <form action="{{ route('campaign.add.lists', [
                             'slug' => $brand->slug, 
@@ -63,29 +118,17 @@
                             <select class="form-control form-control-lg" name="lists">
                                 @foreach($lists as $list)
                                 @if (!in_array($list->id, $selected_list))
-                                    <option value="{{ $list->id }}">{{ $list->name }}</option>
+                                <option value="{{ $list->id }}">{{ $list->name }}</option>
                                 @endif
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-secondary btn-dark type--uppercase">Add List</button>
+                    <button type="submit" class="btn type--uppercase">Add List</button>
                 </form>
             </div>
-            <div class="col-md-4">
-                <h3 class="mb-3">Test Send this Campaign</h3>
-                <form action="{{ route('email.test', [
-                                    'slug' => $brand->slug,
-                                    'uuid' => $campaign->uuid
-                            ]) }}" method="post" style="margin-top: 0 !important;">
-                    @csrf
-                    <div class="form-group" class="mt-2">
-                        <input type="text" name="test_email" class="form-control form-control-lg" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-secondary btn-dark type--uppercase">Send this newsletter</button>
-                    </div>
-                </form>
+            <div class="col-md-2 text-center">
+
             </div>
         </div>
     </div>
@@ -103,27 +146,10 @@
         <span class="ml-2">Let's get started</span>
     </div>
     <ul class="navbar-nav ml-auto">
-        <li class="navbar-item">
-            <a href="{{ route('brand.show', $brand->slug) }}" class="btn bt"> Go back all Campaigns</a>
-        </li>
-        <li class="navbar-item">
-            <a class="btn btn-warning bt" href="{{ route('campaign.content.create', [$brand->slug, $campaign->uuid]) }}">Edit Design</a>
-        </li>
+
+        
         <li class="navbar-item ml-1">
-            <a class="btn btn-warning bt" href="{{ route('campaign.edit', [$brand->slug, $campaign->uuid]) }}">Edit info</a>
-        </li>
-        <li class="navbar-item ml-1">
-            <a href="#schedule" class="btn btn-primary bt" name="draft">Schedule</a href="#schedule">
-        </li>
-        <li class="navbar-item ml-1">
-            @if(count($campaign->binarySubsList) == 0)
-                <button class="btn btn-info bt" disabled>Send now</button>
-            @else
-            <form action="{{ route('campaign.send', $campaign->uuid) }}" method="get">
-            @csrf
-                    <button class="btn btn-info bt">Send now</button>
-            </form>
-            @endif
+            
         </li>
     </ul>
 </nav>

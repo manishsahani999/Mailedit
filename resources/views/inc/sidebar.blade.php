@@ -121,7 +121,7 @@
                 |
                 |
                 -->
-                <li class="dropdown">
+                <!-- <li class="dropdown">
                     <span class="dropdown__trigger">
                         Templates
                     </span>
@@ -141,7 +141,7 @@
                             </ul>
                         </div>
                     </div>
-                </li>
+                </li> -->
 
                 <!--
                 |

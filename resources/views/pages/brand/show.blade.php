@@ -51,7 +51,7 @@
                                     </span>
                                 </a>
 
-                                <a class="btn btn--sm type--uppercase" href="{{ route('campaign.edit', [
+                                <a class="btn btn--sm type--uppercase" href="{{ route('campaign.store.info', [
                                             'slug' => $brand->slug, 
                                             'uuid' => $item->uuid
                                         ]) }}">
@@ -70,12 +70,12 @@
                                 </a>
 
                                 <a class="btn btn--sm type--uppercase" href="" onclick="event.preventDefault();
-                                    document.getElementById('delete-form--{{$item->slug}}').submit();">
+                                    document.getElementById('delete-form--{{$item->uuid}}').submit();">
                                     <span class="btn__text">
                                         Delete
                                     </span>
                                 </a>
-                                <form id="delete-form--{{$item->slug}}" class="" action="{{ route('campaign.destroy', [
+                                <form id="delete-form--{{$item->uuid}}" class="" action="{{ route('campaign.destroy', [
                                             'slug' => $brand->slug,
                                             'uuid' => $item->uuid]) }}" method="post">
                                     @csrf @method('DELETE')
