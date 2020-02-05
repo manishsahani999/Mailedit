@@ -2,75 +2,91 @@
 
 @section('content')
 
-<div class="wrap">
-    <div class="home-header">
-        <h2 class="inline-pc">All Lists</h2>
-        <div class="right-pc">
-            <form action="{{ route('subs.list.store') }}" method="post" class="form-inline">
-                @csrf
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="Name of List" class="form-control form-inline" required>
-                </div>
-                <div class="form-group ml-1">
-                <button class="btn n-lb-sending pl-3 pr-3" type="submit">Create new List</button>
-                </div>
-            </form>
-        </div>
-        <div class="mt-0"><span>lorem ispum dolor situm.</span></div>
-    </div>
-    <div class="home-body">
-        <div class="row">
-            <div class="col-sm-3 text-center">
-                <h3>Search List</h3>
+<section class="cover space--md pb-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <h3 class="mb-0" style="font-size: 3rem;">All lists</h3>
+                <h3 class="type--fade">You can send campaigns by creating a brand.</h3>
+                <!-- <a class="" href="{{ route('brand.create') }}">
+                    <span class="btn__text text-white">Create New Brand</span>
+                </a> -->
             </div>
-            <div class="col">
-                <span id="body-tab">All lists</span>
-                <hr class="mt-0">
-                <div class="n-table-wrap">
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <ul class="accordion accordion-2 accordion--oneopen">
                     @foreach($lists as $list)
-                        <div class="n-table row">
-                            <?php
-                                $count = count($list->binarySubs()->get())
-                            ?>
-                            <div class="col-sm-1 n-col-1">
-                                <img src="{{ asset('img/paper-plane.svg') }}" alt="" class="n-col-icon">
+                    <li>
+                        <?php
+                        $count = count($list->binarySubs()->get())
+                        ?>
+                        <div class="accordion__title">
+                            <span class="h5">{{ $list->name }}
+                                <small class="type--fade">
+                                    Created <strong>{{ $list->created_at->diffForHumans() }}</strong>
+                                </small>
+                            </span>
+                        </div>
+                        <div class="accordion__content">
+                            <div>
+                                Members - {{ $count }}
                             </div>
-                            <div class="col-sm-4 n-col-2">
-                                <h5 class="mb-0">
-                                    <a href="{{ route('subs.list.show', $list->uuid) }}">
-                                        {{ $list->name }}
-                                    </a>
-                                </h5>
-                                <span>something here</span>
-                                <div><span>Created<strong> {{ $list->created_at->diffForHumans() }}</strong></span></div>
-                            </div>
-                            <div class="col-sm-2 pt-2 text-center">
-                                <h3 class="mb-0">{{ $count }}</h3>
-                                <span>Members</span>
-                            </div>
-                            <div class="col-sm-1 offset-sm-1 pt-3 mr-1">
-                                <a href="{{ route('subs.list.show', $list->uuid) }}" class="btn btn-primary bt">
-                                    View
+                            <div class="text-right d-block">
+                                <a class="btn btn--sm type--uppercase" href="{{ route('subs.list.show', $list->uuid) }}">
+                                    <span class="btn__text">
+                                        View
+                                    </span>
                                 </a>
-                            </div>
-                            <div class="col-sm-1 pt-3">
-                                <a href="{{ route('subs.list.edit', $list->uuid) }}" class="btn n-lb-draft bt">
-                                    Edit
+                                <a class="btn btn--sm type--uppercase" href="{{ route('subs.list.edit', $list->uuid) }}">
+                                    <span class="btn__text">
+                                        Edit
+                                    </span>
                                 </a>
-                            </div>
-                            <div class="col-sm-1 pt-3">
-                            <form action="{{ route('subs.list.destroy', $list->uuid) }}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn n-lb-cancel bt">Delete</button>
-                            </form>
+                                <a class="btn btn--sm type--uppercase" href="" onclick="event.preventDefault();
+                                        document.getElementById('delete-form--{{ $list->id }}').submit();">
+                                    <span class="btn__text">
+                                        Delete
+                                    </span>
+                                </a>
+
                             </div>
                         </div>
-                        <hr>
-                    @endforeach    
-                </div>
+                    </li>
+                    <form id="delete-form--{{$list->id}}" action="{{ route('subs.list.destroy', $list->uuid) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+                <form action="{{ route('subs.list.store') }}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Name of List" class="form-control form-inline" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-select">
+                            <select class="form-control form-control-lg" name="binary_brand_id">
+                                @foreach($brand as $item)
+                                <option value="{{ $item->id }}">{{ $item->brand_name }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-secondary btn-dark type--uppercase" type="submit">Create new List</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
-</div>
+</section>
 @endsection

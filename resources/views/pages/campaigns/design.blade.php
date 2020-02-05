@@ -247,7 +247,7 @@
                             console.log(error);
                         }
                         if (data == 1) 
-                        window.location.replace(`{{ route('campaign.show', [$brand->slug, $campaign->uuid]) }}`);
+                        window.location.replace(`{{ route('campaign.store.info', [$brand->slug, $campaign->uuid]) }}`);
                     }
                 });
 

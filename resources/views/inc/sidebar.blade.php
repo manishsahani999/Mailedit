@@ -82,12 +82,19 @@
                 <br>
                 @endif
 
+
+                <!--
+                |
+                |
+                | Brand Section
+                |
+                |
+                -->
                 <li>
                     <a href="{{ route('brand.create') }}">
                         Create New Brand
                     </a>
                 </li>
-
                 <li class="dropdown">
                     <span class="dropdown__trigger">
                         All Brands
@@ -110,10 +117,48 @@
                 <!--
                 |
                 |
-                | Photographers Section
+                | Template List
                 |
                 |
-                 -->
+                -->
+                <li class="dropdown">
+                    <span class="dropdown__trigger">
+                        Templates
+                    </span>
+                    <div class="dropdown__container">
+                        <div class="dropdown__content">
+                            <ul class="menu-vertical">
+                                <li>
+                                    <a href="{{ route('template.create') }}">
+                                        Create Template
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('template.index') }}">
+                                        All Templates
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+
+                <!--
+                |
+                |
+                | Subscriber List
+                |
+                |
+                -->
+                <li>
+                    <a href="{{ route('subs.list.index') }}">
+                        Subscriber Lists
+                    </a>
+                </li>
+
+
+
+
 
                 <!--
                 |

@@ -28,8 +28,10 @@ class SubsListController extends Controller
         // all list
         $lists = auth()->user()->binarySubsList()->get();
 
+        $brands = auth()->user()->binaryBrand()->get();
+
         // redirecting to view/subs/lists/index
-        return view('subs.lists.index', ['lists' => $lists]);
+        return view('subs.lists.index', ['lists' => $lists, 'brand' => $brands]);
     }
 
     /**

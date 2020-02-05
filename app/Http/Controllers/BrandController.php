@@ -26,6 +26,7 @@ class BrandController extends Controller
     public function index()
     {
         $brands = auth()->user()->binaryBrand()->get();
+        
         return view('pages.brand.index', ['brands' => $brands]);
     }
 
