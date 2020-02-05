@@ -45,7 +45,7 @@
                                     <input type="text" class="form-control form-control-lg" name="allowed_files" value="{{ old('allowed_files') }}" placeholder="Allowed attachments file types">
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-dark type--uppercase">
+                                    <button type="submit" class="btn btn-secondary btn-dark type--uppercase">
                                     <span class="btn__text text-white">Create new brand</span>
                                     </button>
                                 </div>

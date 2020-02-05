@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCampaign;
 use Illuminate\Http\Request;
-use App\Models\{BinaryBrand, BinaryCampaigns, BinaryEmailLink};
+use App\Models\{PresetTemplate};
 use Carbon\Carbon;
 use App\Jobs\{SendEmail, ScheduleCampaign};
 use App\Services\UtilityService;
@@ -12,12 +12,140 @@ use Log;
 
 class CampaignsController extends Controller
 {
-
-
+    /**
+     * Constructor 
+     */
     public function __construct(UtilityService $utility)
     {
         $this->utility = $utility;
     }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create($slug)
+    {
+        //  brand
+        $brand = $this->utility->getBrand($slug);
+        $templates = PresetTemplate::all();
+        
+        return view('pages.campaigns.create', [
+            'brand' => $brand,
+            'preset_templates' => $templates
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request, $slug)
+    {
+        // find campaign
+        $campaign = $this->utility->getBrand($slug)->binaryCampaign()->create();
+
+        if ($request->has('preset_template')) {
+            $preset = PresetTemplate::find($request->preset_template);
+            $campaign->update([
+                'html' => $preset->content
+            ]);
+        }
+
+        return redirect()->route('campaign.design.page', [$slug, $campaign->uuid]);
+    }
+
+    /**
+     * Store Info page 
+     */
+    public function storeInfo($slug, $uuid)
+    {
+        // find brand
+        $brand = $this->utility->getBrand($slug);        
+
+        // find campaign
+        $campaign = $this->utility->getCampaign($slug, $uuid);
+
+        return view('pages.campaigns.store_info', [
+            'brand' => $brand,
+            'campaign' => $campaign
+        ]);
+    }
+
+    /**
+     * Update Info Page
+     */
+    public function updateInfo(StoreCampaign $request, $slug, $uuid)
+    {     
+        // find campaign
+        $campaign = $this->utility->getCampaign($slug, $uuid);
+
+        $campaign->update($request->all());
+
+        return redirect()->route('campaign.show', [$slug, $uuid]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($slug, $uuid)
+    {
+        // find brand
+        $brand = $this->utility->getBrand($slug);        
+
+        // find campaign
+        $campaign = $this->utility->getCampaign($slug, $uuid);
+
+        // finding all lists
+        $lists = auth()->user()->binarySubsList()->get();
+
+        // redirecting
+        return view('pages.campaigns.show', [
+            'brand'     => $brand,
+            'campaign'  => $campaign,
+            'lists'     => $lists
+        ]);
+    }
+
+    /**
+     * Content Design
+     */
+    public function designPage($slug, $uuid)
+    {
+        // find brand
+        $brand = $this->utility->getBrand($slug);        
+
+        // find campaign
+        $campaign = $this->utility->getCampaign($slug, $uuid);
+
+        return view('pages.campaigns.design', [
+            'brand'     => $brand,
+            'campaign'  => $campaign,
+        ]);
+    }
+
+    /**
+     * Update Design
+     */
+    public function designUpdate(Request $request, $slug, $uuid)
+    {
+        // find brand
+        $brand = $this->utility->getBrand($slug);        
+
+        // find campaign
+        $campaign = $this->utility->getCampaign($slug, $uuid);
+
+        $campaign->update(['html' => $request->html]);
+
+        return 1;
+    }
+    
 
 
     public function recentCampaign($slug)
@@ -76,22 +204,6 @@ class CampaignsController extends Controller
         ]);  
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($slug)
-    {
-        //  brand
-        $brand = $this->utility->getBrand($slug);
-        
-        return view('pages.campaigns.create', [
-            'brand' => $brand,
-        ]);
-    }
-
     /*
     * Show the Campaign stats
     *
@@ -121,36 +233,9 @@ class CampaignsController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreCampaign $request, $slug)
-    {
-        // data collection
-        $data = $this->utility->campaignRequest($request->all());
-        
-        // Finding brand and Creating Campaign
-        $campaign = $this->utility->getBrand($slug)->binaryCampaign()->create($data);
+    
 
-        // Session Message
-        Toastr()->success('Campaign Created', $campaign->name, ["positionClass" => "toast-bottom-right"]);
-
-        // redirecting to show route
-        if (!$request->has('content')) {
-            return redirect()->route('brand.show', [
-                'slug' => $slug
-            ]);
-        } else {
-            return redirect()->route('campaign.content.create', [
-                'slug' => $slug,
-                'uuid' => $campaign->uuid
-            ]);
-        }
-
-    }
+    
 
     public function content($slug, $uuid)
     {
@@ -187,30 +272,7 @@ class CampaignsController extends Controller
         return 1; 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($slug, $uuid)
-    {
-        // find brand
-        $brand = $this->utility->getBrand($slug);        
-
-        // find campaign
-        $campaign = $this->utility->getCampaign($slug, $uuid);
-
-        // finding all lists
-        $lists = auth()->user()->binarySubsList()->get();
-
-        // redirecting
-        return view('pages.campaigns.show', [
-            'brand'     => $brand,
-            'campaign'  => $campaign,
-            'lists'     => $lists
-        ]);
-    }
+    
 
     /**
      * Add Lists to Campaigns

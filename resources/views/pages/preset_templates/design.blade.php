@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Mailedit Designer</title>
+    <title>Mailedit | Preset Template Designer </title>
     <link rel="stylesheet" href="//unpkg.com/grapesjs@0.10.7/dist/css/grapes.min.css">
     <link rel="stylesheet" href="{{ asset('css/editor/material.css')}}">
     <link rel="stylesheet" href="{{ asset('css/editor/tooltip.css')}}">
@@ -71,16 +71,16 @@
 
 
     <div id="gjs" style="height:0px; overflow:hidden">
-        {!! $campaign->html !!}
+    {!! $preset_template->content !!}
     </div>
 
 
 
     <form id="test-form" class="test-form" action="http://grapes.16mb.com/s" method="POST" style="display:none">
         <div class="putsmail-c">
-            <a href="https://putsmail.com/" target="_blank">
+            <!-- <a href="https://putsmail.com/" target="_blank">
                 <img src="./img/putsmail.png" style="opacity:0.85;" />
-            </a>
+            </a> -->
             <div class="gjs-sm-property" style="font-size: 10px">
                 Test delivering offered by <a class="nl-link" href="https://litmus.com/" target="_blank">Litmus</a> with <a class="nl-link" href="https://putsmail.com/" target="_blank">Putsmail</a>
                 <span class="form-status" style="opacity: 0">
@@ -231,23 +231,26 @@
                 // md.getModel().once('change:open', function() {
                 //     mdlDialog.className = mdlDialog.className.replace(mdlClass, '');
                 // })
+                // var content = editor.getHtml();
                 var content = editor.runCommand('gjs-get-inlined-html');
-                const url = `{{ route('campaign.design.update', [$brand->slug, $campaign->uuid]) }}`;
+                const url = `{{ route('admin.preset.update', $preset_template->uuid) }}`;
+                console.log(content);
                 $.ajax({
                     type: "PUT",
                     url: url,
                     headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     },
                     data: {
-                        html: content,
+                        content: content,
+                        isHtml: true
                     },
                     success: function(data) {
                         if ((data.error)) {
                             console.log(error);
                         }
-                        if (data == 1) 
-                        window.location.replace(`{{ route('campaign.show', [$brand->slug, $campaign->uuid]) }}`);
+                        console.log(data)
+                        window.location.replace(`{{ route('admin.preset.show', $preset_template->uuid) }}`);
                     }
                 });
 

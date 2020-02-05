@@ -17,9 +17,25 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+
+    Route::group(['middleware' => ['role:admin'], 'prefix' => 'admin'], function () {
+        Route::group(['prefix' => 'category'], function () {
+            Route::get('/', 'CategoryController@index')->name('admin.category.index');
+            Route::get('/create', 'CategoryController@create')->name('admin.category.create');
+            Route::post('/', 'CategoryController@store')->name('admin.category.store');
+        });
+        // Preset Template Routes
+        Route::group(['prefix' => 'preset'], function () {
+            Route::get('/', 'PresetTemplateController@index')->name('admin.preset.index');
+            Route::get('/create', 'PresetTemplateController@create')->name('admin.preset.create');
+            Route::post('/', 'PresetTemplateController@store')->name('admin.preset.store');
+            Route::get('{uuid}/', 'PresetTemplateController@show')->name('admin.preset.show');
+            Route::put('{uuid}/', 'PresetTemplateController@update')->name('admin.preset.update');
+            Route::get('{uuid}/design', 'PresetTemplateController@design')->name('admin.preset.design');
+        });
+    });
 
 //    brand routes
     Route::get('brands/', 'BrandController@index')->name('brand.index');
@@ -31,9 +47,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('brand/{slug}', 'BrandController@destroy')->name('brand.destroy');
 
 //    campaigns routes
-    Route::get('brands/{slug}/new-campaign', 'CampaignsController@create')->name('campaign.create');
-    Route::post('brands/{slug}/new-campaign', 'CampaignsController@store')->name('campaign.store');
-    Route::get('brands/{slug}/campaign/{uuid}/schedule', 'CampaignsController@show')->name('campaign.show');
+    Route::get('brands/{slug}/campaign/create', 'CampaignsController@create')->name('campaign.create'); // create campaign
+    Route::post('brands/{slug}/campaign/create', 'CampaignsController@store')->name('campaign.store'); // store campaign
+
+    Route::get('brands/{slug}/campaign/{uuid}/info', 'CampaignsController@storeInfo')->name('campaign.store.info'); // create Info
+    Route::put('brands/{slug}/campaign/{uuid}/info', 'CampaignsController@updateInfo')->name('campaign.update.info'); // store Info
+
+    Route::get('brands/{slug}/campaign/{uuid}/show', 'CampaignsController@show')->name('campaign.show'); // show campaign 
+
+    Route::get('brands/{slug}/campaign/{uuid}/design', 'CampaignsController@designPage')->name('campaign.design.page'); // design campaign
+    Route::put('brands/{slug}/campaign/{uuid}/design', 'CampaignsController@designUpdate')->name('campaign.design.update'); // design campaign
+
     Route::get('brands/{slug}/campaign/{uuid}/content', 'CampaignsController@content')->name('campaign.content.create');
     Route::post('brands/{slug}/campaign/{uuid}/update-content', 'CampaignsController@contentStore')->name('campaign.content.update_content');
     Route::get('brands/{slug}/campaign/{uuid}/edit', 'CampaignsController@edit')->name('campaign.edit');

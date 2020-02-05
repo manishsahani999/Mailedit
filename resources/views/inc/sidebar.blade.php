@@ -67,23 +67,41 @@
                     </a>
                 </li>
 
+                @if(auth()->user()->hasRole('admin'))
+                <br>
+                <li>
+                    <a href="{{ route('admin.category.index') }}">
+                        Categories
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.preset.index') }}">
+                        Preset Templates
+                    </a>
+                </li>
+                <br>
+                @endif
+
+                <li>
+                    <a href="{{ route('brand.create') }}">
+                        Create New Brand
+                    </a>
+                </li>
+
                 <li class="dropdown">
                     <span class="dropdown__trigger">
-                            Brands
-                        </span>
+                        All Brands
+                    </span>
                     <div class="dropdown__container">
                         <div class="dropdown__content">
                             <ul class="menu-vertical">
+                                @foreach(auth()->user()->binaryBrand()->get() as $item)
                                 <li>
-                                    <a href="{{ route('brand.index') }}">
-                                        All Brands
+                                    <a href="{{ route('brand.show', $item->slug) }}">
+                                        {{$item->brand_name}}
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="{{ route('brand.create') }}">
-                                        Create Brands
-                                    </a>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

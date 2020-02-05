@@ -25,7 +25,8 @@ class HomeController extends Controller
     public function index()
     {
         $brands = auth()->user()->binaryBrand()->latest()->first();
-        $campaign = $brands->binaryCampaign()->latest()->first();
+        if ($brands == null) { $campaign = []; }
+        else $campaign = $brands->binaryCampaign()->latest()->first();
 
         return view('home', ["brand" => $brands, "campaign" => $campaign]);
     }

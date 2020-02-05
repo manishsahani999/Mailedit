@@ -1,85 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Login | Mailedit</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/app.css') }}" />
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/components/login.css') }}" />
-</head>
-<body>
-    <div class="wrap">
-        <div class="row h-100">
-        <div class="col-sm-4 text-center" id="login-left">
-            <div>
-                <img class="m-t-2" id="mailman" src="{{ asset('img/postman.svg') }}" alt="">
-            </div>
-            <div class="m-t-1">
-                <h2 class="m-b-1">Log In</h2>
-                <span>Need a Mailedit account?</span> 
-                <a href="{{ route('register') }}">Create Account</a>
+@extends('layouts.app')
 
-                <!-- Errors  -->
-                @if ($errors->any())
-                    <div>
-                        @foreach ($errors->all() as $error)
-                        <div class="text-danger">{{ $error }}</div>
-                        @endforeach
-                    </div>
-                @endif
-                <!-- end errors -->
-            </div>
-            <div class="login_wrap">
+@section('content')
+
+<section class="imageblock switchable feature-large height-100">
+    <div class="imageblock__content col-lg-6 col-md-4 pos-right">
+        <div class="background-image-holder" style="background: url('https://images.pexels.com/photos/1078958/pexels-photo-1078958.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'); opacity: 1;">
+            <img alt="image" src="https://images.pexels.com/photos/1078958/pexels-photo-1078958.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+        </div>
+    </div>
+    <div class="container pos-vertical-center">
+        <div class="row">
+            <div class="col-lg-5 col-md-7">
+                <h1 class="font-nunito" style="font-size: 4rem;">Mailedit <span class="type--fade">| Login </span></h1>
+                <span class="h2 countdown color--primary" data-date="09/25/2018" data-fallback-text="Getting ready"></span>
+                <p class="lead">Grow your business with our state of the art blah blah blah. </p>
                 <form action="{{ route('login') }}" method="post">
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="text" class="form-control form-control-lg" name="email" value="{{ old('email') }}" required autofocus placeholder="Email">
+                        </div>
+                        <div class="col-12">
+                            <input type="password" class="form-control form-control-lg" name="password" value="{{ old('password') }}" required autofocus placeholder="Password">
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-secondary btn-dark type--uppercase">
+                                <span class=" btn__text text-white">Login</span>
+                            </button>
+                        </div>
+                        <div class="col-12">
+                            <span class="type--fine-print">By signing up, you agree to the
+                                <a href="#">Terms of Service</a>
+                            </span>
+                        </div>
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                            <input type="text" name="b_77142ece814d3cff52058a51f_f300c9cce8" tabindex="-1" value="">
+                        </div>
+                    </div>
                     @csrf
-                    <div class="form-group">
-                        <input type="text" class="form-control form-control-lg" name="email"
-                            value="{{ old('email') }}" required autofocus
-                            placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control form-control-lg" name="password"
-                            value="{{ old('password') }}" required autofocus
-                            placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary login-btn">Login</button>
-                    </div>
                 </form>
             </div>
-            <footer class="m-t-1">
-                <span>&copy;Mailedit</span>
-            </footer>
         </div>
-        <div class="col" id="login-right">
-            <div class="row">
-                <div class="col-sm-5">
-                    <div class="m-t-5 p-1 m-l-2">
-                        <h2 class="m-t-2">Lorme heading</h2>
-                        <div class="m-b-1">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                        Ducimus delectus, voluptatum, necessitatibus, quo possimus 
-                        eveniet modi quam doloremque earum quia veniam dicta.    
-                        </div>
-                        <a href="#" class="btn btn-warning"><strong>Find out how</strong></a>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="text-center">
-                    <img id="mail-big" src="{{ asset('img/email.svg') }}" alt="">
-                </div>
-                <div class="text-center">
-                    <h1>Mailedit</h1>
-                </div>
-                </div>
-            </div>
-        </div>
+        <!--end of row-->
     </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-</body>
-</html>
+    <!--end of container-->
+</section>
+
+@endsection

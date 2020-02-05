@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <h3 class="mb-0" style="font-size: 3rem;">Hello, {{ Auth::user()->name }}</h3>
+                <h3 class="mb-0 font-nunito"  style="font-size: 3rem;">Hello, {{ Auth::user()->name }}</h3>
                 <h3 class="type--fade">Welcome to your Dashboard.</h3>
             </div>
         </div>
@@ -21,8 +21,8 @@
 
                 <div class="row mt-4">
                     <div class="col-md-8">
-                        <small>Your latest brand - {{ $brand->brand_name }}, with latest campaign {{ $campaign->name }}.</small>
-                        @if($campaign->recipients_count != 0)
+                        <small>Your latest brand - {{ ($brand) ? $brand->brand_name : "" }}, with latest campaign {{ ($campaign) ? $campaign->name : '' }}.</small>
+                        @if($campaign && $campaign->recipients_count != 0)
                         <div class="row pt-3 pb-4">
                             <div class="col-md-4 col-sm-6 text-center">
                                 <h1 class="mb-0 type--fade" style="font-size: 5em;">
