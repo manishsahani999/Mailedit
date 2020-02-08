@@ -2,29 +2,23 @@
 
 @section('content')
 
-<section class="cover space--md pb-4">
+<section class="cover space--md pb-5 ">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <h3 class="mb-0" style="font-size: 3rem;">{{ ucwords($brand->brand_name) }} <span class="type--fade" style="font-size: 2.1rem;">/ All Campaigns</span></h3>
-                <h5 class="type--fade">Created {{ $brand->created_at->diffForHumans() }} by {{ Auth::user()->name }}.</h5>
-                <a class="btn btn-secondary btn-dark type--uppercase" href="{{ route('campaign.create', $brand->slug) }}"">
-                    <span class=" btn__text text-white">Create New Campaign</span>
-                </a>
-                <a class="btn btn-secondary btn-dark type--uppercase" href="{{ route('seq.create', $brand->slug) }}"">
-                    <span class=" btn__text text-white">Create New Sequence</span>
-                </a>
+                <h3 class="mb-0" style="font-size: 3rem;">{{ $seq->name }}</h3>
+                <h3 class="type--fade">Select Campagins to send.</h3>
             </div>
         </div>
     </div>
 </section>
 
-<section class="cover space--md pb-4">
+<section class="cover pb-5 mb-5">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <ul class="accordion accordion-2 accordion--oneopen">
-                    @foreach ($campaigns as $item)
+            <div class="col-md-7">
+            <ul class="accordion accordion-2 accordion--oneopen">
+                    @foreach ($seq->campaign as $item)
                     <li>
                         <div class="accordion__title">
                             <span class="h5">{{$item->name}}
@@ -89,29 +83,25 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="col-md-2">
-                <div class="mb-3">
-                    <a href="{{ route('campaign.recent', $brand->slug) }}" class="home-sidebar text-dark">
-                        <i class="far fa-clock mr-2 home-sidebar-icon"></i> Recent
-                    </a>
-                </div>
-                <div class="mb-3">
-                    <a href="{{ route('campaign.ongoing', $brand->slug) }}" class="home-sidebar text-dark">
-                        <i class="fas fa-arrow-right mr-2 home-sidebar-icon"></i> ongoing
-                    </a>
-                </div>
-                <div class="mb-3">
-                    <a href="{{ route('campaign.draft', $brand->slug) }}" class="home-sidebar text-dark">
-                        <i class="fas fa-edit mr-2 home-sidebar-icon"></i> Draft
-                    </a>
-                </div>
-                <div class="mb-3">
-                    <a href="{{ route('campaign.completed', $brand->slug) }}" class="home-sidebar text-dark">
-                        <i class="fas fa-check mr-2 home-sidebar-icon"></i> Complete
-                    </a>
-                </div>
+            <div class="col-md-3">
+                <form action="" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <div class="input-select">
+                            <select class="form-control form-control-lg" name="lists">
+                                @foreach($campaigns as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn type--uppercase">Add to Sequence</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </section>
+
 @endsection

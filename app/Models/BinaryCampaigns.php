@@ -48,4 +48,12 @@ class BinaryCampaigns extends Model
     public function emails() {
         return $this->hasMany('App\Models\BinaryEmail', 'binary_campaign_id');
     }
+
+    /**
+     * Many to many inverse for Sequence 
+     */
+    public function sequence()
+    {
+        return $this->belongsToMany('App\Models\Sequence');
+    }
 }

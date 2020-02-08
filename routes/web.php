@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
 
-//    brand routes
+    // brand routes
     Route::get('brands/', 'BrandController@index')->name('brand.index');
     Route::get('brands/new-brand', 'BrandController@create')->name('brand.create');
     Route::post('brands/new-brand', 'BrandController@store')->name('brand.store');
@@ -46,7 +46,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('brands/{slug}', 'BrandController@update')->name('brand.update');
     Route::delete('brand/{slug}', 'BrandController@destroy')->name('brand.destroy');
 
-//    campaigns routes
+    // Sequence routes
+    Route::group(['prefix' => 'brands/{slug}/sequence'], function () {
+        Route::get('/', 'SequenceController@create')->name('seq.create');
+        Route::get('/{uuid}', 'SequenceController@show')->name('seq.show');
+    });
+
+    // campaigns routes
     Route::get('brands/{slug}/campaign/create', 'CampaignsController@create')->name('campaign.create'); // create campaign
     Route::post('brands/{slug}/campaign/create', 'CampaignsController@store')->name('campaign.store'); // store campaign
 

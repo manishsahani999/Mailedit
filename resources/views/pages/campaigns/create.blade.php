@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-
 <section class="cover space--md pb-5 mb-5">
     <div class="container">
         <div class="row justify-content-center">

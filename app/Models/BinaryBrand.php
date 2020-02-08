@@ -35,6 +35,16 @@ class BinaryBrand extends Model
         return $this->hasMany('App\Models\BinaryCampaigns');
     }
 
+    /**
+     *
+     * A user can have many sequence
+     *
+     * @return this 
+     */
+    public function seq() {
+        return $this->hasMany('App\Models\Sequence');
+    }
+
     public function defaultList()
     {
         return $this->hasOne('App\Models\BinarySubsList');

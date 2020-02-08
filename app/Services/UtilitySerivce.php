@@ -29,6 +29,14 @@ class UtilityService
     }
 
     /*
+    * Find the Sequences
+    */
+    public function getSeq($slug ,$uuid)
+    {
+        return $this->getBrand($slug)->seq()->whereUuid($uuid)->first();
+    }
+
+    /*
     * return request data
     */
     public function campaignRequest($data)

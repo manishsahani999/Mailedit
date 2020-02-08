@@ -2,17 +2,18 @@
 
 namespace App;
 
+use App\Models\Traits\Uuids;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
 
-/**
- * @property mixed $binary_brand
- */
 class User extends Authenticatable
 {
-    use LaratrustUserTrait;
+    use Uuids;
     use Notifiable;
+    use SoftDeletes;
+    use LaratrustUserTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -32,34 +33,65 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /*-------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------
+    */
+
     /**
-     *
-     * A user can have many brands
-     *
-     * @return this 
+     * 
+     * User has many Models/Brand
+     * 
+     * @param  
+     * @return App\Models\Brand
      */
-    public function binaryBrand() {
-        return $this->hasMany('App\Models\BinaryBrand');
+    public function brands()
+    {
+        return $this->hasMany('App\Models\Brands');
     }
 
     /**
-     *
-     * A user can have many Subs List
-     *
-     * @return this
+     * 
+     * User has many Models/List
+     * 
+     * @param  
+     * @return App\Models\List
      */
-    public function binarySubsList() {
-        return $this->hasMany('App\Models\BinarySubsList');
+    public function lists()
+    {
+        return $this->hasMany('App\Models\List');
     }
 
-    /**
-     *
-     * A user can have many Subs List
-     *
-     * @return this
-     */
-    public function template() {
-        return $this->hasMany('App\Models\BinaryEmailTemplate', 'user_id');
-    }
+    // /**
+    //  *
+    //  * A user can have many brands
+    //  *
+    //  * @return this 
+    //  */
+    // public function binaryBrand()
+    // {
+    //     return $this->hasMany('App\Models\BinaryBrand');
+    // }
 
+    // /**
+    //  *
+    //  * A user can have many Subs List
+    //  *
+    //  * @return this
+    //  */
+    // public function binarySubsList()
+    // {
+    //     return $this->hasMany('App\Models\BinarySubsList');
+    // }
+
+    // /**
+    //  *
+    //  * A user can have many Subs List
+    //  *
+    //  * @return this
+    //  */
+    // public function template()
+    // {
+    //     return $this->hasMany('App\Models\BinaryEmailTemplate', 'user_id');
+    // }
 }
